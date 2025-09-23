@@ -13,10 +13,10 @@
 
 
 -- Tạo database
-CREATE DATABASE JobCenterFinancialManagementSPKT;
+CREATE DATABASE JobCenterFinancialManagementHCM;
 GO
 
-USE JobCenterFinancialManagementSPKT;
+USE JobCenterFinancialManagementHCM;
 GO
 
 -- 1. CÁC BẢNG CƠ SỞ
@@ -135,16 +135,16 @@ CREATE TABLE GiaoDich (
     mo_ta NVARCHAR(500),                       -- Mô tả chi tiết giao dịch (lý do thu/chi, hoàn tiền cho ai, ...)
     ma_loai VARCHAR(10) NOT NULL,              -- Mã loại giao dịch (tham chiếu LoaiGiaoDich)
     ma_tknh INT NOT NULL,                      -- Mã tài khoản ngân hàng (tham chiếu TaiKhoanNH)
-    ma_nv_tao INT NOT NULL,                    -- Mã nhân viên tạo giao dịch (tham chiếu NhanVien)
+    ma_nv_tao_nvtc INT NOT NULL,               -- Mã nhân viên tài chính tạo giao dịch (tham chiếu NhanVienTC)
     ma_du_an INT,                              -- Mã dự án (tham chiếu DuAn, NULL nếu không thuộc dự án)
     trang_thai VARCHAR(20) DEFAULT 'CHO_DUYET', -- Trạng thái: CHO_DUYET/DA_DUYET/TU_CHOI
-    ma_nv_duyet INT,                           -- Mã nhân viên duyệt giao dịch (tham chiếu NhanVien)
+    ma_nv_duyet_tp INT,                        -- Mã trưởng phòng tài chính duyệt giao dịch (tham chiếu TruongPhongTC)
     ngay_duyet DATETIME,                       -- Ngày giờ duyệt giao dịch
     FOREIGN KEY (ma_loai) REFERENCES LoaiGiaoDich(ma_loai),
     FOREIGN KEY (ma_tknh) REFERENCES TaiKhoanNH(ma_tknh),
-    FOREIGN KEY (ma_nv_tao) REFERENCES NhanVien(ma_nv),
+    FOREIGN KEY (ma_nv_tao_nvtc) REFERENCES NhanVienTC(ma_nv),
     FOREIGN KEY (ma_du_an) REFERENCES DuAn(ma_du_an),
-    FOREIGN KEY (ma_nv_duyet) REFERENCES NhanVien(ma_nv)
+    FOREIGN KEY (ma_nv_duyet_tp) REFERENCES TruongPhongTC(ma_nv)
 );
 
 
@@ -187,7 +187,7 @@ CHECK (
   (trang_thai='CHO_DUYET')
   OR (
      trang_thai IN ('DA_DUYET','TU_CHOI')
-     AND ma_nv_duyet IS NOT NULL
+     AND ma_nv_duyet_tp IS NOT NULL
      AND ngay_duyet IS NOT NULL
      AND ngay_duyet >= ngay_gd
   )
@@ -221,8 +221,9 @@ CREATE INDEX IX_GiaoDich_LoaiGd ON GiaoDich(loai_gd);
 CREATE INDEX IX_GiaoDich_MaDuAn ON GiaoDich(ma_du_an);
 CREATE INDEX IX_GiaoDich_MaTknh ON GiaoDich(ma_tknh);
 CREATE INDEX IX_GiaoDich_MaLoai ON GiaoDich(ma_loai);
-CREATE INDEX IX_GiaoDich_MaNvTao ON GiaoDich(ma_nv_tao);
-CREATE INDEX IX_GiaoDich_MaNvDuyet ON GiaoDich(ma_nv_duyet);
+CREATE INDEX IX_GiaoDich_MaNvTaoNVTc ON GiaoDich(ma_nv_tao_nvtc);
+CREATE INDEX IX_GiaoDich_MaNvDuyetTP ON GiaoDich(ma_nv_duyet_tp);
+CREATE INDEX IX_GiaoDich_ChoDuyet ON GiaoDich(trang_thai, ngay_gd) WHERE trang_thai='CHO_DUYET';
 
 
 
@@ -363,11 +364,12 @@ SELECT
     gd.ngay_gd,                                    -- Ngày tạo giao dịch
     gd.mo_ta,                                      -- Mô tả giao dịch
     lg.ten_loai,                                   -- Tên loại giao dịch
-    nv.ho_ten as nguoi_tao,                        -- Người tạo giao dịch
+    nv_tao.ho_ten as nguoi_tao,                    -- Người tạo giao dịch
     da.ten_du_an                                   -- Tên dự án (nếu có)
 FROM GiaoDich gd
 INNER JOIN LoaiGiaoDich lg ON gd.ma_loai = lg.ma_loai
-INNER JOIN NhanVien nv ON gd.ma_nv_tao = nv.ma_nv
+INNER JOIN NhanVienTC nvtc ON gd.ma_nv_tao_nvtc = nvtc.ma_nv
+INNER JOIN NhanVien nv_tao ON nvtc.ma_nv = nv_tao.ma_nv
 LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an
 WHERE gd.trang_thai = 'CHO_DUYET'                  -- Chỉ lấy giao dịch chờ duyệt
 
@@ -387,15 +389,17 @@ SELECT
     gd.trang_thai,                                 -- Trạng thái giao dịch
     lg.ten_loai,                                   -- Tên loại giao dịch
     tkn.ten_tk as tai_khoan,                       -- Tên tài khoản
-    nv.ho_ten as nguoi_tao,                        -- Người tạo giao dịch
-    nv_duyet.ho_ten as nguoi_duyet,                -- Người duyệt giao dịch
+    nv_tao.ho_ten as nguoi_tao,                    -- Người tạo giao dịch
+    nv_duyet_tp.ho_ten as nguoi_duyet,             -- Người duyệt giao dịch
     gd.ngay_duyet,                                 -- Ngày duyệt giao dịch
     da.ten_du_an                                   -- Tên dự án (nếu có)
 FROM GiaoDich gd
 INNER JOIN LoaiGiaoDich lg ON gd.ma_loai = lg.ma_loai
 INNER JOIN TaiKhoanNH tkn ON gd.ma_tknh = tkn.ma_tknh
-INNER JOIN NhanVien nv ON gd.ma_nv_tao = nv.ma_nv
-LEFT JOIN NhanVien nv_duyet ON gd.ma_nv_duyet = nv_duyet.ma_nv
+INNER JOIN NhanVienTC nvtc ON gd.ma_nv_tao_nvtc = nvtc.ma_nv
+INNER JOIN NhanVien nv_tao ON nvtc.ma_nv = nv_tao.ma_nv
+LEFT JOIN TruongPhongTC tp ON gd.ma_nv_duyet_tp = tp.ma_nv
+LEFT JOIN NhanVien nv_duyet_tp ON tp.ma_nv = nv_duyet_tp.ma_nv
 LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an
  
 
@@ -527,13 +531,13 @@ END;
 -- Mục đích: Duyệt hoặc từ chối giao dịch (chỉ Admin và Trưởng phòng)
 -- Tham số:
 --   @ma_gd: Mã giao dịch cần duyệt (INT)
---   @ma_nv_duyet: Mã nhân viên duyệt (INT)
+--   @ma_nv_duyet_tp: Mã nhân viên duyệt (INT)
 --   @trang_thai: Trạng thái mới (DA_DUYET/TU_CHOI)
 -- Logic: Kiểm tra quyền → Cập nhật giao dịch → Trigger tự động cập nhật số dư
 GO
 CREATE PROCEDURE SP_DuyetGiaoDich
     @ma_gd INT,                              -- Mã giao dịch cần duyệt
-    @ma_nv_duyet INT,                        -- Mã nhân viên thực hiện duyệt
+    @ma_nv_duyet_tp INT,                     -- Mã trưởng phòng duyệt
     @trang_thai VARCHAR(20)                  -- Trạng thái mới (DA_DUYET/TU_CHOI)
 AS
 BEGIN
@@ -551,7 +555,7 @@ BEGIN
         -- Kiểm tra quyền duyệt (chỉ Trưởng phòng mới được duyệt)
         IF NOT EXISTS (
             SELECT 1 FROM TruongPhongTC tp
-            WHERE tp.ma_nv = @ma_nv_duyet
+            WHERE tp.ma_nv = @ma_nv_duyet_tp
         )
         BEGIN
             RAISERROR(N'Không có quyền duyệt giao dịch!', 16, 1);
@@ -581,7 +585,7 @@ BEGIN
         -- Cập nhật giao dịch với thông tin duyệt
         UPDATE GiaoDich 
         SET trang_thai = @trang_thai,        -- Cập nhật trạng thái mới
-            ma_nv_duyet = @ma_nv_duyet,      -- Ghi lại người duyệt
+            ma_nv_duyet_tp = @ma_nv_duyet_tp,-- Ghi lại người duyệt
             ngay_duyet = GETDATE()           -- Ghi lại thời gian duyệt
         WHERE ma_gd = @ma_gd;
         
@@ -622,8 +626,10 @@ BEGIN
     FROM GiaoDich gd
     INNER JOIN LoaiGiaoDich lg ON gd.ma_loai = lg.ma_loai
     INNER JOIN TaiKhoanNH tkn ON gd.ma_tknh = tkn.ma_tknh
-    INNER JOIN NhanVien nv ON gd.ma_nv_tao = nv.ma_nv
-    LEFT JOIN NhanVien nv_duyet ON gd.ma_nv_duyet = nv_duyet.ma_nv
+    INNER JOIN NhanVienTC nvtc ON gd.ma_nv_tao_nvtc = nvtc.ma_nv
+    INNER JOIN NhanVien nv ON nvtc.ma_nv = nv.ma_nv
+    LEFT JOIN TruongPhongTC tp_duyet ON tp_duyet.ma_nv = gd.ma_nv_duyet_tp
+    LEFT JOIN NhanVien nv_duyet ON nv_duyet.ma_nv = tp_duyet.ma_nv
     LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an
     WHERE gd.ngay_gd >= @ngay_bd                    -- Trong khoảng thời gian, tính TRỌN ngày kết thúc (>= @ngay_bd và < @ngay_kt+1 ngày)
       AND gd.ngay_gd < DATEADD(DAY, 1, @ngay_kt)
@@ -646,7 +652,7 @@ CREATE PROCEDURE SP_ThemGiaoDich
     @mo_ta NVARCHAR(500),                           -- Mô tả giao dịch
     @ma_loai VARCHAR(10),                           -- Mã loại giao dịch
     @ma_tknh INT,                                   -- Mã tài khoản ngân hàng
-    @ma_nv_tao INT,                                 -- Mã nhân viên tạo
+    @ma_nv_tao_nvtc INT,                            -- Mã NV tài chính tạo
     @ma_du_an INT = NULL                            -- Mã dự án (có thể NULL)
 AS
 BEGIN
@@ -666,8 +672,8 @@ BEGIN
         END
 
         -- Thêm giao dịch mới
-        INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
-        VALUES (@loai_gd, @so_tien, @mo_ta, @ma_loai, @ma_tknh, @ma_nv_tao, @ma_du_an);
+        INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
+        VALUES (@loai_gd, @so_tien, @mo_ta, @ma_loai, @ma_tknh, @ma_nv_tao_nvtc, @ma_du_an);
         
         -- Trả về mã giao dịch mới
         SELECT SCOPE_IDENTITY() as ma_gd_moi;
@@ -1103,7 +1109,7 @@ GO
 -- QUYỀN CHO TRƯỞNG PHÒNG
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON NhanVien TO rl_truongphong;
-GRANT SELECT, INSERT, UPDATE, DELETE ON LoaiGiaoDich TO rl_truongphong;
+GRANT SELECT ON LoaiGiaoDich TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanNH TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON DuAn TO rl_truongphong;
 GRANT SELECT, INSERT ON GiaoDich TO rl_truongphong; -- UPDATE phải thông qua SP_SuaGiaoDich
@@ -1258,34 +1264,34 @@ DECLARE @gd INT;
 
 -- === GIAO DỊCH THU PHÍ ỨNG TUYỂN (từng sinh viên) ===
 -- Sinh viên Nguyễn Văn A
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên Nguyễn Văn A', 'LGD_UT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Sinh viên Trần Thị B
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên Trần Thị B', 'LGD_UT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Sinh viên Lê Văn C
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên Lê Văn C', 'LGD_UT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên D', 'LGD_UT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên E', 'LGD_UT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên F', 'LGD_UT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
@@ -1294,34 +1300,34 @@ EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- === GIAO DỊCH THU PHÍ ĐĂNG TIN (từng doanh nghiệp) ===
 -- Công ty ABC
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 200000, N'Thu phí đăng tin từ công ty ABC', 'LGD_DT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Công ty XYZ
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 200000, N'Thu phí đăng tin từ công ty XYZ', 'LGD_DT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Công ty DEF
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 200000, N'Thu phí đăng tin từ công ty DEF', 'LGD_DT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 300000, N'Thu phí đăng tin từ công ty GHI', 'LGD_DT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 300000, N'Thu phí đăng tin từ công ty JKL', 'LGD_DT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 300000, N'Thu phí đăng tin từ công ty MNO', 'LGD_DT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
@@ -1329,27 +1335,27 @@ EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 
 -- === GIAO DỊCH THU TÀI TRỢ ===
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
-VALUES ('THU', 2000000, N'Thu tài trợ từ công ty ABC cho dự án kết nối doanh nghiệp', 'LGD_TT', 2, 3, 4);
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
+VALUES ('THU', 2000000, N'Thu tài trợ từ công ty ABC cho dự án kết nối doanh nghiệp', 'LGD_TT', 2, 2, 4);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 500000, N'Thu tài trợ từ công ty XYZ cho dự án hỗ trợ sinh viên', 'LGD_TT', 1, 2, 6);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 20000000, N'Tài trợ từ doanh nghiệp PQR cho dự án kết nối', 'LGD_TT', 1, 2, 4);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 10000000, N'Tài trợ từ doanh nghiệp STU cho hoạt động trung tâm', 'LGD_TT', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('THU', 5000000, N'Đồng tài trợ từ doanh nghiệp VWX cho chiến dịch truyền thông', 'LGD_TT', 1, 2, 2);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
@@ -1358,37 +1364,37 @@ EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- === GIAO DỊCH CHI ===
 -- Lương nhân viên
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
-VALUES ('CHI', 15000000, N'Chi lương nhân viên tháng 9', 'LGD_LUONG', 1, 3, NULL);
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
+VALUES ('CHI', 15000000, N'Chi lương nhân viên tháng 9', 'LGD_LUONG', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Vận hành
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('CHI', 5000000, N'Chi phí vận hành trung tâm', 'LGD_VH', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Chi phí dự án đào tạo
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('CHI', 2000000, N'Chi phí thuê giảng viên dự án đào tạo', 'LGD_VH', 1, 2, 3);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Chi phí hội chợ việc làm
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
-VALUES ('CHI', 3000000, N'Chi phí thuê gian hàng hội chợ việc làm', 'LGD_VH', 2, 3, 5);
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
+VALUES ('CHI', 3000000, N'Chi phí thuê gian hàng hội chợ việc làm', 'LGD_VH', 2, 2, 5);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Marketing dự án
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
-VALUES ('CHI', 1500000, N'Chi phí marketing dự án quảng bá', 'LGD_MK', 3, 3, 2);
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
+VALUES ('CHI', 1500000, N'Chi phí marketing dự án quảng bá', 'LGD_MK', 3, 2, 2);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
 
 -- Chi phí thuê mặt bằng
-INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao_nvtc, ma_du_an)
 VALUES ('CHI', 8000000, N'Chi phí thuê mặt bằng trung tâm', 'LGD_MB', 1, 2, NULL);
 SET @gd = SCOPE_IDENTITY();
 EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
