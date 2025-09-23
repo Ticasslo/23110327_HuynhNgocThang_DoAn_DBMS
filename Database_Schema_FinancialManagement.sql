@@ -1,15 +1,25 @@
 -- Database Schema for Student Job Center Financial Management
 -- Hệ thống quản lý thu chi tài chính - Trung tâm giới thiệu việc làm sinh viên
 
+-- 1. Các bảng cơ sở
+-- 2. Các ràng buộc constraint
+-- 3. Các index
+-- 4. Các trigger
+-- 5. Các view
+-- 6. Các function
+-- 7. Các stored procedure
+-- 8. Các role và phân quyền, function và procedure liên quan
+-- 9. Các insert dữ liệu mẫu
+
+
 -- Tạo database
-CREATE DATABASE JobCenterFinancialManagement;
+CREATE DATABASE JobCenterFinancialManagementSPKT;
 GO
 
-USE JobCenterFinancialManagement;
+USE JobCenterFinancialManagementSPKT;
 GO
- 
 
--- 1. TẠO CÁC BẢNG CƠ SỞ
+-- 1. CÁC BẢNG CƠ SỞ
 CREATE TABLE TaiKhoan (
     ma_tk INT IDENTITY(1,1) PRIMARY KEY,       -- Mã tài khoản tự tăng (1, 2, 3, ...)
     username VARCHAR(50) UNIQUE NOT NULL,      -- Tên đăng nhập (duy nhất trong hệ thống)
@@ -30,7 +40,7 @@ CREATE TABLE NhanVien (
 CREATE TABLE TruongPhongTC (
     ma_nv INT PRIMARY KEY,                     -- Mã nhân viên (khóa chính và khóa ngoại)
     quyen_han NVARCHAR(200),                   -- Quyền hạn đặc biệt của trưởng phòng
-    ngay_bo_nhiem DATE DEFAULT GETDATE(),      -- Ngày bổ nhiệm làm trưởng phòng
+    ngay_bo_nhiem DATE DEFAULT CAST(GETDATE() AS DATE),      -- Ngày bổ nhiệm làm trưởng phòng
     FOREIGN KEY (ma_nv) REFERENCES NhanVien(ma_nv) ON DELETE CASCADE
 );
 
@@ -49,9 +59,21 @@ CREATE TABLE KeToan (
 );
 
 -- BẢNG LOẠI GIAO DỊCH (LoaiGiaoDich)
--- Phân loại các khoản thu chi (phí dịch vụ, lương, chi phí vận hành, ...)
+-- Phân loại các khoản thu chi
+-- Lưu ý: Mã loại giao dịch là CỐ ĐỊNH, không thay đổi trong quá trình sử dụng
+
+-- Không có thêm sửa xóa đối với loại giao dịch
+
+-- 'LGD_UT', N'Phí ứng tuyển việc làm', 'THU', N'Thu từ phí ứng tuyển của sinh viên'
+-- 'LGD_DT', N'Phí đăng tin tuyển dụng', 'THU', N'Thu từ phí đăng tin của doanh nghiệp'
+-- 'LGD_TT', N'Tài trợ từ doanh nghiệp', 'THU', N'Thu từ tài trợ của doanh nghiệp'
+-- 'LGD_KHAC', N'Các khoản thu khác', 'THU', N'Các khoản thu khác'
+-- 'LGD_LUONG', N'Lương nhân viên', 'CHI', N'Chi trả lương cho nhân viên'
+-- 'LGD_VH', N'Chi phí vận hành', 'CHI', N'Chi phí vận hành trung tâm'
+-- 'LGD_MK', N'Chi phí marketing', 'CHI', N'Chi phí quảng cáo, marketing'
+-- 'LGD_MB', N'Chi phí thuê mặt bằng', 'CHI', N'Chi phí thuê mặt bằng'
 CREATE TABLE LoaiGiaoDich (
-    ma_loai INT IDENTITY(1,1) PRIMARY KEY,     -- Mã loại giao dịch tự tăng (1, 2, 3, ...)
+    ma_loai VARCHAR(10) PRIMARY KEY,           -- Mã loại giao dịch CỐ ĐỊNH (LGD_UT, LGD_DT, ...)
     ten_loai NVARCHAR(100) NOT NULL,           -- Tên loại giao dịch (Phí dịch vụ, Lương nhân viên, ...)
     loai_thu_chi VARCHAR(10) NOT NULL,         -- Phân loại THU hoặc CHI
     mo_ta NVARCHAR(200)                        -- Mô tả chi tiết về loại giao dịch
@@ -59,6 +81,9 @@ CREATE TABLE LoaiGiaoDich (
 
 -- BẢNG TÀI KHOẢN NGÂN HÀNG (TaiKhoanNH)
 -- Mục đích: Quản lý các tài khoản ngân hàng ẢO của trung tâm (không phải của sinh viên/doanh nghiệp)
+
+-- Có thể thêm, sửa, xóa -> vô hiệu hóa tài khoản ngân hàng
+
 -- Lưu ý: 
 --   - Đây là tài khoản ảo để quản lý nội bộ, không kết nối ngân hàng thật
 --   - Sinh viên/doanh nghiệp KHÔNG có tài khoản trong hệ thống
@@ -76,6 +101,9 @@ CREATE TABLE TaiKhoanNH (
 -- BẢNG DỰ ÁN (DuAn)
 -- Mục đích: Quản lý các dự án/hoạt động của trung tâm có ngân sách riêng
 -- Ví dụ: Mở rộng trung tâm, Nâng cấp hệ thống, Tuyển dụng đặc biệt
+
+-- Có thể thêm, sửa, xóa -> vô hiệu hóa/ ngừng hoạt động dự án
+
 CREATE TABLE DuAn (
     ma_du_an INT IDENTITY(1,1) PRIMARY KEY,    -- Mã dự án tự tăng (1, 2, 3, ...)
     ten_du_an NVARCHAR(200) NOT NULL,          -- Tên dự án (Mở rộng trung tâm, Nâng cấp hệ thống, ...)
@@ -94,13 +122,18 @@ CREATE TABLE DuAn (
 --   - CHI: Chi tiền của trung tâm (lương, vận hành, hoàn tiền, ...)
 --   - Hoàn tiền = tạo giao dịch CHI + trả tiền mặt cho khách hàng
 --   - Sinh viên/doanh nghiệp KHÔNG có tài khoản trong hệ thống
+
+-- Thêm giao dịch
+-- Cập nhật giao dịch chỉ khi trạng thái chờ duyệt thôi
+-- Không có xóa giao dịch vì giữ tính lịch sử
+
 CREATE TABLE GiaoDich (
     ma_gd INT IDENTITY(1,1) PRIMARY KEY,       -- Mã giao dịch tự tăng (1, 2, 3, ...)
     loai_gd VARCHAR(10) NOT NULL,              -- Loại giao dịch: THU (thu tiền) hoặc CHI (chi tiền)
     so_tien DECIMAL(15,2) NOT NULL,            -- Số tiền giao dịch (phải > 0)
     ngay_gd DATETIME DEFAULT GETDATE(),        -- Ngày giờ thực hiện giao dịch
     mo_ta NVARCHAR(500),                       -- Mô tả chi tiết giao dịch (lý do thu/chi, hoàn tiền cho ai, ...)
-    ma_loai INT NOT NULL,                      -- Mã loại giao dịch (tham chiếu LoaiGiaoDich)
+    ma_loai VARCHAR(10) NOT NULL,              -- Mã loại giao dịch (tham chiếu LoaiGiaoDich)
     ma_tknh INT NOT NULL,                      -- Mã tài khoản ngân hàng (tham chiếu TaiKhoanNH)
     ma_nv_tao INT NOT NULL,                    -- Mã nhân viên tạo giao dịch (tham chiếu NhanVien)
     ma_du_an INT,                              -- Mã dự án (tham chiếu DuAn, NULL nếu không thuộc dự án)
@@ -151,8 +184,13 @@ CHECK (so_tien > 0);
 -- Đảm bảo giao dịch đã duyệt thì phải có người duyệt, ngày duyệt và ngày duyệt không nhỏ hơn ngày giao dịch
 ALTER TABLE GiaoDich ADD CONSTRAINT CK_GiaoDich_DuyetHopLe
 CHECK (
-  (trang_thai <> 'DA_DUYET')
-  OR (ma_nv_duyet IS NOT NULL AND ngay_duyet IS NOT NULL AND ngay_duyet >= ngay_gd)
+  (trang_thai='CHO_DUYET')
+  OR (
+     trang_thai IN ('DA_DUYET','TU_CHOI')
+     AND ma_nv_duyet IS NOT NULL
+     AND ngay_duyet IS NOT NULL
+     AND ngay_duyet >= ngay_gd
+  )
 );
 
 -- Đảm bảo ngân_sach không âm
@@ -182,6 +220,9 @@ CREATE INDEX IX_GiaoDich_TrangThai ON GiaoDich(trang_thai);
 CREATE INDEX IX_GiaoDich_LoaiGd ON GiaoDich(loai_gd);
 CREATE INDEX IX_GiaoDich_MaDuAn ON GiaoDich(ma_du_an);
 CREATE INDEX IX_GiaoDich_MaTknh ON GiaoDich(ma_tknh);
+CREATE INDEX IX_GiaoDich_MaLoai ON GiaoDich(ma_loai);
+CREATE INDEX IX_GiaoDich_MaNvTao ON GiaoDich(ma_nv_tao);
+CREATE INDEX IX_GiaoDich_MaNvDuyet ON GiaoDich(ma_nv_duyet);
 
 
 
@@ -199,7 +240,7 @@ ON dbo.GiaoDich
 AFTER UPDATE
 AS
 BEGIN
-  SET NOCOUNT ON;
+    SET NOCOUNT ON;
 
   DECLARE @Transitions TABLE (
     ma_tknh INT PRIMARY KEY,
@@ -210,7 +251,7 @@ BEGIN
   SELECT i.ma_tknh,
          SUM(CASE WHEN i.loai_gd='THU' THEN i.so_tien
                   WHEN i.loai_gd='CHI' THEN -i.so_tien ELSE 0 END) AS delta
-  FROM inserted i
+        FROM inserted i
   JOIN deleted  d ON d.ma_gd = i.ma_gd
   WHERE d.trang_thai = 'CHO_DUYET' AND i.trang_thai = 'DA_DUYET'
   GROUP BY i.ma_tknh;
@@ -221,18 +262,69 @@ BEGIN
     FROM dbo.TaiKhoanNH t
     JOIN @Transitions tr ON tr.ma_tknh = t.ma_tknh
     WHERE t.so_du + tr.delta < 0
-  )
-  BEGIN
-    RAISERROR (N'Số dư sẽ âm, không thể duyệt giao dịch.', 16, 1);
-    ROLLBACK TRANSACTION;
-    RETURN;
-  END
-
+        )
+    BEGIN
+        RAISERROR(N'Số dư sẽ âm, không thể duyệt giao dịch.', 16, 1);
+        RETURN;
+    END
+        
   -- Cập nhật số dư
   UPDATE t
      SET t.so_du = t.so_du + tr.delta
   FROM dbo.TaiKhoanNH t
   JOIN @Transitions tr ON tr.ma_tknh = t.ma_tknh;
+END;
+
+-- TRIGGER CHẶN XÓA GIAO DỊCH
+-- Mục đích: Không cho phép xóa giao dịch (bảo toàn dữ liệu lịch sử)
+-- Kích hoạt: Khi DELETE trên bảng GiaoDich
+-- Logic: Chặn tất cả thao tác xóa, chỉ cho phép cập nhật trạng thái
+GO
+CREATE OR ALTER TRIGGER TR_GiaoDich_PreventDelete
+ON dbo.GiaoDich
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    -- Chặn tất cả thao tác xóa giao dịch
+    THROW 51001, N'Không được phép xóa giao dịch! Chỉ có thể cập nhật trạng thái hoặc từ chối giao dịch.', 1;
+END;
+
+
+-- TRIGGER SOFT-DELETE TÀI KHOẢN NGÂN HÀNG
+-- Mục đích: Khi DELETE trên TaiKhoanNH, chuyển thành cập nhật trang_thai='inactive'
+-- Logic: INSTEAD OF DELETE -> UPDATE
+GO
+CREATE OR ALTER TRIGGER TR_TaiKhoanNH_SoftDelete
+ON dbo.TaiKhoanNH
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE t
+    SET t.trang_thai = 'inactive'
+    FROM dbo.TaiKhoanNH t
+    INNER JOIN deleted d ON d.ma_tknh = t.ma_tknh;
+END;
+
+
+-- TRIGGER SOFT-DELETE DỰ ÁN
+-- Mục đích: Khi DELETE trên DuAn, chuyển thành cập nhật trang_thai='inactive'
+-- Logic: INSTEAD OF DELETE -> UPDATE
+GO
+CREATE OR ALTER TRIGGER TR_DuAn_SoftDelete
+ON dbo.DuAn
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE da
+    SET da.trang_thai = 'inactive'
+    FROM dbo.DuAn da
+    INNER JOIN deleted d ON d.ma_du_an = da.ma_du_an;
 END;
 
 
@@ -241,32 +333,6 @@ END;
 
 
 -- 5. VIEWS
--- VIEW BÁO CÁO THU CHI TỔNG HỢP
--- Dữ liệu: Mã giao dịch, loại, số tiền, ngày, mô tả, loại giao dịch, tài khoản, người tạo, dự án, trạng thái, người duyệt
-GO
-CREATE VIEW V_BaoCaoThuChi
-AS
-SELECT 
-    gd.ma_gd,                           -- Mã giao dịch
-    gd.loai_gd,                         -- Loại giao dịch (THU/CHI)
-    gd.so_tien,                         -- Số tiền giao dịch
-    gd.ngay_gd,                         -- Ngày giờ giao dịch
-    gd.mo_ta,                           -- Mô tả giao dịch
-    lg.ten_loai,                        -- Tên loại giao dịch (Phí dịch vụ, Lương nhân viên, ...)
-    tkn.ten_tk,                         -- Tên tài khoản ngân hàng
-    tkn.ngan_hang,                      -- Tên ngân hàng
-    nv.ho_ten as nguoi_tao,             -- Họ tên người tạo giao dịch
-    da.ten_du_an,                       -- Tên dự án (NULL nếu không thuộc dự án)
-    gd.trang_thai,                      -- Trạng thái giao dịch (CHO_DUYET/DA_DUYET/TU_CHOI)
-    nv2.ho_ten as nguoi_duyet,          -- Họ tên người duyệt giao dịch
-    gd.ngay_duyet                       -- Ngày giờ duyệt giao dịch
-FROM GiaoDich gd
-INNER JOIN LoaiGiaoDich lg ON gd.ma_loai = lg.ma_loai      -- Kết nối với bảng loại giao dịch
-INNER JOIN TaiKhoanNH tkn ON gd.ma_tknh = tkn.ma_tknh      -- Kết nối với bảng tài khoản ngân hàng
-INNER JOIN NhanVien nv ON gd.ma_nv_tao = nv.ma_nv          -- Kết nối với bảng nhân viên (người tạo)
-LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an             -- Kết nối với bảng dự án (có thể NULL)
-LEFT JOIN NhanVien nv2 ON gd.ma_nv_duyet = nv2.ma_nv;      -- Kết nối với bảng nhân viên (người duyệt)
-
 -- VIEW THỐNG KÊ THU CHI THEO THÁNG
 -- Mục đích: Tổng hợp thu chi theo từng tháng để tạo biểu đồ
 -- Tác dụng: Hiển thị xu hướng thu chi, báo cáo tài chính theo tháng
@@ -332,6 +398,35 @@ INNER JOIN NhanVien nv ON gd.ma_nv_tao = nv.ma_nv
 LEFT JOIN NhanVien nv_duyet ON gd.ma_nv_duyet = nv_duyet.ma_nv
 LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an
  
+
+-- VIEW DỰ ÁN
+GO
+CREATE VIEW V_DuAn
+AS
+SELECT ma_du_an, ten_du_an, ngay_bd, ngay_kt, ngan_sach, trang_thai
+FROM DuAn;
+
+-- VIEW TÀI KHOẢN NGÂN HÀNG
+GO
+CREATE VIEW V_TaiKhoanNH
+AS
+SELECT ma_tknh, ten_tk, so_tk, ngan_hang, so_du, trang_thai
+FROM TaiKhoanNH;
+
+-- VIEW NHÂN VIÊN
+GO
+CREATE VIEW V_NhanVien
+AS
+SELECT ma_nv, ho_ten, email, sdt, ma_tk
+FROM NhanVien;
+
+-- VIEW LOẠI GIAO DỊCH
+GO
+CREATE VIEW V_LoaiGiaoDich
+AS
+SELECT ma_loai, ten_loai, loai_thu_chi, mo_ta
+FROM LoaiGiaoDich;
+
 
 
 
@@ -539,7 +634,7 @@ END;
 
 
 
--- CÁC PROCEDURE CRUD (THÊM, SỬA, XÓA DỮ LIỆU)
+-- CÁC PROCEDURE CRUD (THÊM, SỬA HOẶC XÓA DỮ LIỆU)
 -- PROCEDURE THÊM GIAO DỊCH MỚI
 -- Mục đích: Tạo giao dịch thu/chi mới
 -- Tham số: Tất cả thông tin cần thiết cho giao dịch
@@ -549,7 +644,7 @@ CREATE PROCEDURE SP_ThemGiaoDich
     @loai_gd VARCHAR(10),                           -- Loại giao dịch (THU/CHI)
     @so_tien DECIMAL(15,2),                         -- Số tiền
     @mo_ta NVARCHAR(500),                           -- Mô tả giao dịch
-    @ma_loai INT,                                   -- Mã loại giao dịch
+    @ma_loai VARCHAR(10),                           -- Mã loại giao dịch
     @ma_tknh INT,                                   -- Mã tài khoản ngân hàng
     @ma_nv_tao INT,                                 -- Mã nhân viên tạo
     @ma_du_an INT = NULL                            -- Mã dự án (có thể NULL)
@@ -557,6 +652,19 @@ AS
 BEGIN
     BEGIN TRANSACTION;
     BEGIN TRY
+        -- Kiểm tra loai_gd khớp với loai_thu_chi của mã loại
+        IF NOT EXISTS (
+            SELECT 1
+            FROM LoaiGiaoDich lgd
+            WHERE lgd.ma_loai = @ma_loai
+              AND lgd.loai_thu_chi = @loai_gd
+        )
+        BEGIN
+            RAISERROR(N'Loại giao dịch không khớp THU/CHI với mã loại!', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
         -- Thêm giao dịch mới
         INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
         VALUES (@loai_gd, @so_tien, @mo_ta, @ma_loai, @ma_tknh, @ma_nv_tao, @ma_du_an);
@@ -573,7 +681,7 @@ BEGIN
 END;
 
 
--- PROCEDURE SỬA GIAO DỊCH
+-- PROCEDURE CẬP NHẬT GIAO DỊCH
 -- Mục đích: Cập nhật thông tin giao dịch (chỉ khi chưa duyệt)
 -- Tham số: Mã giao dịch và thông tin mới
 -- Trả về: Số dòng được cập nhật
@@ -582,7 +690,7 @@ CREATE PROCEDURE SP_SuaGiaoDich
     @ma_gd INT,                                     -- Mã giao dịch cần sửa
     @so_tien DECIMAL(15,2),                         -- Số tiền mới
     @mo_ta NVARCHAR(500),                           -- Mô tả mới
-    @ma_loai INT,                                   -- Mã loại giao dịch mới
+    @ma_loai VARCHAR(10),                           -- Mã loại giao dịch mới
     @ma_tknh INT,                                   -- Mã tài khoản ngân hàng mới
     @ma_du_an INT = NULL                            -- Mã dự án mới
 AS
@@ -593,6 +701,22 @@ BEGIN
         IF NOT EXISTS (SELECT 1 FROM GiaoDich WHERE ma_gd = @ma_gd AND trang_thai = 'CHO_DUYET')
         BEGIN
             RAISERROR(N'Giao dịch không tồn tại hoặc đã được duyệt!', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+        
+        -- Kiểm tra loai_gd hiện tại khớp với loai_thu_chi của mã loại mới
+        DECLARE @loai_gd_hien_tai VARCHAR(10);
+        SELECT @loai_gd_hien_tai = loai_gd FROM GiaoDich WHERE ma_gd = @ma_gd;
+
+        IF NOT EXISTS (
+            SELECT 1
+            FROM LoaiGiaoDich lgd
+            WHERE lgd.ma_loai = @ma_loai
+              AND lgd.loai_thu_chi = @loai_gd_hien_tai
+        )
+        BEGIN
+            RAISERROR(N'Loại giao dịch không khớp THU/CHI với mã loại!', 16, 1);
             ROLLBACK TRANSACTION;
             RETURN;
         END
@@ -608,40 +732,6 @@ BEGIN
         
         -- Trả về số dòng được cập nhật
         SELECT @@ROWCOUNT as so_dong_cap_nhat;
-        
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        THROW;
-    END CATCH
-END;
-
-
--- PROCEDURE XÓA GIAO DỊCH
--- Mục đích: Xóa giao dịch (chỉ khi chưa duyệt)
--- Tham số: Mã giao dịch cần xóa
--- Trả về: Số dòng được xóa
-GO
-CREATE PROCEDURE SP_XoaGiaoDich
-    @ma_gd INT                                      -- Mã giao dịch cần xóa
-AS
-BEGIN
-    BEGIN TRANSACTION;
-    BEGIN TRY
-        -- Kiểm tra giao dịch có tồn tại và chưa duyệt không
-        IF NOT EXISTS (SELECT 1 FROM GiaoDich WHERE ma_gd = @ma_gd AND trang_thai = 'CHO_DUYET')
-        BEGIN
-            RAISERROR(N'Giao dịch không tồn tại hoặc đã được duyệt!', 16, 1);
-            ROLLBACK TRANSACTION;
-            RETURN;
-        END
-        
-        -- Xóa giao dịch
-        DELETE FROM GiaoDich WHERE ma_gd = @ma_gd;
-        
-        -- Trả về số dòng được xóa
-        SELECT @@ROWCOUNT as so_dong_da_xoa;
         
         COMMIT TRANSACTION;
     END TRY
@@ -682,7 +772,7 @@ BEGIN
 END;
 
 
--- PROCEDURE SỬA DỰ ÁN
+-- PROCEDURE CẬP NHẬT DỰ ÁN
 -- Mục đích: Cập nhật thông tin dự án
 -- Tham số: Mã dự án và thông tin mới
 -- Trả về: Số dòng được cập nhật
@@ -905,14 +995,7 @@ END;
 
 
 -- 8. PHÂN QUYỀN CHO CÁC VAI TRÒ
--- Tạo DATABASE ROLES
-CREATE ROLE rl_truongphong;
-CREATE ROLE rl_nhanvien_tc;
-CREATE ROLE rl_ketoan;
-
-
 -- Các procedure và function liên quan tới việc đăng nhập và gán quyền hạn
--- Đưa function đăng nhập lên trước để trigger có thể gọi được
 GO
 CREATE FUNCTION dbo.FN_Login_GetRole(
   @username VARCHAR(50),
@@ -967,6 +1050,11 @@ BEGIN
 
   -- Gán ROLE dựa vào hàm xác định vai trò
   SELECT TOP 1 @role = vai_tro FROM dbo.FN_Login_GetRole(@username, @password);
+  IF (@role IS NULL OR @role = 'UNKNOWN')
+  BEGIN
+    RAISERROR(N'Không tìm thấy vai trò ứng với tài khoản trong dữ liệu ứng dụng.', 16, 1);
+    RETURN;
+  END
   IF @role = 'TRUONG_PHONG_TC' EXEC(N'ALTER ROLE rl_truongphong ADD MEMBER [' + @username + N']');
   ELSE IF @role = 'NHAN_VIEN_TC' EXEC(N'ALTER ROLE rl_nhanvien_tc ADD MEMBER [' + @username + N']');
   ELSE IF @role = 'KE_TOAN' EXEC(N'ALTER ROLE rl_ketoan ADD MEMBER [' + @username + N']');
@@ -999,80 +1087,105 @@ BEGIN
     EXEC (@sql);
   END TRY BEGIN CATCH END CATCH;
 END;
+GO
 
 
 -- PHÂN QUYỀN (GRANT)
+-- CÁC ROLE PHỤC VỤ PHẦN PHÂN QUYỀN
+IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_truongphong')
+  CREATE ROLE rl_truongphong AUTHORIZATION dbo;
+IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_nhanvien_tc')
+  CREATE ROLE rl_nhanvien_tc AUTHORIZATION dbo;
+IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_ketoan')
+  CREATE ROLE rl_ketoan AUTHORIZATION dbo;
+GO
+
 -- QUYỀN CHO TRƯỞNG PHÒNG
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON NhanVien TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON LoaiGiaoDich TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanNH TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE, DELETE ON DuAn TO rl_truongphong;
-GRANT SELECT, INSERT, UPDATE, DELETE ON GiaoDich TO rl_truongphong;
-GRANT SELECT ON V_BaoCaoThuChi TO rl_truongphong;
+GRANT SELECT, INSERT ON GiaoDich TO rl_truongphong; -- UPDATE phải thông qua SP_SuaGiaoDich
+
 GRANT SELECT ON V_ThongKeThang TO rl_truongphong;
 GRANT SELECT ON V_GiaoDichChoDuyet TO rl_truongphong;
 GRANT SELECT ON V_LichSuGiaoDich TO rl_truongphong;
-GRANT EXECUTE ON SP_DuyetGiaoDich TO rl_truongphong;
-GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_truongphong;
+GRANT SELECT ON V_DuAn TO rl_truongphong;
+GRANT SELECT ON V_TaiKhoanNH TO rl_truongphong;
+GRANT SELECT ON V_NhanVien TO rl_truongphong;
+GRANT SELECT ON V_LoaiGiaoDich TO rl_truongphong;
+
 GRANT EXECUTE ON FN_TinhLaiLo TO rl_truongphong;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_truongphong;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_truongphong;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_truongphong;
+
+GRANT EXECUTE ON SP_DuyetGiaoDich TO rl_truongphong;
+GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_truongphong;
 GRANT EXECUTE ON SP_ThemGiaoDich TO rl_truongphong;
 GRANT EXECUTE ON SP_SuaGiaoDich TO rl_truongphong;
-GRANT EXECUTE ON SP_XoaGiaoDich TO rl_truongphong;
 GRANT EXECUTE ON SP_ThemDuAn TO rl_truongphong;
 GRANT EXECUTE ON SP_SuaDuAn TO rl_truongphong;
 GRANT EXECUTE ON SP_XoaDuAn TO rl_truongphong;
 GRANT EXECUTE ON SP_ThemTaiKhoanNH TO rl_truongphong;
 GRANT EXECUTE ON SP_SuaTaiKhoanNH TO rl_truongphong;
 GRANT EXECUTE ON SP_XoaTaiKhoanNH TO rl_truongphong;
-
 -- Cấp quyền chạy SP tạo tài khoản SQL account của nhân viên cho Trưởng phòng
 GRANT EXECUTE ON SP_ProvisionSqlAccount TO rl_truongphong;
 GRANT EXECUTE ON SP_DropSqlAccount TO rl_truongphong;
 
 
 -- QUYỀN CHO NHÂN VIÊN TÀI CHÍNH
-GRANT SELECT ON TaiKhoan TO rl_nhanvien_tc;
 GRANT SELECT ON NhanVien TO rl_nhanvien_tc;
 GRANT SELECT ON LoaiGiaoDich TO rl_nhanvien_tc;
 GRANT SELECT ON TaiKhoanNH TO rl_nhanvien_tc;
 GRANT SELECT ON DuAn TO rl_nhanvien_tc;
-GRANT SELECT, INSERT, UPDATE ON GiaoDich TO rl_nhanvien_tc;
-GRANT SELECT ON V_BaoCaoThuChi TO rl_nhanvien_tc;
+GRANT SELECT, INSERT ON GiaoDich TO rl_nhanvien_tc; -- UPDATE phải thông qua SP_SuaGiaoDich
+
 GRANT SELECT ON V_ThongKeThang TO rl_nhanvien_tc;
 GRANT SELECT ON V_GiaoDichChoDuyet TO rl_nhanvien_tc;
 GRANT SELECT ON V_LichSuGiaoDich TO rl_nhanvien_tc;
-GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_nhanvien_tc;
+GRANT SELECT ON V_DuAn TO rl_nhanvien_tc;
+GRANT SELECT ON V_TaiKhoanNH TO rl_nhanvien_tc;
+GRANT SELECT ON V_NhanVien TO rl_nhanvien_tc;
+GRANT SELECT ON V_LoaiGiaoDich TO rl_nhanvien_tc;
+
 GRANT EXECUTE ON FN_TinhLaiLo TO rl_nhanvien_tc;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_nhanvien_tc;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_nhanvien_tc;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_nhanvien_tc;
+
+GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_ThemGiaoDich TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_SuaGiaoDich TO rl_nhanvien_tc;
-GRANT EXECUTE ON SP_XoaGiaoDich TO rl_nhanvien_tc;
-GRANT EXECUTE ON SP_ThemDuAn TO rl_nhanvien_tc;
-GRANT EXECUTE ON SP_SuaDuAn TO rl_nhanvien_tc;
-GRANT EXECUTE ON SP_XoaDuAn TO rl_nhanvien_tc;
 
 -- QUYỀN CHO KẾ TOÁN (READ-ONLY)
-GRANT SELECT ON TaiKhoan TO rl_ketoan;
 GRANT SELECT ON NhanVien TO rl_ketoan;
 GRANT SELECT ON LoaiGiaoDich TO rl_ketoan;
 GRANT SELECT ON TaiKhoanNH TO rl_ketoan;
 GRANT SELECT ON DuAn TO rl_ketoan;
 GRANT SELECT ON GiaoDich TO rl_ketoan;
-GRANT SELECT ON V_BaoCaoThuChi TO rl_ketoan;
+
+GRANT SELECT ON V_DuAn TO rl_ketoan;
+GRANT SELECT ON V_TaiKhoanNH TO rl_ketoan;
+GRANT SELECT ON V_NhanVien TO rl_ketoan;
+GRANT SELECT ON V_LoaiGiaoDich TO rl_ketoan;
 GRANT SELECT ON V_ThongKeThang TO rl_ketoan;
 GRANT SELECT ON V_GiaoDichChoDuyet TO rl_ketoan;
 GRANT SELECT ON V_LichSuGiaoDich TO rl_ketoan;
-GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_ketoan;
+
 GRANT EXECUTE ON FN_TinhLaiLo TO rl_ketoan;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_ketoan;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_ketoan;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_ketoan;
+
+GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_ketoan;
+
+
+-- DENY
+DENY UPDATE (so_du) ON dbo.TaiKhoanNH TO rl_truongphong, rl_nhanvien_tc, rl_ketoan;
+DENY DELETE ON dbo.GiaoDich TO rl_truongphong, rl_nhanvien_tc, rl_ketoan;
 
 
 
@@ -1084,8 +1197,8 @@ GRANT SELECT ON dbo.FN_Login_GetRole TO rl_ketoan;
 -- Dùng SP_ProvisionSqlAccount để tạo tài khoản SQL account của nhân viên khi có tài khoản trong table TaiKhoan
 INSERT INTO TaiKhoan (username, password) VALUES 
 ('truongphong', 'tp123'),
-('nhanvien_tc', 'nvtc123'),
-('ketoan1', 'kt123');
+('nhanvientc', 'nvtc123'),
+('ketoan', 'kt123');
 
 INSERT INTO NhanVien (ho_ten, email, sdt, ma_tk) VALUES 
 (N'Trần Thị Trưởng Phòng', 'truongphong@jobcenter.com', '0123456790', 1),
@@ -1099,20 +1212,183 @@ INSERT INTO NhanVienTC (ma_nv, chuyen_mon, cap_bac) VALUES
 INSERT INTO KeToan (ma_nv, chung_chi, kinh_nghiem) VALUES 
 (3, N'CPA, ACCA', 5);
 
-INSERT INTO LoaiGiaoDich (ten_loai, loai_thu_chi, mo_ta) VALUES 
-(N'Phí dịch vụ giới thiệu việc làm', 'THU', N'Thu từ phí dịch vụ giới thiệu việc làm'),
-(N'Phí đăng tin tuyển dụng', 'THU', N'Thu từ phí đăng tin tuyển dụng'),
-(N'Tài trợ từ doanh nghiệp', 'THU', N'Thu từ tài trợ của doanh nghiệp'),
-(N'Các khoản thu khác', 'THU', N'Các khoản thu khác'),
-(N'Lương nhân viên', 'CHI', N'Chi trả lương cho nhân viên'),
-(N'Chi phí vận hành', 'CHI', N'Chi phí vận hành trung tâm'),
-(N'Chi phí marketing', 'CHI', N'Chi phí quảng cáo, marketing'),
-(N'Chi phí thuê mặt bằng', 'CHI', N'Chi phí thuê mặt bằng');
 
+-- TẠO LOGIN CHO 3 TÀI KHOẢN MẪU
+-- Yêu cầu quyền server: securityadmin/sysadmin.
+EXEC SP_ProvisionSqlAccount 'truongphong', 'tp123';
+EXEC SP_ProvisionSqlAccount 'nhanvientc', 'nvtc123';
+EXEC SP_ProvisionSqlAccount 'ketoan', 'kt123';
+
+-- XÓA LOGIN (ROLLBACK) CHO 3 TÀI KHOẢN MẪU
+-- EXEC SP_DropSqlAccount 'truongphong';
+-- EXEC SP_DropSqlAccount 'nhanvientc';
+-- EXEC SP_DropSqlAccount 'ketoan';
+
+
+-- CÁC LOẠI GIAO DỊCH CỐ ĐỊNH (mã cố định, không thay đổi nên không có thêm sửa xóa)
+INSERT INTO LoaiGiaoDich (ma_loai, ten_loai, loai_thu_chi, mo_ta) VALUES 
+('LGD_UT', N'Phí ứng tuyển việc làm', 'THU', N'Thu từ phí ứng tuyển của sinh viên'),
+('LGD_DT', N'Phí đăng tin tuyển dụng', 'THU', N'Thu từ phí đăng tin của doanh nghiệp'),
+('LGD_TT', N'Tài trợ từ doanh nghiệp', 'THU', N'Thu từ tài trợ của doanh nghiệp'),
+('LGD_KHAC', N'Các khoản thu khác', 'THU', N'Các khoản thu khác'),
+('LGD_LUONG', N'Lương nhân viên', 'CHI', N'Chi trả lương cho nhân viên'),
+('LGD_VH', N'Chi phí vận hành', 'CHI', N'Chi phí vận hành trung tâm'),
+('LGD_MK', N'Chi phí marketing', 'CHI', N'Chi phí quảng cáo, marketing'),
+('LGD_MB', N'Chi phí thuê mặt bằng', 'CHI', N'Chi phí thuê mặt bằng');
+
+-- Có thể thêm, cập nhật, vô hiệu hóa tài khoản ngân hàng
 INSERT INTO TaiKhoanNH (ten_tk, so_tk, ngan_hang, so_du) VALUES 
 (N'Tài khoản chính', '1234567890', N'Vietcombank', 100000000),
-(N'Tài khoản dự phòng', '0987654321', N'BIDV', 50000000);
+(N'Tài khoản dự phòng', '0987654321', N'BIDV', 50000000),
+(N'Tài khoản hoạt động', '2223334445', N'ACB', 30000000);
 
+-- Có thể thêm, cập nhật, vô hiệu hóa/ ngừng hoạt động dự án
 INSERT INTO DuAn (ten_du_an, ngay_bd, ngay_kt, ngan_sach) VALUES 
-(N'Dự án mở rộng trung tâm', '2024-01-01', '2024-12-31', 500000000),
-(N'Dự án nâng cấp hệ thống', '2024-06-01', '2024-08-31', 200000000);
+(N'Dự án nâng cấp website tuyển dụng', '2024-06-01', '2024-08-31', 200000000),
+(N'Dự án quảng bá tuyển dụng', '2024-09-01', NULL, 150000000),
+(N'Dự án đào tạo kỹ năng phỏng vấn', '2024-03-01', '2024-12-31', 100000000),
+(N'Dự án kết nối doanh nghiệp', '2024-01-01', NULL, 300000000),
+(N'Dự án hội chợ việc làm', '2024-10-01', '2024-10-31', 50000000),
+(N'Dự án hỗ trợ sinh viên khó khăn', '2024-02-01', NULL, 80000000);
+
+
+-- Giao dịch mẫu
+-- Giao dịch thêm, cập nhật chỉ khi chưa duyệt, không có xóa
+DECLARE @gd INT;
+
+-- === GIAO DỊCH THU PHÍ ỨNG TUYỂN (từng sinh viên) ===
+-- Sinh viên Nguyễn Văn A
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên Nguyễn Văn A', 'LGD_UT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Sinh viên Trần Thị B
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên Trần Thị B', 'LGD_UT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Sinh viên Lê Văn C
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên Lê Văn C', 'LGD_UT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên D', 'LGD_UT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên E', 'LGD_UT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000, N'Thu phí ứng tuyển từ sinh viên F', 'LGD_UT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+
+
+-- === GIAO DỊCH THU PHÍ ĐĂNG TIN (từng doanh nghiệp) ===
+-- Công ty ABC
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 200000, N'Thu phí đăng tin từ công ty ABC', 'LGD_DT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Công ty XYZ
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 200000, N'Thu phí đăng tin từ công ty XYZ', 'LGD_DT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Công ty DEF
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 200000, N'Thu phí đăng tin từ công ty DEF', 'LGD_DT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 300000, N'Thu phí đăng tin từ công ty GHI', 'LGD_DT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 300000, N'Thu phí đăng tin từ công ty JKL', 'LGD_DT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 300000, N'Thu phí đăng tin từ công ty MNO', 'LGD_DT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+
+
+-- === GIAO DỊCH THU TÀI TRỢ ===
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 2000000, N'Thu tài trợ từ công ty ABC cho dự án kết nối doanh nghiệp', 'LGD_TT', 2, 3, 4);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 500000, N'Thu tài trợ từ công ty XYZ cho dự án hỗ trợ sinh viên', 'LGD_TT', 1, 2, 6);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 20000000, N'Tài trợ từ doanh nghiệp PQR cho dự án kết nối', 'LGD_TT', 1, 2, 4);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 10000000, N'Tài trợ từ doanh nghiệp STU cho hoạt động trung tâm', 'LGD_TT', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('THU', 5000000, N'Đồng tài trợ từ doanh nghiệp VWX cho chiến dịch truyền thông', 'LGD_TT', 1, 2, 2);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+
+
+-- === GIAO DỊCH CHI ===
+-- Lương nhân viên
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('CHI', 15000000, N'Chi lương nhân viên tháng 9', 'LGD_LUONG', 1, 3, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Vận hành
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('CHI', 5000000, N'Chi phí vận hành trung tâm', 'LGD_VH', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Chi phí dự án đào tạo
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('CHI', 2000000, N'Chi phí thuê giảng viên dự án đào tạo', 'LGD_VH', 1, 2, 3);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Chi phí hội chợ việc làm
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('CHI', 3000000, N'Chi phí thuê gian hàng hội chợ việc làm', 'LGD_VH', 2, 3, 5);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Marketing dự án
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('CHI', 1500000, N'Chi phí marketing dự án quảng bá', 'LGD_MK', 3, 3, 2);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
+
+-- Chi phí thuê mặt bằng
+INSERT INTO GiaoDich (loai_gd, so_tien, mo_ta, ma_loai, ma_tknh, ma_nv_tao, ma_du_an)
+VALUES ('CHI', 8000000, N'Chi phí thuê mặt bằng trung tâm', 'LGD_MB', 1, 2, NULL);
+SET @gd = SCOPE_IDENTITY();
+EXEC SP_DuyetGiaoDich @gd, 1, 'DA_DUYET';
