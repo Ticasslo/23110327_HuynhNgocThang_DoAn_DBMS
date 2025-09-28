@@ -13,10 +13,10 @@
 
 
 -- Tạo database
-CREATE DATABASE JobCenterFinancialManagementHCM;
+CREATE DATABASE JobCenterFinancialManagement;
 GO
 
-USE JobCenterFinancialManagementHCM;
+USE JobCenterFinancialManagement;
 GO
 
 -- 1. CÁC BẢNG CƠ SỞ
@@ -31,7 +31,7 @@ CREATE TABLE TaiKhoan (
 CREATE TABLE NhanVien (
     ma_nv INT IDENTITY(1,1) PRIMARY KEY,       -- Mã nhân viên tự tăng (1, 2, 3, ...)
     ho_ten NVARCHAR(100) NOT NULL,             -- Họ và tên đầy đủ của nhân viên
-    email VARCHAR(100) UNIQUE NOT NULL,        -- Email liên lạc (duy nhất, dùng để gửi thông báo)
+    email NVARCHAR(100) UNIQUE NOT NULL,        -- Email liên lạc (duy nhất, dùng để gửi thông báo)
     sdt VARCHAR(20),                           -- Số điện thoại liên lạc
     ma_tk INT UNIQUE NOT NULL,                 -- Mã tài khoản đăng nhập (1-1 với bảng TaiKhoan)
     FOREIGN KEY (ma_tk) REFERENCES TaiKhoan(ma_tk)
@@ -293,41 +293,6 @@ BEGIN
 END;
 
 
--- TRIGGER SOFT-DELETE TÀI KHOẢN NGÂN HÀNG
--- Mục đích: Khi DELETE trên TaiKhoanNH, chuyển thành cập nhật trang_thai='inactive'
--- Logic: INSTEAD OF DELETE -> UPDATE
-GO
-CREATE OR ALTER TRIGGER TR_TaiKhoanNH_SoftDelete
-ON dbo.TaiKhoanNH
-INSTEAD OF DELETE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    UPDATE t
-    SET t.trang_thai = 'inactive'
-    FROM dbo.TaiKhoanNH t
-    INNER JOIN deleted d ON d.ma_tknh = t.ma_tknh;
-END;
-
-
--- TRIGGER SOFT-DELETE DỰ ÁN
--- Mục đích: Khi DELETE trên DuAn, chuyển thành cập nhật trang_thai='inactive'
--- Logic: INSTEAD OF DELETE -> UPDATE
-GO
-CREATE OR ALTER TRIGGER TR_DuAn_SoftDelete
-ON dbo.DuAn
-INSTEAD OF DELETE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    UPDATE da
-    SET da.trang_thai = 'inactive'
-    FROM dbo.DuAn da
-    INNER JOIN deleted d ON d.ma_du_an = da.ma_du_an;
-END;
-
 
 
 
@@ -416,13 +381,6 @@ CREATE VIEW V_TaiKhoanNH
 AS
 SELECT ma_tknh, ten_tk, so_tk, ngan_hang, so_du, trang_thai
 FROM TaiKhoanNH;
-
--- VIEW NHÂN VIÊN
-GO
-CREATE VIEW V_NhanVien
-AS
-SELECT ma_nv, ho_ten, email, sdt, ma_tk
-FROM NhanVien;
 
 -- VIEW LOẠI GIAO DỊCH
 GO
@@ -527,6 +485,260 @@ END;
 
 
 -- 7. STORED PROCEDURES
+
+
+-- STORED PROCEDURES cho CÁC VIEWS
+-- SP cho V_ThongKeThang - Thống kê thu chi theo tháng
+GO
+CREATE PROCEDURE SP_GetThongKeThang
+    @Nam INT = NULL,                    -- Năm (NULL = tất cả năm)
+    @Thang INT = NULL                   -- Tháng (NULL = tất cả tháng)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Nam,                            -- Năm
+        Thang,                          -- Tháng
+        TongThu,                        -- Tổng thu
+        TongChi,                        -- Tổng chi
+        LaiLo                           -- Lãi/Lỗ
+    FROM V_ThongKeThang
+    WHERE (@Nam IS NULL OR Nam = @Nam)
+      AND (@Thang IS NULL OR Thang = @Thang)
+    ORDER BY Nam DESC, Thang DESC;
+END;
+GO
+
+
+-- SP cho V_GiaoDichChoDuyet - Giao dịch chờ duyệt
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_GetGiaoDichChoDuyet
+  @MaNvTao INT = NULL,
+  @LoaiGd  VARCHAR(10) = NULL,
+  @MaDuAn  INT = NULL
+AS
+BEGIN
+  SET NOCOUNT ON;
+
+  SELECT 
+      v.ma_gd,
+      v.loai_gd,
+      v.so_tien,
+      v.ngay_gd,
+      v.mo_ta,
+      v.ten_loai,
+      v.nguoi_tao,
+      v.ten_du_an
+  FROM dbo.V_GiaoDichChoDuyet AS v
+  INNER JOIN dbo.GiaoDich AS gd
+          ON gd.ma_gd = v.ma_gd        -- dùng JOIN để lọc theo các khóa ngoại
+  WHERE (@MaNvTao IS NULL OR gd.ma_nv_tao_nvtc = @MaNvTao)
+    AND (@LoaiGd  IS NULL OR v.loai_gd = @LoaiGd)
+    AND (@MaDuAn  IS NULL OR gd.ma_du_an = @MaDuAn)
+  ORDER BY v.ngay_gd DESC;
+END
+GO
+
+
+-- SP cho Nhân viên TC - Xem giao dịch chờ duyệt của mình
+GO
+CREATE PROCEDURE SP_GetGiaoDichChoDuyet_ForNhanVienTC
+    @MaNvTao INT                        -- Mã nhân viên tạo (BẮT BUỘC)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Kiểm tra quyền: Chỉ được xem giao dịch của mình
+    IF NOT EXISTS (SELECT 1 FROM NhanVienTC WHERE ma_nv = @MaNvTao)
+    BEGIN
+        RAISERROR(N'Không có quyền xem giao dịch chờ duyệt!', 16, 1);
+        RETURN;
+    END
+    
+    SELECT 
+        gd.ma_gd,
+        gd.loai_gd,
+        gd.so_tien,
+        gd.ngay_gd,
+        gd.mo_ta,
+        lg.ten_loai,
+        nv.ho_ten as nguoi_tao,
+        da.ten_du_an,
+        gd.trang_thai
+    FROM GiaoDich gd
+    INNER JOIN LoaiGiaoDich lg ON gd.ma_loai = lg.ma_loai
+    INNER JOIN NhanVien nv ON gd.ma_nv_tao_nvtc = nv.ma_nv
+    LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an
+    WHERE gd.trang_thai = 'CHO_DUYET'
+      AND gd.ma_nv_tao_nvtc = @MaNvTao  -- CHỈ XEM GIAO DỊCH CỦA MÌNH
+    ORDER BY gd.ngay_gd DESC;
+END;
+GO
+
+
+-- SP cho V_LichSuGiaoDich - Lịch sử giao dịch
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_GetLichSuGiaoDich
+  @TuNgay   DATETIME = NULL,
+  @DenNgay  DATETIME = NULL,
+  @TrangThai VARCHAR(20) = NULL,
+  @LoaiGd   VARCHAR(10) = NULL,
+  @MaDuAn   INT = NULL,
+  @MaTknh   INT = NULL,
+  @MaNvTao  INT = NULL
+AS
+BEGIN
+  SET NOCOUNT ON;
+
+  SELECT 
+      v.ma_gd,
+      v.loai_gd,
+      v.so_tien,
+      v.ngay_gd,
+      v.mo_ta,
+      v.trang_thai,
+      v.ten_loai,
+      v.tai_khoan,
+      v.nguoi_tao,
+      v.nguoi_duyet,
+      v.ngay_duyet,
+      v.ten_du_an
+  FROM dbo.V_LichSuGiaoDich AS v
+  INNER JOIN dbo.GiaoDich AS gd
+          ON gd.ma_gd = v.ma_gd
+  WHERE (@TuNgay   IS NULL OR v.ngay_gd >= @TuNgay)
+    AND (@DenNgay  IS NULL OR v.ngay_gd < DATEADD(DAY, 1, @DenNgay))
+    AND (@TrangThai IS NULL OR v.trang_thai = @TrangThai)
+    AND (@LoaiGd   IS NULL OR v.loai_gd   = @LoaiGd)
+    AND (@MaDuAn   IS NULL OR gd.ma_du_an = @MaDuAn)
+    AND (@MaTknh   IS NULL OR gd.ma_tknh  = @MaTknh)
+    AND (@MaNvTao  IS NULL OR gd.ma_nv_tao_nvtc = @MaNvTao)
+  ORDER BY v.ngay_gd DESC;
+END
+GO
+
+
+-- SP cho Nhân viên TC - Chỉ xem giao dịch của mình
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_GetLichSuGiaoDich_ForNhanVienTC
+  @MaNvTao INT,                         -- BẮT BUỘC
+  @TuNgay   DATETIME = NULL,
+  @DenNgay  DATETIME = NULL,
+  @TrangThai VARCHAR(20) = NULL,
+  @LoaiGd   VARCHAR(10) = NULL,
+  @MaDuAn   INT = NULL,
+  @MaTknh   INT = NULL
+AS
+BEGIN
+  SET NOCOUNT ON;
+
+  -- Kiểm tra quyền: phải là nhân viên TC
+  IF NOT EXISTS (SELECT 1 FROM dbo.NhanVienTC WHERE ma_nv = @MaNvTao)
+  BEGIN
+    RAISERROR(N'Không có quyền xem lịch sử giao dịch!', 16, 1);
+    RETURN;
+  END;
+
+  SELECT 
+      v.ma_gd,
+      v.loai_gd,
+      v.so_tien,
+      v.ngay_gd,
+      v.mo_ta,
+      v.trang_thai,
+      v.ten_loai,
+      v.tai_khoan,
+      v.nguoi_tao,
+      v.nguoi_duyet,
+      v.ngay_duyet,
+      v.ten_du_an
+  FROM dbo.V_LichSuGiaoDich AS v
+  INNER JOIN dbo.GiaoDich AS gd
+          ON gd.ma_gd = v.ma_gd
+  WHERE gd.ma_nv_tao_nvtc = @MaNvTao                      -- ràng buộc "của tôi"
+    AND (@TuNgay   IS NULL OR v.ngay_gd >= @TuNgay)
+    AND (@DenNgay  IS NULL OR v.ngay_gd < DATEADD(DAY, 1, @DenNgay))
+    AND (@TrangThai IS NULL OR v.trang_thai = @TrangThai)
+    AND (@LoaiGd   IS NULL OR v.loai_gd   = @LoaiGd)
+    AND (@MaDuAn   IS NULL OR gd.ma_du_an = @MaDuAn)
+    AND (@MaTknh   IS NULL OR gd.ma_tknh  = @MaTknh)
+  ORDER BY v.ngay_gd DESC;
+END
+GO
+
+
+-- SP cho V_DuAn - Danh sách dự án
+GO
+CREATE PROCEDURE SP_GetDuAn
+    @TrangThai VARCHAR(20) = NULL,      -- Trạng thái (NULL = tất cả)
+    @TuNgayBd DATETIME = NULL,          -- Từ ngày bắt đầu
+    @DenNgayBd DATETIME = NULL,         -- Đến ngày bắt đầu
+    @CoNganSach BIT = NULL              -- Có ngân sách (NULL = tất cả)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        ma_du_an,                       -- Mã dự án
+        ten_du_an,                      -- Tên dự án
+        ngay_bd,                        -- Ngày bắt đầu
+        ngay_kt,                        -- Ngày kết thúc
+        ngan_sach,                      -- Ngân sách
+        trang_thai                      -- Trạng thái
+    FROM V_DuAn
+    WHERE (@TrangThai IS NULL OR trang_thai = @TrangThai)
+      AND (@TuNgayBd IS NULL OR ngay_bd >= @TuNgayBd)
+      AND (@DenNgayBd IS NULL OR ngay_bd <= @DenNgayBd)
+      AND (@CoNganSach IS NULL OR 
+           CASE WHEN ngan_sach > 0 THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END = @CoNganSach)
+    ORDER BY ngay_bd DESC;
+END;
+GO
+
+
+-- SP cho V_TaiKhoanNH - Danh sách tài khoản ngân hàng
+GO
+CREATE PROCEDURE SP_GetTaiKhoanNH
+    @TrangThai VARCHAR(20) = NULL,      -- Trạng thái (NULL = tất cả)
+    @NganHang NVARCHAR(100) = NULL,     -- Tên ngân hàng (NULL = tất cả)
+    @CoSoDu BIT = NULL                  -- Có số dư (NULL = tất cả)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        ma_tknh,                        -- Mã tài khoản NH
+        ten_tk,                         -- Tên tài khoản
+        so_tk,                          -- Số tài khoản
+        ngan_hang,                      -- Tên ngân hàng
+        so_du,                          -- Số dư
+        trang_thai                      -- Trạng thái
+    FROM V_TaiKhoanNH
+    WHERE (@TrangThai IS NULL OR trang_thai = @TrangThai)
+      AND (@NganHang IS NULL OR ngan_hang LIKE '%' + @NganHang + '%')
+      AND (@CoSoDu IS NULL OR 
+           CASE WHEN so_du > 0 THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END = @CoSoDu)
+    ORDER BY so_du DESC;
+END;
+GO
+
+
+-- SP cho V_LoaiGiaoDich - Danh sách loại giao dịch
+GO
+CREATE PROCEDURE SP_GetLoaiGiaoDich
+    @LoaiThuChi VARCHAR(10) = NULL      -- Loại thu chi (THU/CHI, NULL = tất cả)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        ma_loai,                        -- Mã loại giao dịch
+        ten_loai,                       -- Tên loại giao dịch
+        loai_thu_chi,                   -- Loại thu chi
+        mo_ta                           -- Mô tả
+    FROM V_LoaiGiaoDich
+    WHERE (@LoaiThuChi IS NULL OR loai_thu_chi = @LoaiThuChi)
+    ORDER BY loai_thu_chi, ten_loai;
+END;
+GO
+
+
 -- PROCEDURE DUYỆT GIAO DỊCH
 -- Mục đích: Duyệt hoặc từ chối giao dịch (chỉ Admin và Trưởng phòng)
 -- Tham số:
@@ -541,6 +753,7 @@ CREATE PROCEDURE SP_DuyetGiaoDich
     @trang_thai VARCHAR(20)                  -- Trạng thái mới (DA_DUYET/TU_CHOI)
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;                       -- Bắt đầu transaction để đảm bảo tính nhất quán
     
     BEGIN TRY
@@ -610,6 +823,7 @@ CREATE PROCEDURE SP_XuatBaoCaoChiTiet
     @ma_du_an INT = NULL                           -- Mã dự án (NULL = tất cả dự án)
 AS
 BEGIN
+    SET NOCOUNT ON;
     SELECT 
         gd.ma_gd,                                  -- Mã giao dịch
         gd.loai_gd,                                -- Loại giao dịch (THU/CHI)
@@ -656,6 +870,7 @@ CREATE PROCEDURE SP_ThemGiaoDich
     @ma_du_an INT = NULL                            -- Mã dự án (có thể NULL)
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra loai_gd khớp với loai_thu_chi của mã loại
@@ -698,15 +913,25 @@ CREATE PROCEDURE SP_SuaGiaoDich
     @mo_ta NVARCHAR(500),                           -- Mô tả mới
     @ma_loai VARCHAR(10),                           -- Mã loại giao dịch mới
     @ma_tknh INT,                                   -- Mã tài khoản ngân hàng mới
-    @ma_du_an INT = NULL                            -- Mã dự án mới
+    @ma_du_an INT = NULL,                           -- Mã dự án mới
+    @ma_nv_sua INT                                  -- Mã nhân viên thực hiện sửa (BẮT BUỘC)
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra giao dịch có tồn tại và chưa duyệt không
         IF NOT EXISTS (SELECT 1 FROM GiaoDich WHERE ma_gd = @ma_gd AND trang_thai = 'CHO_DUYET')
         BEGIN
             RAISERROR(N'Giao dịch không tồn tại hoặc đã được duyệt!', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+        
+        -- KIỂM TRA QUYỀN: Chỉ được sửa giao dịch của mình
+        IF NOT EXISTS (SELECT 1 FROM GiaoDich WHERE ma_gd = @ma_gd AND ma_nv_tao_nvtc = @ma_nv_sua)
+        BEGIN
+            RAISERROR(N'Không có quyền sửa giao dịch của người khác!', 16, 1);
             ROLLBACK TRANSACTION;
             RETURN;
         END
@@ -760,6 +985,7 @@ CREATE PROCEDURE SP_ThemDuAn
     @ngan_sach DECIMAL(15,2) = 0                    -- Ngân sách dự án
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Thêm dự án mới
@@ -792,6 +1018,7 @@ CREATE PROCEDURE SP_SuaDuAn
     @trang_thai VARCHAR(20) = 'active'              -- Trạng thái mới
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra dự án có tồn tại không
@@ -823,15 +1050,16 @@ BEGIN
 END;
 
 
--- PROCEDURE XÓA DỰ ÁN
--- Mục đích: Xóa dự án (chỉ khi không có giao dịch liên quan)
--- Tham số: Mã dự án cần xóa
--- Trả về: Số dòng được xóa
+-- PROCEDURE VÔ HIỆU HÓA DỰ ÁN
+-- Mục đích: Vô hiệu hóa dự án (cập nhật trang_thai = 'inactive')
+-- Tham số: Mã dự án cần vô hiệu hóa
+-- Trả về: Số dòng được cập nhật
 GO
-CREATE PROCEDURE SP_XoaDuAn
-    @ma_du_an INT                                   -- Mã dự án cần xóa
+CREATE PROCEDURE SP_UpdateDuAn
+    @ma_du_an INT                                   -- Mã dự án cần vô hiệu hóa
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra dự án có tồn tại không
@@ -842,19 +1070,13 @@ BEGIN
             RETURN;
         END
         
-        -- Kiểm tra có giao dịch liên quan không
-        IF EXISTS (SELECT 1 FROM GiaoDich WHERE ma_du_an = @ma_du_an)
-        BEGIN
-            RAISERROR(N'Không thể xóa dự án có giao dịch liên quan!', 16, 1);
-            ROLLBACK TRANSACTION;
-            RETURN;
-        END
+        -- Cập nhật trạng thái dự án thành inactive
+        UPDATE DuAn 
+        SET trang_thai = 'inactive'
+        WHERE ma_du_an = @ma_du_an;
         
-        -- Xóa dự án
-        DELETE FROM DuAn WHERE ma_du_an = @ma_du_an;
-        
-        -- Trả về số dòng được xóa
-        SELECT @@ROWCOUNT as so_dong_da_xoa;
+        -- Trả về số dòng được cập nhật
+        SELECT @@ROWCOUNT as so_dong_cap_nhat;
         
         COMMIT TRANSACTION;
     END TRY
@@ -877,6 +1099,7 @@ CREATE PROCEDURE SP_ThemTaiKhoanNH
     @so_du DECIMAL(15,2) = 0                        -- Số dư ban đầu
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra số tài khoản đã tồn tại chưa
@@ -916,6 +1139,7 @@ CREATE PROCEDURE SP_SuaTaiKhoanNH
     @trang_thai VARCHAR(20) = 'active'              -- Trạng thái mới
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra tài khoản có tồn tại không
@@ -954,15 +1178,16 @@ BEGIN
 END;
 
 
--- PROCEDURE XÓA TÀI KHOẢN NGÂN HÀNG
--- Mục đích: Xóa tài khoản ngân hàng (chỉ khi không có giao dịch liên quan)
--- Tham số: Mã tài khoản cần xóa
--- Trả về: Số dòng được xóa
+-- PROCEDURE VÔ HIỆU HÓA TÀI KHOẢN NGÂN HÀNG
+-- Mục đích: Vô hiệu hóa tài khoản ngân hàng (cập nhật trang_thai = 'inactive')
+-- Tham số: Mã tài khoản cần vô hiệu hóa
+-- Trả về: Số dòng được cập nhật
 GO
-CREATE PROCEDURE SP_XoaTaiKhoanNH
-    @ma_tknh INT                                    -- Mã tài khoản cần xóa
+CREATE PROCEDURE SP_UpdateTaiKhoanNH
+    @ma_tknh INT                                    -- Mã tài khoản cần vô hiệu hóa
 AS
 BEGIN
+    SET NOCOUNT ON;
     BEGIN TRANSACTION;
     BEGIN TRY
         -- Kiểm tra tài khoản có tồn tại không
@@ -973,19 +1198,13 @@ BEGIN
             RETURN;
         END
         
-        -- Kiểm tra có giao dịch liên quan không
-        IF EXISTS (SELECT 1 FROM GiaoDich WHERE ma_tknh = @ma_tknh)
-        BEGIN
-            RAISERROR(N'Không thể xóa tài khoản có giao dịch liên quan!', 16, 1);
-            ROLLBACK TRANSACTION;
-            RETURN;
-        END
+        -- Cập nhật trạng thái tài khoản thành inactive
+        UPDATE TaiKhoanNH 
+        SET trang_thai = 'inactive'
+        WHERE ma_tknh = @ma_tknh;
         
-        -- Xóa tài khoản
-        DELETE FROM TaiKhoanNH WHERE ma_tknh = @ma_tknh;
-        
-        -- Trả về số dòng được xóa
-        SELECT @@ROWCOUNT as so_dong_da_xoa;
+        -- Trả về số dòng được cập nhật
+        SELECT @@ROWCOUNT as so_dong_cap_nhat;
         
         COMMIT TRANSACTION;
     END TRY
@@ -1107,91 +1326,81 @@ IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl
 GO
 
 -- QUYỀN CHO TRƯỞNG PHÒNG
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO rl_truongphong;
-GRANT SELECT, INSERT, UPDATE, DELETE ON NhanVien TO rl_truongphong;
 GRANT SELECT ON LoaiGiaoDich TO rl_truongphong;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanNH TO rl_truongphong;
-GRANT SELECT, INSERT, UPDATE, DELETE ON DuAn TO rl_truongphong;
-GRANT SELECT, INSERT ON GiaoDich TO rl_truongphong; -- UPDATE phải thông qua SP_SuaGiaoDich
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanNH TO rl_truongphong;
+GRANT SELECT, INSERT, UPDATE ON DuAn TO rl_truongphong;
+GRANT SELECT ON GiaoDich TO rl_truongphong; -- Chỉ xem, không thêm/sửa
 
-GRANT SELECT ON V_ThongKeThang TO rl_truongphong;
-GRANT SELECT ON V_GiaoDichChoDuyet TO rl_truongphong;
-GRANT SELECT ON V_LichSuGiaoDich TO rl_truongphong;
-GRANT SELECT ON V_DuAn TO rl_truongphong;
-GRANT SELECT ON V_TaiKhoanNH TO rl_truongphong;
-GRANT SELECT ON V_NhanVien TO rl_truongphong;
-GRANT SELECT ON V_LoaiGiaoDich TO rl_truongphong;
+GRANT EXECUTE ON SP_GetThongKeThang TO rl_truongphong;
+GRANT EXECUTE ON SP_GetGiaoDichChoDuyet TO rl_truongphong;
+GRANT EXECUTE ON SP_GetLichSuGiaoDich TO rl_truongphong;
+GRANT EXECUTE ON SP_GetDuAn TO rl_truongphong;
+GRANT EXECUTE ON SP_GetTaiKhoanNH TO rl_truongphong;
+GRANT EXECUTE ON SP_GetLoaiGiaoDich TO rl_truongphong;
+GRANT EXECUTE ON SP_DuyetGiaoDich TO rl_truongphong;
+GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_truongphong;
+GRANT EXECUTE ON SP_ThemDuAn TO rl_truongphong;
+GRANT EXECUTE ON SP_SuaDuAn TO rl_truongphong;
+GRANT EXECUTE ON SP_UpdateDuAn TO rl_truongphong;
+GRANT EXECUTE ON SP_ThemTaiKhoanNH TO rl_truongphong;
+GRANT EXECUTE ON SP_SuaTaiKhoanNH TO rl_truongphong;
+GRANT EXECUTE ON SP_UpdateTaiKhoanNH TO rl_truongphong;
+-- Cấp quyền chạy SP tạo tài khoản SQL account của nhân viên cho Trưởng phòng
+GRANT EXECUTE ON SP_ProvisionSqlAccount TO rl_truongphong;
+GRANT EXECUTE ON SP_DropSqlAccount TO rl_truongphong;
 
 GRANT EXECUTE ON FN_TinhLaiLo TO rl_truongphong;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_truongphong;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_truongphong;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_truongphong;
 
-GRANT EXECUTE ON SP_DuyetGiaoDich TO rl_truongphong;
-GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_truongphong;
-GRANT EXECUTE ON SP_ThemGiaoDich TO rl_truongphong;
-GRANT EXECUTE ON SP_SuaGiaoDich TO rl_truongphong;
-GRANT EXECUTE ON SP_ThemDuAn TO rl_truongphong;
-GRANT EXECUTE ON SP_SuaDuAn TO rl_truongphong;
-GRANT EXECUTE ON SP_XoaDuAn TO rl_truongphong;
-GRANT EXECUTE ON SP_ThemTaiKhoanNH TO rl_truongphong;
-GRANT EXECUTE ON SP_SuaTaiKhoanNH TO rl_truongphong;
-GRANT EXECUTE ON SP_XoaTaiKhoanNH TO rl_truongphong;
--- Cấp quyền chạy SP tạo tài khoản SQL account của nhân viên cho Trưởng phòng
-GRANT EXECUTE ON SP_ProvisionSqlAccount TO rl_truongphong;
-GRANT EXECUTE ON SP_DropSqlAccount TO rl_truongphong;
+
 
 
 -- QUYỀN CHO NHÂN VIÊN TÀI CHÍNH
-GRANT SELECT ON NhanVien TO rl_nhanvien_tc;
 GRANT SELECT ON LoaiGiaoDich TO rl_nhanvien_tc;
 GRANT SELECT ON TaiKhoanNH TO rl_nhanvien_tc;
 GRANT SELECT ON DuAn TO rl_nhanvien_tc;
 GRANT SELECT, INSERT ON GiaoDich TO rl_nhanvien_tc; -- UPDATE phải thông qua SP_SuaGiaoDich
 
-GRANT SELECT ON V_ThongKeThang TO rl_nhanvien_tc;
-GRANT SELECT ON V_GiaoDichChoDuyet TO rl_nhanvien_tc;
-GRANT SELECT ON V_LichSuGiaoDich TO rl_nhanvien_tc;
-GRANT SELECT ON V_DuAn TO rl_nhanvien_tc;
-GRANT SELECT ON V_TaiKhoanNH TO rl_nhanvien_tc;
-GRANT SELECT ON V_NhanVien TO rl_nhanvien_tc;
-GRANT SELECT ON V_LoaiGiaoDich TO rl_nhanvien_tc;
-
-GRANT EXECUTE ON FN_TinhLaiLo TO rl_nhanvien_tc;
-GRANT EXECUTE ON FN_KiemTraSoDu TO rl_nhanvien_tc;
-GRANT SELECT ON FN_TinhTongThuChi TO rl_nhanvien_tc;
-GRANT SELECT ON dbo.FN_Login_GetRole TO rl_nhanvien_tc;
-
-GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_nhanvien_tc;
+GRANT EXECUTE ON SP_GetLichSuGiaoDich_ForNhanVienTC TO rl_nhanvien_tc;
+GRANT EXECUTE ON SP_GetGiaoDichChoDuyet_ForNhanVienTC TO rl_nhanvien_tc;  -- Xem giao dịch chờ duyệt của mình
+GRANT EXECUTE ON SP_GetDuAn TO rl_nhanvien_tc;
+GRANT EXECUTE ON SP_GetTaiKhoanNH TO rl_nhanvien_tc;
+GRANT EXECUTE ON SP_GetLoaiGiaoDich TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_ThemGiaoDich TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_SuaGiaoDich TO rl_nhanvien_tc;
 
+
+GRANT EXECUTE ON FN_KiemTraSoDu TO rl_nhanvien_tc;  -- Chỉ cần kiểm tra số dư
+GRANT SELECT ON dbo.FN_Login_GetRole TO rl_nhanvien_tc;
+
+
+
 -- QUYỀN CHO KẾ TOÁN (READ-ONLY)
-GRANT SELECT ON NhanVien TO rl_ketoan;
 GRANT SELECT ON LoaiGiaoDich TO rl_ketoan;
 GRANT SELECT ON TaiKhoanNH TO rl_ketoan;
 GRANT SELECT ON DuAn TO rl_ketoan;
 GRANT SELECT ON GiaoDich TO rl_ketoan;
 
-GRANT SELECT ON V_DuAn TO rl_ketoan;
-GRANT SELECT ON V_TaiKhoanNH TO rl_ketoan;
-GRANT SELECT ON V_NhanVien TO rl_ketoan;
-GRANT SELECT ON V_LoaiGiaoDich TO rl_ketoan;
-GRANT SELECT ON V_ThongKeThang TO rl_ketoan;
-GRANT SELECT ON V_GiaoDichChoDuyet TO rl_ketoan;
-GRANT SELECT ON V_LichSuGiaoDich TO rl_ketoan;
+GRANT EXECUTE ON SP_GetDuAn TO rl_ketoan;
+GRANT EXECUTE ON SP_GetTaiKhoanNH TO rl_ketoan;
+GRANT EXECUTE ON SP_GetLoaiGiaoDich TO rl_ketoan;
+GRANT EXECUTE ON SP_GetThongKeThang TO rl_ketoan;
+GRANT EXECUTE ON SP_GetLichSuGiaoDich TO rl_ketoan;
+GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_ketoan;
 
 GRANT EXECUTE ON FN_TinhLaiLo TO rl_ketoan;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_ketoan;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_ketoan;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_ketoan;
 
-GRANT EXECUTE ON SP_XuatBaoCaoChiTiet TO rl_ketoan;
-
 
 -- DENY
 DENY UPDATE (so_du) ON dbo.TaiKhoanNH TO rl_truongphong, rl_nhanvien_tc, rl_ketoan;
 DENY DELETE ON dbo.GiaoDich TO rl_truongphong, rl_nhanvien_tc, rl_ketoan;
+DENY DELETE ON dbo.DuAn TO rl_truongphong, rl_nhanvien_tc, rl_ketoan;
+DENY DELETE ON dbo.TaiKhoanNH TO rl_truongphong, rl_nhanvien_tc, rl_ketoan;
 
 
 

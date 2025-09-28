@@ -1,0 +1,4 @@
+D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.AssemblyReference.cache
+D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.CoreCompileInputs.cache
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.AssemblyReference.cache
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.CoreCompileInputs.cache

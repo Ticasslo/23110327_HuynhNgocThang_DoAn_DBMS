@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2D66340C-D5AE-4637-8CF5-95DA251A4275}|..\\JCFM.DataAccess\\JCFM.DataAccess.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.dataaccess\\dbconnection\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D66340C-D5AE-4637-8CF5-95DA251A4275}|..\\JCFM.DataAccess\\JCFM.DataAccess.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.dataaccess\\exceptions\\dataaccessexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.winforms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC72A89A-A31D-4E46-B3D7-A9F4E92D370D}|..\\JCFM.Models\\JCFM.Models.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.models\\giaodich.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC72A89A-A31D-4E46-B3D7-A9F4E92D370D}|..\\JCFM.Models\\JCFM.Models.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.models\\duan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E946555E-26DB-48A8-AA5C-CB90FC613CE1}|..\\JCFM.Business\\JCFM.Business.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.business\\exceptions\\businessexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:43:15.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GiaoDich.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Models\\GiaoDich.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Models\\GiaoDich.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Models\\GiaoDich.cs",
+              "RelativeToolTip": "..\\JCFM.Models\\GiaoDich.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:43:12.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DuAn.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Models\\DuAn.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Models\\DuAn.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Models\\DuAn.cs",
+              "RelativeToolTip": "..\\JCFM.Models\\DuAn.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:43:11.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DBConnection.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\DBConnection\\DBConnection.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\DBConnection\\DBConnection.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\DBConnection\\DBConnection.cs",
+              "RelativeToolTip": "..\\JCFM.DataAccess\\DBConnection\\DBConnection.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:43:05.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DataAccessException.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Exceptions\\DataAccessException.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Exceptions\\DataAccessException.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Exceptions\\DataAccessException.cs",
+              "RelativeToolTip": "..\\JCFM.DataAccess\\Exceptions\\DataAccessException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:43:02.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BusinessException.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "RelativeToolTip": "..\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:42:27.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
