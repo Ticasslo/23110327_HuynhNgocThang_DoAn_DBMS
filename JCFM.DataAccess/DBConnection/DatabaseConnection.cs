@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace JCFM.DataAccess.DBConnection
 {
-    public static class DBConnection
+    public static class DatabaseConnection
     {
         private const string Server = @"WIN";
-        private const string Database = "JobCenterFinancialManagementHCM";
+        private const string Database = "JobCenterFinancialManagement";
         private static string connectionString;
 
         public static void Configure(string user, string password)

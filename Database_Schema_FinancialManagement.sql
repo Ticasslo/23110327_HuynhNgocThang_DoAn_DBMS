@@ -1222,29 +1222,55 @@ END;
 -- 8. PHÂN QUYỀN CHO CÁC VAI TRÒ
 -- Các procedure và function liên quan tới việc đăng nhập và gán quyền hạn
 GO
-CREATE FUNCTION dbo.FN_Login_GetRole(
-  @username VARCHAR(50),
-  @password VARCHAR(255)
+CREATE OR ALTER FUNCTION dbo.FN_Login_GetRole
+(
+  @username NVARCHAR(50),
+  @password NVARCHAR(255)
 )
 RETURNS TABLE
-AS RETURN
+AS
+RETURN
 (
   WITH u AS (
-    SELECT tk.ma_tk, nv.ma_nv
-    FROM TaiKhoan tk
-    JOIN NhanVien nv ON nv.ma_tk = tk.ma_tk
+    SELECT nv.ma_nv, tk.username
+    FROM dbo.TaiKhoan tk
+    JOIN dbo.NhanVien nv ON nv.ma_tk = tk.ma_tk
     WHERE tk.username = @username
-      AND tk.password = @password
+      AND tk.[password] = @password
       AND tk.trang_thai = 'active'
   )
-  SELECT TOP 1
-    CASE 
-      WHEN EXISTS (SELECT 1 FROM TruongPhongTC tp WHERE tp.ma_nv = u.ma_nv) THEN 'TRUONG_PHONG_TC'
-      WHEN EXISTS (SELECT 1 FROM NhanVienTC nvtc WHERE nvtc.ma_nv = u.ma_nv) THEN 'NHAN_VIEN_TC'
-      WHEN EXISTS (SELECT 1 FROM KeToan kt WHERE kt.ma_nv = u.ma_nv) THEN 'KE_TOAN'
-      ELSE 'UNKNOWN'
-    END AS vai_tro,
-    u.ma_nv
+  SELECT TOP (1)
+         CASE 
+           -- ƯU TIÊN: SQL role trước (nếu đã provision)
+           WHEN EXISTS (
+             SELECT 1
+             FROM sys.database_role_members drm
+             JOIN sys.database_principals r ON r.principal_id  = drm.role_principal_id
+             JOIN sys.database_principals m ON m.principal_id  = drm.member_principal_id
+             WHERE r.[name] = N'rl_truongphong' AND m.[name] = @username
+           ) THEN N'TRUONG_PHONG_TC'
+           WHEN EXISTS (
+             SELECT 1
+             FROM sys.database_role_members drm
+             JOIN sys.database_principals r ON r.principal_id = drm.role_principal_id
+             JOIN sys.database_principals m ON m.principal_id = drm.member_principal_id
+             WHERE r.[name] = N'rl_nhanvien_tc' AND m.[name] = @username
+           ) THEN N'NHAN_VIEN_TC'
+           WHEN EXISTS (
+             SELECT 1
+             FROM sys.database_role_members drm
+             JOIN sys.database_principals r ON r.principal_id = drm.role_principal_id
+             JOIN sys.database_principals m ON m.principal_id = drm.member_principal_id
+             WHERE r.[name] = N'rl_ketoan' AND m.[name] = @username
+           ) THEN N'KE_TOAN'
+
+           -- FALLBACK: theo bảng ứng dụng nếu chưa gán SQL role
+           WHEN EXISTS (SELECT 1 FROM dbo.TruongPhongTC tp WHERE tp.ma_nv = u.ma_nv) THEN N'TRUONG_PHONG_TC'
+           WHEN EXISTS (SELECT 1 FROM dbo.NhanVienTC  nv2 WHERE nv2.ma_nv = u.ma_nv) THEN N'NHAN_VIEN_TC'
+           WHEN EXISTS (SELECT 1 FROM dbo.KeToan       kt WHERE kt.ma_nv = u.ma_nv) THEN N'KE_TOAN'
+           ELSE N'UNKNOWN'
+         END AS vai_tro,
+         u.ma_nv
   FROM u
 );
 

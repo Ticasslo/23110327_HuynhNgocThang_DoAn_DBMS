@@ -45,6 +45,9 @@
     <Compile Include="GiaoDich.cs" />
     <Compile Include="KeToan.cs" />
     <Compile Include="LoaiGiaoDich.cs" />
+    <Compile Include="Login\AppSession.cs" />
+    <Compile Include="Login\LoginResult.cs" />
+    <Compile Include="Login\UserRole.cs" />
     <Compile Include="NhanVien.cs" />
     <Compile Include="NhanVienTC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

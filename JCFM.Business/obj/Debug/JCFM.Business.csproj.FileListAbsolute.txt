@@ -4,9 +4,14 @@ D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.Business\obj\Debug\JCFM.Busin
 D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.Business\obj\Debug\JCFM.Business.csproj.CoreCompileInputs.cache
 D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.Business\obj\Debug\JCFM.Business.dll
 D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.Business\obj\Debug\JCFM.Business.pdb
-D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.Business.dll
-D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.Business.pdb
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\obj\Debug\JCFM.Business.csproj.AssemblyReference.cache
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\obj\Debug\JCFM.Business.csproj.CoreCompileInputs.cache
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.Business.dll
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.Business.pdb
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.DataAccess.dll
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.Models.dll
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.DataAccess.pdb
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\bin\Debug\JCFM.Models.pdb
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\obj\Debug\JCFM.Bus.42B31D62.Up2Date
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\obj\Debug\JCFM.Business.dll
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.Business\obj\Debug\JCFM.Business.pdb

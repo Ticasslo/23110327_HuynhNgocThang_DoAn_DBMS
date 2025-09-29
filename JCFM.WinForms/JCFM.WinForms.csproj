@@ -46,8 +46,116 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\BaoCaoChiTiet_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaoCaoChiTiet_Form.Designer.cs">
+      <DependentUpon>BaoCaoChiTiet_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\KeToan\TrangChuKeToan_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\KeToan\TrangChuKeToan_Form.Designer.cs">
+      <DependentUpon>TrangChuKeToan_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LichSuGiaoDich_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LichSuGiaoDich_Form.Designer.cs">
+      <DependentUpon>LichSuGiaoDich_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoaiGiaoDich_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoaiGiaoDich_View.Designer.cs">
+      <DependentUpon>LoaiGiaoDich_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login\Login_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Login\Login_Form.Designer.cs">
+      <DependentUpon>Login_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NhanVienTC\GiaoDichCuaToi_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NhanVienTC\GiaoDichCuaToi_Form.Designer.cs">
+      <DependentUpon>GiaoDichCuaToi_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NhanVienTC\TrangChuNhanVienTC_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NhanVienTC\TrangChuNhanVienTC_Form.Designer.cs">
+      <DependentUpon>TrangChuNhanVienTC_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QLDuAn_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QLDuAn_Form.Designer.cs">
+      <DependentUpon>QLDuAn_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QLTaiKhoanNH_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QLTaiKhoanNH_Form.Designer.cs">
+      <DependentUpon>QLTaiKhoanNH_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ThongKeThang_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ThongKeThang_Form.Designer.cs">
+      <DependentUpon>ThongKeThang_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TruongPhongTC\GiaoDichChoDuyet_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TruongPhongTC\GiaoDichChoDuyet_Form.Designer.cs">
+      <DependentUpon>GiaoDichChoDuyet_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TruongPhongTC\TrangChuTruongPhongTC_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TruongPhongTC\TrangChuTruongPhongTC_Form.Designer.cs">
+      <DependentUpon>TrangChuTruongPhongTC_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BaoCaoChiTiet_Form.resx">
+      <DependentUpon>BaoCaoChiTiet_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\KeToan\TrangChuKeToan_Form.resx">
+      <DependentUpon>TrangChuKeToan_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LichSuGiaoDich_Form.resx">
+      <DependentUpon>LichSuGiaoDich_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoaiGiaoDich_View.resx">
+      <DependentUpon>LoaiGiaoDich_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Login\Login_Form.resx">
+      <DependentUpon>Login_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NhanVienTC\GiaoDichCuaToi_Form.resx">
+      <DependentUpon>GiaoDichCuaToi_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NhanVienTC\TrangChuNhanVienTC_Form.resx">
+      <DependentUpon>TrangChuNhanVienTC_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QLDuAn_Form.resx">
+      <DependentUpon>QLDuAn_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QLTaiKhoanNH_Form.resx">
+      <DependentUpon>QLTaiKhoanNH_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ThongKeThang_Form.resx">
+      <DependentUpon>ThongKeThang_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TruongPhongTC\GiaoDichChoDuyet_Form.resx">
+      <DependentUpon>GiaoDichChoDuyet_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TruongPhongTC\TrangChuTruongPhongTC_Form.resx">
+      <DependentUpon>TrangChuTruongPhongTC_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -70,8 +178,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Forms\" />
+    <ProjectReference Include="..\JCFM.Business\JCFM.Business.csproj">
+      <Project>{e946555e-26db-48a8-aa5c-cb90fc613ce1}</Project>
+      <Name>JCFM.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JCFM.Models\JCFM.Models.csproj">
+      <Project>{cc72a89a-a31d-4e46-b3d7-a9f4e92d370d}</Project>
+      <Name>JCFM.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

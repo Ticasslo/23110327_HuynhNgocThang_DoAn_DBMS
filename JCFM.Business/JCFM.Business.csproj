@@ -43,10 +43,31 @@
   <ItemGroup>
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Implementations\BaoCaoThongKeService.cs" />
+    <Compile Include="Services\Implementations\DuAnService.cs" />
+    <Compile Include="Services\Implementations\GiaoDichService.cs" />
+    <Compile Include="Services\Implementations\Login\AuthService.cs" />
+    <Compile Include="Services\Implementations\TaiKhoanNHService.cs" />
+    <Compile Include="Services\Implementations\TinhToanTaiChinhService.cs" />
+    <Compile Include="Services\Implementations\XemLoaiGiaoDich.cs" />
+    <Compile Include="Services\Interfaces\IBaoCaoThongKeService.cs" />
+    <Compile Include="Services\Interfaces\IDuAnService.cs" />
+    <Compile Include="Services\Interfaces\IGiaoDichService.cs" />
+    <Compile Include="Services\Interfaces\ITaiKhoanNHService.cs" />
+    <Compile Include="Services\Interfaces\ITinhToanTaiChinhService.cs" />
+    <Compile Include="Services\Interfaces\IXemLoaiGiaoDich.cs" />
+    <Compile Include="Services\Interfaces\Login\IAuthService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Services\Implementations\" />
-    <Folder Include="Services\Interfaces\" />
+    <ProjectReference Include="..\JCFM.DataAccess\JCFM.DataAccess.csproj">
+      <Project>{2d66340c-d5ae-4637-8cf5-95da251a4275}</Project>
+      <Name>JCFM.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JCFM.Models\JCFM.Models.csproj">
+      <Project>{cc72a89a-a31d-4e46-b3d7-a9f4e92d370d}</Project>
+      <Name>JCFM.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
