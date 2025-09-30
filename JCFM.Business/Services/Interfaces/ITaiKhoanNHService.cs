@@ -19,6 +19,6 @@ namespace JCFM.Business.Services.Interfaces
         int SuaTaiKhoanNH(int maTknh, string tenTk, string soTk, string nganHang, string trangThai = "active");
 
         // SP_UpdateTaiKhoanNH — Vai trò: Trưởng phòng (✅)
-        int VohieuHoaTaiKhoanNH(int maTknh);
+        int VoHieuHoaTaiKhoanNH(int maTknh);
     }
 }

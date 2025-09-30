@@ -59,14 +59,6 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Không lấy được danh sách chờ duyệt.", ex); }
         }
 
-        // SP_GetGiaoDichChoDuyet_ForNhanVienTC — Vai trò: Nhân viên TC (✅)
-        public DataTable GetGiaoDichChoDuyet_CuaToi(int maNvTao)
-        {
-            if (maNvTao <= 0) throw new BusinessException("Mã nhân viên không hợp lệ.");
-            try { return _repo.GetGiaoDichChoDuyet_CuaToi(maNvTao); }
-            catch (DataAccessException ex) { throw new BusinessException("Không lấy được danh sách chờ duyệt (của tôi).", ex); }
-        }
-
         // SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán (✅/✅)
         public DataTable GetLichSuGiaoDich(DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null, int? maNvTao = null)
         {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JCFM.Business.Services.Implementations
 {
-    public class LookupService : ILookupService
+    public class LoaiGiaoDichService : ILoaiGiaoDichService
     {
         private readonly XemLoaiGiaoDich _repo = new XemLoaiGiaoDich();
 

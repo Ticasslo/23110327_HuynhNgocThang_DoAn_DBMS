@@ -50,7 +50,7 @@ namespace JCFM.Business.Services.Implementations
         }
 
         // SP_UpdateTaiKhoanNH — Vai trò: Trưởng phòng (✅)
-        public int VohieuHoaTaiKhoanNH(int maTknh)
+        public int VoHieuHoaTaiKhoanNH(int maTknh)
         {
             if (maTknh <= 0) throw new BusinessException("Mã tài khoản không hợp lệ.");
             try { return _repo.VohieuHoaTaiKhoanNH(maTknh); }

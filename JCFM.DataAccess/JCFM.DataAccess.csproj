@@ -50,6 +50,7 @@
     <Compile Include="Repositories\BaoCaoThongKe.cs" />
     <Compile Include="Repositories\QLDuAn.cs" />
     <Compile Include="Repositories\QLGiaoDich.cs" />
+    <Compile Include="Repositories\QLNhanVien.cs" />
     <Compile Include="Repositories\QLTaiKhoanNH.cs" />
     <Compile Include="Repositories\TinhToanTaiChinh.cs" />
     <Compile Include="Repositories\XemLoaiGiaoDich.cs" />

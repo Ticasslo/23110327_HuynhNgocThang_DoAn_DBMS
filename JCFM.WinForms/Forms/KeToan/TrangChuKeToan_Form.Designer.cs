@@ -37,6 +37,7 @@
             this.btnXemTaiKhoanNH = new System.Windows.Forms.Button();
             this.btnXemDuAn = new System.Windows.Forms.Button();
             this.btnLoaiGiaoDich = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -53,7 +54,7 @@
             this.btnBack.FlatAppearance.BorderSize = 0;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Location = new System.Drawing.Point(691, 50);
+            this.btnBack.Location = new System.Drawing.Point(1107, -1);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(36, 37);
             this.btnBack.TabIndex = 93;
@@ -67,7 +68,7 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(733, 50);
+            this.btnClose.Location = new System.Drawing.Point(1145, -1);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(36, 37);
             this.btnClose.TabIndex = 94;
@@ -102,7 +103,7 @@
             this.btnBaoCaoChiTiet.Name = "btnBaoCaoChiTiet";
             this.btnBaoCaoChiTiet.Size = new System.Drawing.Size(117, 77);
             this.btnBaoCaoChiTiet.TabIndex = 97;
-            this.btnBaoCaoChiTiet.Text = "Báo cáo chi tiết";
+            this.btnBaoCaoChiTiet.Text = "Báo cáo chi tiết dự án";
             this.btnBaoCaoChiTiet.UseVisualStyleBackColor = true;
             this.btnBaoCaoChiTiet.Click += new System.EventHandler(this.btnBaoCaoChiTiet_Click);
             // 
@@ -136,11 +137,23 @@
             this.btnLoaiGiaoDich.UseVisualStyleBackColor = true;
             this.btnLoaiGiaoDich.Click += new System.EventHandler(this.btnLoaiGiaoDich_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label4.Location = new System.Drawing.Point(222, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(342, 41);
+            this.label4.TabIndex = 101;
+            this.label4.Text = "TRANG CHỦ KẾ TOÁN";
+            // 
             // TrangChuKeToan_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnLoaiGiaoDich);
             this.Controls.Add(this.btnXemDuAn);
             this.Controls.Add(this.btnXemTaiKhoanNH);
@@ -171,5 +184,6 @@
         private System.Windows.Forms.Button btnXemTaiKhoanNH;
         private System.Windows.Forms.Button btnXemDuAn;
         private System.Windows.Forms.Button btnLoaiGiaoDich;
+        private System.Windows.Forms.Label label4;
     }
 }

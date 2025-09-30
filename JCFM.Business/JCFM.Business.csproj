@@ -47,15 +47,17 @@
     <Compile Include="Services\Implementations\DuAnService.cs" />
     <Compile Include="Services\Implementations\GiaoDichService.cs" />
     <Compile Include="Services\Implementations\Login\AuthService.cs" />
+    <Compile Include="Services\Implementations\NhanVienService.cs" />
     <Compile Include="Services\Implementations\TaiKhoanNHService.cs" />
     <Compile Include="Services\Implementations\TinhToanTaiChinhService.cs" />
-    <Compile Include="Services\Implementations\XemLoaiGiaoDich.cs" />
+    <Compile Include="Services\Implementations\LoaiGiaoDichService.cs" />
     <Compile Include="Services\Interfaces\IBaoCaoThongKeService.cs" />
     <Compile Include="Services\Interfaces\IDuAnService.cs" />
     <Compile Include="Services\Interfaces\IGiaoDichService.cs" />
+    <Compile Include="Services\Interfaces\INhanVienService.cs" />
     <Compile Include="Services\Interfaces\ITaiKhoanNHService.cs" />
     <Compile Include="Services\Interfaces\ITinhToanTaiChinhService.cs" />
-    <Compile Include="Services\Interfaces\IXemLoaiGiaoDich.cs" />
+    <Compile Include="Services\Interfaces\ILoaiGiaoDichService.cs" />
     <Compile Include="Services\Interfaces\Login\IAuthService.cs" />
   </ItemGroup>
   <ItemGroup />

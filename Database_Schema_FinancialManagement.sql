@@ -19,6 +19,18 @@ GO
 USE JobCenterFinancialManagement;
 GO
 
+ALTER DATABASE JobCenterFinancialManagement SET TRUSTWORTHY ON;
+GO
+
+-- CÁC ROLE PHỤC VỤ PHẦN PHÂN QUYỀN
+IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_truongphong')
+  CREATE ROLE rl_truongphong AUTHORIZATION dbo;
+IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_nhanvien_tc')
+  CREATE ROLE rl_nhanvien_tc AUTHORIZATION dbo;
+IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_ketoan')
+  CREATE ROLE rl_ketoan AUTHORIZATION dbo;
+GO
+
 -- 1. CÁC BẢNG CƠ SỞ
 CREATE TABLE TaiKhoan (
     ma_tk INT IDENTITY(1,1) PRIMARY KEY,       -- Mã tài khoản tự tăng (1, 2, 3, ...)
@@ -294,6 +306,135 @@ END;
 
 
 
+-- TRIGGER SOFT DELETE: TAIKHOAN (ỨNG DỤNG)
+-- Mục đích: Khi DELETE trên bảng TaiKhoan, thay bằng UPDATE trang_thai = 'inactive'
+-- Lưu ý: INSTEAD OF DELETE sẽ thay thế thao tác xóa bằng cập nhật trạng thái
+GO
+CREATE OR ALTER TRIGGER TR_TaiKhoan_InsteadOfDelete
+ON dbo.TaiKhoan
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE tk
+       SET tk.trang_thai = 'inactive'
+    FROM dbo.TaiKhoan AS tk
+    INNER JOIN deleted AS d ON d.ma_tk = tk.ma_tk;
+END;
+
+
+-- TRIGGER SOFT DELETE: TAIKHOANNH (TÀI KHOẢN NGÂN HÀNG)
+-- Mục đích: Khi DELETE trên bảng TaiKhoanNH, thay bằng UPDATE trang_thai = 'inactive'
+GO
+CREATE OR ALTER TRIGGER TR_TaiKhoanNH_InsteadOfDelete
+ON dbo.TaiKhoanNH
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE tknh
+       SET tknh.trang_thai = 'inactive'
+    FROM dbo.TaiKhoanNH AS tknh
+    INNER JOIN deleted AS d ON d.ma_tknh = tknh.ma_tknh;
+END;
+
+
+-- TRIGGER SOFT DELETE: DUAN
+-- Mục đích: Khi DELETE trên bảng DuAn, thay bằng UPDATE trang_thai = 'inactive'
+GO
+CREATE OR ALTER TRIGGER TR_DuAn_InsteadOfDelete
+ON dbo.DuAn
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE da
+    SET da.trang_thai = 'inactive'
+    FROM dbo.DuAn AS da
+    INNER JOIN deleted AS d ON d.ma_du_an = da.ma_du_an;
+END;
+
+-- TRIGGER RÀNG BUỘC CHUYỂN TRẠNG THÁI HỢP LÝ CHO GIAO DỊCH
+-- Chỉ cho phép:
+--   CHO_DUYET -> DA_DUYET | TU_CHOI
+-- Không cho phép thay đổi trạng thái nếu đã là DA_DUYET hoặc TU_CHOI
+GO
+CREATE OR ALTER TRIGGER TR_GiaoDich_ValidateTransition
+ON dbo.GiaoDich
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Chặn chuyển trạng thái từ DA_DUYET/TU_CHOI sang bất kỳ trạng thái khác
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN deleted  d ON d.ma_gd = i.ma_gd
+        WHERE d.trang_thai IN ('DA_DUYET','TU_CHOI')
+          AND i.trang_thai <> d.trang_thai
+    )
+    BEGIN
+        RAISERROR(N'Không được phép thay đổi trạng thái sau khi đã duyệt hoặc từ chối.', 16, 1);
+        ROLLBACK TRANSACTION; RETURN;
+    END
+
+    -- Với trạng thái ban đầu là CHO_DUYET, chỉ cho phép sang DA_DUYET hoặc TU_CHOI (hoặc giữ nguyên)
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN deleted  d ON d.ma_gd = i.ma_gd
+        WHERE d.trang_thai = 'CHO_DUYET'
+          AND i.trang_thai NOT IN ('CHO_DUYET','DA_DUYET','TU_CHOI')
+    )
+    BEGIN
+        RAISERROR(N'Trạng thái không hợp lệ. CHO_DUYET chỉ được chuyển sang DA_DUYET hoặc TU_CHOI.', 16, 1);
+        ROLLBACK TRANSACTION; RETURN;
+    END
+END;
+
+
+-- TRIGGER RÀNG BUỘC THỰC THỂ THAM CHIẾU PHẢI ĐANG ACTIVE
+-- Khi INSERT/UPDATE GiaoDich: TaiKhoanNH và (nếu có) DuAn phải ở trạng_thai 'active'
+GO
+CREATE OR ALTER TRIGGER TR_GiaoDich_ValidateFKActive
+ON dbo.GiaoDich
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tài khoản ngân hàng phải còn hoạt động
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN dbo.TaiKhoanNH tknh ON tknh.ma_tknh = i.ma_tknh
+        WHERE tknh.trang_thai <> 'active'
+    )
+    BEGIN
+        RAISERROR(N'Tài khoản ngân hàng đã inactive. Không thể tạo/cập nhật giao dịch.', 16, 1);
+        ROLLBACK TRANSACTION; RETURN;
+    END
+
+    -- Nếu có dự án, dự án phải còn hoạt động
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN dbo.DuAn da ON da.ma_du_an = i.ma_du_an
+        WHERE i.ma_du_an IS NOT NULL
+          AND da.trang_thai <> 'active'
+    )
+    BEGIN
+        RAISERROR(N'Dự án đã inactive/hoàn thành. Không thể tạo/cập nhật giao dịch gắn dự án này.', 16, 1);
+        ROLLBACK TRANSACTION; RETURN;
+    END
+END;
+
+
+
 
 
 
@@ -388,6 +529,27 @@ CREATE VIEW V_LoaiGiaoDich
 AS
 SELECT ma_loai, ten_loai, loai_thu_chi, mo_ta
 FROM LoaiGiaoDich;
+
+
+-- VIEW DANH SÁCH NHÂN VIÊN (HỖ TRỢ TRA CỨU)
+GO
+CREATE OR ALTER VIEW dbo.V_DanhSachNhanVien
+AS
+SELECT
+    nv.ma_nv,
+    nv.ho_ten,
+    nv.email,
+    nv.sdt,
+    tk.username,
+    tk.trang_thai,
+    CAST(CASE 
+         WHEN EXISTS (SELECT 1 FROM dbo.TruongPhongTC tp WHERE tp.ma_nv = nv.ma_nv) THEN N'TRUONG_PHONG_TC'
+         WHEN EXISTS (SELECT 1 FROM dbo.NhanVienTC   nvtc WHERE nvtc.ma_nv = nv.ma_nv) THEN N'NHAN_VIEN_TC'
+         WHEN EXISTS (SELECT 1 FROM dbo.KeToan       kt   WHERE kt.ma_nv = nv.ma_nv) THEN N'KE_TOAN'
+         ELSE N'UNKNOWN'
+    END AS NVARCHAR(30)) AS vai_tro
+FROM dbo.NhanVien nv
+JOIN dbo.TaiKhoan tk ON tk.ma_tk = nv.ma_tk;
 
 
 
@@ -486,7 +648,6 @@ END;
 
 -- 7. STORED PROCEDURES
 
-
 -- STORED PROCEDURES cho CÁC VIEWS
 -- SP cho V_ThongKeThang - Thống kê thu chi theo tháng
 GO
@@ -537,41 +698,6 @@ BEGIN
     AND (@MaDuAn  IS NULL OR gd.ma_du_an = @MaDuAn)
   ORDER BY v.ngay_gd DESC;
 END
-GO
-
-
--- SP cho Nhân viên TC - Xem giao dịch chờ duyệt của mình
-GO
-CREATE PROCEDURE SP_GetGiaoDichChoDuyet_ForNhanVienTC
-    @MaNvTao INT                        -- Mã nhân viên tạo (BẮT BUỘC)
-AS
-BEGIN
-    SET NOCOUNT ON;
-    -- Kiểm tra quyền: Chỉ được xem giao dịch của mình
-    IF NOT EXISTS (SELECT 1 FROM NhanVienTC WHERE ma_nv = @MaNvTao)
-    BEGIN
-        RAISERROR(N'Không có quyền xem giao dịch chờ duyệt!', 16, 1);
-        RETURN;
-    END
-    
-    SELECT 
-        gd.ma_gd,
-        gd.loai_gd,
-        gd.so_tien,
-        gd.ngay_gd,
-        gd.mo_ta,
-        lg.ten_loai,
-        nv.ho_ten as nguoi_tao,
-        da.ten_du_an,
-        gd.trang_thai
-    FROM GiaoDich gd
-    INNER JOIN LoaiGiaoDich lg ON gd.ma_loai = lg.ma_loai
-    INNER JOIN NhanVien nv ON gd.ma_nv_tao_nvtc = nv.ma_nv
-    LEFT JOIN DuAn da ON gd.ma_du_an = da.ma_du_an
-    WHERE gd.trang_thai = 'CHO_DUYET'
-      AND gd.ma_nv_tao_nvtc = @MaNvTao  -- CHỈ XEM GIAO DỊCH CỦA MÌNH
-    ORDER BY gd.ngay_gd DESC;
-END;
 GO
 
 
@@ -1269,8 +1395,8 @@ RETURN
            WHEN EXISTS (SELECT 1 FROM dbo.NhanVienTC  nv2 WHERE nv2.ma_nv = u.ma_nv) THEN N'NHAN_VIEN_TC'
            WHEN EXISTS (SELECT 1 FROM dbo.KeToan       kt WHERE kt.ma_nv = u.ma_nv) THEN N'KE_TOAN'
            ELSE N'UNKNOWN'
-         END AS vai_tro,
-         u.ma_nv
+    END AS vai_tro,
+    u.ma_nv
   FROM u
 );
 
@@ -1280,6 +1406,7 @@ GO
 CREATE OR ALTER PROCEDURE SP_ProvisionSqlAccount
   @username VARCHAR(50),
   @password VARCHAR(255)
+WITH EXECUTE AS OWNER
 AS
 BEGIN
   SET NOCOUNT ON;
@@ -1315,14 +1442,11 @@ GO
 -- PROCEDURE XÓA TÀI KHOẢN SQL ACCOUNT CỦA NHÂN VIÊN CHO TRƯỞNG PHÒNG
 CREATE OR ALTER PROCEDURE SP_DropSqlAccount
   @username VARCHAR(50)
+WITH EXECUTE AS OWNER
 AS
 BEGIN
   SET NOCOUNT ON;
   DECLARE @sql NVARCHAR(MAX);
-
-  -- Kill session nếu có
-  DECLARE @sid INT; SELECT TOP 1 @sid = session_id FROM sys.dm_exec_sessions WHERE login_name = @username;
-  IF @sid IS NOT NULL BEGIN SET @sql = N'KILL ' + CAST(@sid AS NVARCHAR(20)); EXEC (@sql); END
 
   -- Xóa USER trong DB (nếu tồn tại)
   IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @username)
@@ -1341,16 +1465,204 @@ END;
 GO
 
 
--- PHÂN QUYỀN (GRANT)
--- CÁC ROLE PHỤC VỤ PHẦN PHÂN QUYỀN
-IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_truongphong')
-  CREATE ROLE rl_truongphong AUTHORIZATION dbo;
-IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_nhanvien_tc')
-  CREATE ROLE rl_nhanvien_tc AUTHORIZATION dbo;
-IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE type='R' AND name='rl_ketoan')
-  CREATE ROLE rl_ketoan AUTHORIZATION dbo;
+-- SP TÌM NHÂN VIÊN (TRA CỨU DANH BẠ)
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_TimNhanVien
+    @Keyword   NVARCHAR(100) = NULL,  -- tìm theo họ tên/email/username (LIKE)
+    @VaiTro    NVARCHAR(30)  = NULL,  -- 'TRUONG_PHONG_TC' | 'NHAN_VIEN_TC' | 'KE_TOAN'
+    @TrangThai VARCHAR(20)   = NULL   -- 'active' | 'inactive'
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT ma_nv, ho_ten, email, sdt, username, trang_thai, vai_tro
+    FROM dbo.V_DanhSachNhanVien
+    WHERE (@TrangThai IS NULL OR trang_thai = @TrangThai)
+      AND (@VaiTro    IS NULL OR vai_tro   = @VaiTro)
+      AND (
+            @Keyword IS NULL
+         OR ho_ten   LIKE N'%' + @Keyword + N'%'
+         OR email    LIKE N'%' + @Keyword + N'%'
+         OR username LIKE N'%' + @Keyword + N'%'
+      )
+    ORDER BY ho_ten ASC;
+END;
+
+
+-- SP THÊM NHÂN VIÊN (TẠO TÀI KHOẢN + HỒ SƠ + GÁN VAI TRÒ)
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_ThemNhanVien
+    @HoTen     NVARCHAR(100),
+    @Email     NVARCHAR(100),
+    @Sdt       VARCHAR(20) = NULL,
+    @Username  VARCHAR(50),
+    @Password  VARCHAR(255),
+    @VaiTro    NVARCHAR(30),          -- 'TRUONG_PHONG_TC' | 'NHAN_VIEN_TC' | 'KE_TOAN'
+    @Provision BIT = 1                -- 1 = gọi SP_ProvisionSqlAccount
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRAN;
+
+    BEGIN TRY
+        -- Uniqueness
+        IF EXISTS (SELECT 1 FROM dbo.TaiKhoan WHERE username = @Username)
+        BEGIN
+            RAISERROR(N'Username đã tồn tại.', 16, 1);
+            ROLLBACK TRAN; RETURN;
+        END
+        IF EXISTS (SELECT 1 FROM dbo.NhanVien WHERE email = @Email)
+        BEGIN
+            RAISERROR(N'Email đã tồn tại.', 16, 1);
+            ROLLBACK TRAN; RETURN;
+        END
+
+        -- 1) Tài khoản ứng dụng
+        INSERT INTO dbo.TaiKhoan(username, [password], trang_thai)
+        VALUES (@Username, @Password, 'active');
+        DECLARE @ma_tk INT = SCOPE_IDENTITY();
+
+        -- 2) Nhân viên
+        INSERT INTO dbo.NhanVien(ho_ten, email, sdt, ma_tk)
+        VALUES (@HoTen, @Email, @Sdt, @ma_tk);
+        DECLARE @ma_nv INT = SCOPE_IDENTITY();
+
+        -- 3) Gán vai trò
+        IF (@VaiTro = N'TRUONG_PHONG_TC')
+            INSERT INTO dbo.TruongPhongTC(ma_nv, quyen_han) VALUES (@ma_nv, N'Duyệt giao dịch');
+        ELSE IF (@VaiTro = N'NHAN_VIEN_TC')
+            INSERT INTO dbo.NhanVienTC(ma_nv, chuyen_mon, cap_bac) VALUES (@ma_nv, N'Tài chính', 'NhanVien');
+        ELSE IF (@VaiTro = N'KE_TOAN')
+            INSERT INTO dbo.KeToan(ma_nv, chung_chi, kinh_nghiem) VALUES (@ma_nv, N'CPA', 0);
+        ELSE
+        BEGIN
+            RAISERROR(N'Vai trò không hợp lệ.', 16, 1);
+            ROLLBACK TRAN; RETURN;
+        END
+
+        -- 4) Provision SQL Login/User + gán DB role
+        IF (@Provision = 1)
+            EXEC dbo.SP_ProvisionSqlAccount @Username, @Password;
+
+        COMMIT TRAN;
+
+        -- Trả về mã NV mới
+        SELECT @ma_nv AS ma_nv_moi;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRAN;
+        THROW;
+    END CATCH
+END;
+
+
+-- SP XOÁ/INACTIVE NHÂN VIÊN (MẶC ĐỊNH SOFT DELETE TÀI KHOẢN)
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_XoaNhanVien
+    @MaNv       INT,
+    @HardDelete BIT = 0,
+    @DropSql    BIT = 1
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRAN;
+
+    BEGIN TRY
+        IF NOT EXISTS (SELECT 1 FROM dbo.NhanVien WHERE ma_nv = @MaNv)
+        BEGIN
+            RAISERROR(N'Nhân viên không tồn tại.', 16, 1);
+            ROLLBACK TRAN; RETURN;
+        END
+
+        DECLARE @username VARCHAR(50), @ma_tk INT;
+        SELECT @ma_tk = nv.ma_tk, @username = tk.username
+        FROM dbo.NhanVien nv
+        JOIN dbo.TaiKhoan tk ON tk.ma_tk = nv.ma_tk
+        WHERE nv.ma_nv = @MaNv;
+
+        IF (@HardDelete = 1)
+        BEGIN
+            -- Chặn nếu có tham chiếu ở GiaoDich
+            IF EXISTS (SELECT 1 FROM dbo.GiaoDich WHERE ma_nv_tao_nvtc = @MaNv OR ma_nv_duyet_tp = @MaNv)
+            BEGIN
+                RAISERROR(N'Không thể xóa vĩnh viễn do đang được tham chiếu trong giao dịch.', 16, 1);
+                ROLLBACK TRAN; RETURN;
+            END
+
+            -- Xóa NV trước (role tables ON DELETE CASCADE)
+            DELETE FROM dbo.NhanVien WHERE ma_nv = @MaNv;
+            -- Xóa tài khoản ứng dụng
+            DELETE FROM dbo.TaiKhoan WHERE ma_tk = @ma_tk;
+            -- Drop SQL Login/User
+            IF (@DropSql = 1 AND @username IS NOT NULL)
+                EXEC dbo.SP_DropSqlAccount @username;
+        END
+        ELSE
+        BEGIN
+            -- Soft delete: chỉ inactive tài khoản ứng dụng
+            UPDATE dbo.TaiKhoan SET trang_thai = 'inactive' WHERE ma_tk = @ma_tk;
+            -- Drop SQL Login/User
+            IF (@DropSql = 1 AND @username IS NOT NULL)
+                EXEC dbo.SP_DropSqlAccount @username;
+        END
+
+        COMMIT TRAN;
+        SELECT 1 AS success;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRAN;
+        THROW;
+    END CATCH
+END;
+
+
+-- SP KÍCH HOẠT LẠI NHÂN VIÊN (ACTIVE TÀI KHOẢN + PROVISION SQL)
+GO
+CREATE OR ALTER PROCEDURE dbo.SP_KichHoatNhanVien
+    @MaNv       INT,
+    @Provision  BIT = 1   -- 1 = gọi SP_ProvisionSqlAccount để cấp lại LOGIN/USER
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRAN;
+
+    BEGIN TRY
+        IF NOT EXISTS (SELECT 1 FROM dbo.NhanVien WHERE ma_nv = @MaNv)
+        BEGIN
+            RAISERROR(N'Nhân viên không tồn tại.', 16, 1);
+            ROLLBACK TRAN; RETURN;
+        END
+
+        DECLARE @ma_tk INT, @username VARCHAR(50), @password VARCHAR(255);
+        SELECT @ma_tk = nv.ma_tk, @username = tk.username, @password = tk.[password]
+        FROM dbo.NhanVien nv
+        JOIN dbo.TaiKhoan tk ON tk.ma_tk = nv.ma_tk
+        WHERE nv.ma_nv = @MaNv;
+
+        -- Kích hoạt lại tài khoản ứng dụng
+        UPDATE dbo.TaiKhoan SET trang_thai = 'active' WHERE ma_tk = @ma_tk;
+
+        -- Cấp lại SQL Login/User + gán DB role theo FN_Login_GetRole
+        IF (@Provision = 1 AND @username IS NOT NULL AND @password IS NOT NULL)
+            EXEC dbo.SP_ProvisionSqlAccount @username = @username, @password = @password;
+
+        COMMIT TRAN;
+        SELECT 1 AS success;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRAN;
+        THROW;
+    END CATCH
+END;
 GO
 
+
+
+
+
+
+
+-- PHÂN QUYỀN (GRANT)
+GO
 -- QUYỀN CHO TRƯỞNG PHÒNG
 GRANT SELECT ON LoaiGiaoDich TO rl_truongphong;
 GRANT SELECT, INSERT, UPDATE ON TaiKhoanNH TO rl_truongphong;
@@ -1374,6 +1686,10 @@ GRANT EXECUTE ON SP_UpdateTaiKhoanNH TO rl_truongphong;
 -- Cấp quyền chạy SP tạo tài khoản SQL account của nhân viên cho Trưởng phòng
 GRANT EXECUTE ON SP_ProvisionSqlAccount TO rl_truongphong;
 GRANT EXECUTE ON SP_DropSqlAccount TO rl_truongphong;
+GRANT EXECUTE ON dbo.SP_KichHoatNhanVien TO rl_truongphong;
+GRANT EXECUTE ON dbo.SP_TimNhanVien     TO rl_truongphong;
+GRANT EXECUTE ON dbo.SP_ThemNhanVien    TO rl_truongphong;
+GRANT EXECUTE ON dbo.SP_XoaNhanVien     TO rl_truongphong;
 
 GRANT EXECUTE ON FN_TinhLaiLo TO rl_truongphong;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_truongphong;
@@ -1390,7 +1706,6 @@ GRANT SELECT ON DuAn TO rl_nhanvien_tc;
 GRANT SELECT, INSERT ON GiaoDich TO rl_nhanvien_tc; -- UPDATE phải thông qua SP_SuaGiaoDich
 
 GRANT EXECUTE ON SP_GetLichSuGiaoDich_ForNhanVienTC TO rl_nhanvien_tc;
-GRANT EXECUTE ON SP_GetGiaoDichChoDuyet_ForNhanVienTC TO rl_nhanvien_tc;  -- Xem giao dịch chờ duyệt của mình
 GRANT EXECUTE ON SP_GetDuAn TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_GetTaiKhoanNH TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_GetLoaiGiaoDich TO rl_nhanvien_tc;
@@ -1420,6 +1735,7 @@ GRANT EXECUTE ON FN_TinhLaiLo TO rl_ketoan;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_ketoan;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_ketoan;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_ketoan;
+GRANT EXECUTE ON dbo.SP_TimNhanVien     TO rl_ketoan, rl_nhanvien_tc;
 
 
 -- DENY

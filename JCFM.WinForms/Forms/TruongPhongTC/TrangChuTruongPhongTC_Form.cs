@@ -1,4 +1,5 @@
-﻿using JCFM.Models.Login;
+﻿using _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.Login;
+using JCFM.Models.Login;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,8 +30,26 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Owner?.Show();
-            this.Close();
+            var ask = MessageBox.Show(
+                "Bạn có muốn trở lại trang đăng nhập?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (ask == DialogResult.Yes)
+            {
+                if (this.Owner != null && !this.Owner.IsDisposed)
+                {
+                    this.Owner.Show();
+                }
+                else
+                {
+                    var login = new Login_Form();
+                    login.Show();
+                }
+                this.Close();
+            }
         }
 
         private bool _exiting = false;
@@ -78,6 +97,10 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             => OpenChild(new BaoCaoChiTiet_Form(_session));
 
         private void btnLoaiGiaoDich_Click(object sender, EventArgs e)
-            => OpenChild(new LoaiGiaoDich_View(_session));
+            => OpenChild(new LoaiGiaoDich_Form(_session));
+
+        private void btnQLTaiKhoanNV_Click(object sender, EventArgs e)
+            => OpenChild(new QLTaiKhoanNV_Form(_session));
+
     }
 }

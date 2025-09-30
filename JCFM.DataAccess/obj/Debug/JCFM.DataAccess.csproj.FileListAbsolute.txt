@@ -1,11 +1,11 @@
 D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.AssemblyReference.cache
 D:\UTE_DBMS\23110327_HuynhNgocThang_DoAn_DBMS\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.CoreCompileInputs.cache
-D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.AssemblyReference.cache
-D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.CoreCompileInputs.cache
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\bin\Debug\JCFM.DataAccess.dll
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\bin\Debug\JCFM.DataAccess.pdb
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\bin\Debug\JCFM.Models.dll
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\bin\Debug\JCFM.Models.pdb
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.AssemblyReference.cache
+D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.csproj.CoreCompileInputs.cache
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.Dat.C3B4E261.Up2Date
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.dll
 D:\UTE_DBMS\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\JCFM.DataAccess\obj\Debug\JCFM.DataAccess.pdb

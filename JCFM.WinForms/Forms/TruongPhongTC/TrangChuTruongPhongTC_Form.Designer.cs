@@ -38,12 +38,14 @@
             this.btnThongKeThang = new System.Windows.Forms.Button();
             this.btnBaoCaoChiTiet = new System.Windows.Forms.Button();
             this.btnLoaiGiaoDich = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnQLTaiKhoanNV = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Location = new System.Drawing.Point(151, 25);
+            this.lblWelcome.Location = new System.Drawing.Point(12, 26);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(44, 16);
             this.lblWelcome.TabIndex = 0;
@@ -54,7 +56,7 @@
             this.btnBack.FlatAppearance.BorderSize = 0;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Location = new System.Drawing.Point(657, 50);
+            this.btnBack.Location = new System.Drawing.Point(1107, -1);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(36, 37);
             this.btnBack.TabIndex = 92;
@@ -68,7 +70,7 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(737, 40);
+            this.btnClose.Location = new System.Drawing.Point(1145, -1);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(36, 37);
             this.btnClose.TabIndex = 93;
@@ -133,7 +135,7 @@
             this.btnBaoCaoChiTiet.Name = "btnBaoCaoChiTiet";
             this.btnBaoCaoChiTiet.Size = new System.Drawing.Size(121, 68);
             this.btnBaoCaoChiTiet.TabIndex = 99;
-            this.btnBaoCaoChiTiet.Text = "Báo cáo chi tiết";
+            this.btnBaoCaoChiTiet.Text = "Báo cáo chi tiết dự án";
             this.btnBaoCaoChiTiet.UseVisualStyleBackColor = true;
             this.btnBaoCaoChiTiet.Click += new System.EventHandler(this.btnBaoCaoChiTiet_Click);
             // 
@@ -147,11 +149,34 @@
             this.btnLoaiGiaoDich.UseVisualStyleBackColor = true;
             this.btnLoaiGiaoDich.Click += new System.EventHandler(this.btnLoaiGiaoDich_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label4.Location = new System.Drawing.Point(20, 67);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(631, 41);
+            this.label4.TabIndex = 101;
+            this.label4.Text = "TRANG CHỦ TRƯỞNG PHÒNG TÀI CHÍNH";
+            // 
+            // btnQLTaiKhoanNV
+            // 
+            this.btnQLTaiKhoanNV.Location = new System.Drawing.Point(482, 388);
+            this.btnQLTaiKhoanNV.Name = "btnQLTaiKhoanNV";
+            this.btnQLTaiKhoanNV.Size = new System.Drawing.Size(121, 68);
+            this.btnQLTaiKhoanNV.TabIndex = 102;
+            this.btnQLTaiKhoanNV.Text = "Quản lý tài khoản nhân viên";
+            this.btnQLTaiKhoanNV.UseVisualStyleBackColor = true;
+            this.btnQLTaiKhoanNV.Click += new System.EventHandler(this.btnQLTaiKhoanNV_Click);
+            // 
             // TrangChuTruongPhongTC_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.Controls.Add(this.btnQLTaiKhoanNV);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnLoaiGiaoDich);
             this.Controls.Add(this.btnBaoCaoChiTiet);
             this.Controls.Add(this.btnThongKeThang);
@@ -184,5 +209,7 @@
         private System.Windows.Forms.Button btnThongKeThang;
         private System.Windows.Forms.Button btnBaoCaoChiTiet;
         private System.Windows.Forms.Button btnLoaiGiaoDich;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnQLTaiKhoanNV;
     }
 }

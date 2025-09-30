@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,10 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\BaoCaoChiTiet_Form.cs">
+    <Compile Include="Forms\TP_KT\BaoCaoChiTiet_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BaoCaoChiTiet_Form.Designer.cs">
+    <Compile Include="Forms\TP_KT\BaoCaoChiTiet_Form.Designer.cs">
       <DependentUpon>BaoCaoChiTiet_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\KeToan\TrangChuKeToan_Form.cs">
@@ -58,17 +59,17 @@
     <Compile Include="Forms\KeToan\TrangChuKeToan_Form.Designer.cs">
       <DependentUpon>TrangChuKeToan_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LichSuGiaoDich_Form.cs">
+    <Compile Include="Forms\TP_KT\LichSuGiaoDich_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LichSuGiaoDich_Form.Designer.cs">
+    <Compile Include="Forms\TP_KT\LichSuGiaoDich_Form.Designer.cs">
       <DependentUpon>LichSuGiaoDich_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoaiGiaoDich_View.cs">
+    <Compile Include="Forms\LoaiGiaoDich_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoaiGiaoDich_View.Designer.cs">
-      <DependentUpon>LoaiGiaoDich_View.cs</DependentUpon>
+    <Compile Include="Forms\LoaiGiaoDich_Form.Designer.cs">
+      <DependentUpon>LoaiGiaoDich_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Login\Login_Form.cs">
       <SubType>Form</SubType>
@@ -100,10 +101,10 @@
     <Compile Include="Forms\QLTaiKhoanNH_Form.Designer.cs">
       <DependentUpon>QLTaiKhoanNH_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ThongKeThang_Form.cs">
+    <Compile Include="Forms\TP_KT\ThongKeThang_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ThongKeThang_Form.Designer.cs">
+    <Compile Include="Forms\TP_KT\ThongKeThang_Form.Designer.cs">
       <DependentUpon>ThongKeThang_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TruongPhongTC\GiaoDichChoDuyet_Form.cs">
@@ -111,6 +112,12 @@
     </Compile>
     <Compile Include="Forms\TruongPhongTC\GiaoDichChoDuyet_Form.Designer.cs">
       <DependentUpon>GiaoDichChoDuyet_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TruongPhongTC\QLTaiKhoanNV_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TruongPhongTC\QLTaiKhoanNV_Form.Designer.cs">
+      <DependentUpon>QLTaiKhoanNV_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TruongPhongTC\TrangChuTruongPhongTC_Form.cs">
       <SubType>Form</SubType>
@@ -120,17 +127,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\BaoCaoChiTiet_Form.resx">
+    <EmbeddedResource Include="Forms\TP_KT\BaoCaoChiTiet_Form.resx">
       <DependentUpon>BaoCaoChiTiet_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeToan\TrangChuKeToan_Form.resx">
       <DependentUpon>TrangChuKeToan_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LichSuGiaoDich_Form.resx">
+    <EmbeddedResource Include="Forms\TP_KT\LichSuGiaoDich_Form.resx">
       <DependentUpon>LichSuGiaoDich_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoaiGiaoDich_View.resx">
-      <DependentUpon>LoaiGiaoDich_View.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\LoaiGiaoDich_Form.resx">
+      <DependentUpon>LoaiGiaoDich_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login\Login_Form.resx">
       <DependentUpon>Login_Form.cs</DependentUpon>
@@ -147,11 +154,14 @@
     <EmbeddedResource Include="Forms\QLTaiKhoanNH_Form.resx">
       <DependentUpon>QLTaiKhoanNH_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ThongKeThang_Form.resx">
+    <EmbeddedResource Include="Forms\TP_KT\ThongKeThang_Form.resx">
       <DependentUpon>ThongKeThang_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TruongPhongTC\GiaoDichChoDuyet_Form.resx">
       <DependentUpon>GiaoDichChoDuyet_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TruongPhongTC\QLTaiKhoanNV_Form.resx">
+      <DependentUpon>QLTaiKhoanNV_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TruongPhongTC\TrangChuTruongPhongTC_Form.resx">
       <DependentUpon>TrangChuTruongPhongTC_Form.cs</DependentUpon>

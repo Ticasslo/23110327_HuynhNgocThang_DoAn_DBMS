@@ -21,8 +21,6 @@ namespace JCFM.Business.Services.Interfaces
         // SP_GetGiaoDichChoDuyet — Vai trò: Trưởng phòng (✅)
         DataTable GetGiaoDichChoDuyet(int? maNvTao = null, string loaiGd = null, int? maDuAn = null);
 
-        // SP_GetGiaoDichChoDuyet_ForNhanVienTC — Vai trò: Nhân viên TC (✅)
-        DataTable GetGiaoDichChoDuyet_CuaToi(int maNvTao);
 
         // SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán (✅/✅)
         DataTable GetLichSuGiaoDich(DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null, int? maNvTao = null);

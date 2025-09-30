@@ -51,7 +51,7 @@ namespace JCFM.Business.Services.Implementations
         }
 
         // SP_UpdateDuAn — Vai trò: Trưởng phòng (✅)
-        public int VohieuHoaDuAn(int maDuAn)
+        public int VoHieuHoaDuAn(int maDuAn)
         {
             if (maDuAn <= 0) throw new BusinessException("Mã dự án không hợp lệ.");
             try { return _repo.VohieuHoaDuAn(maDuAn); }

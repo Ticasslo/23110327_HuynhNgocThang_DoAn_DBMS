@@ -19,6 +19,6 @@ namespace JCFM.Business.Services.Interfaces
         int SuaDuAn(int maDuAn, string tenDuAn, DateTime ngayBd, DateTime? ngayKt, decimal nganSach, string trangThai = "active");
 
         // SP_UpdateDuAn — Vai trò: Trưởng phòng (✅)
-        int VohieuHoaDuAn(int maDuAn);
+        int VoHieuHoaDuAn(int maDuAn);
     }
 }

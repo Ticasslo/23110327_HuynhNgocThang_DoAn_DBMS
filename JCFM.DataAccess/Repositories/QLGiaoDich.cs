@@ -67,13 +67,6 @@ namespace JCFM.DataAccess.Repositories
             return DbHelper.ExecuteDataTable(cmd);
         }
 
-        // SP: SP_GetGiaoDichChoDuyet_ForNhanVienTC — Vai trò: Nhân viên TC (✅) (xem của mình)
-        public DataTable GetGiaoDichChoDuyet_CuaToi(int maNvTao)
-        {
-            var cmd = DbHelper.StoredProc("dbo.SP_GetGiaoDichChoDuyet_ForNhanVienTC");
-            cmd.Parameters.Add(DbHelper.Param("@MaNvTao", maNvTao));
-            return DbHelper.ExecuteDataTable(cmd);
-        }
 
         // SP: SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán (✅/✅)
         public DataTable GetLichSuGiaoDich(DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null, int? maNvTao = null)
