@@ -16,7 +16,7 @@ namespace JCFM.Business.Services.Implementations
     {
         private readonly QLTaiKhoanNH _repo = new QLTaiKhoanNH();
 
-        // SP_GetTaiKhoanNH — Vai trò: TP/NVTC/Kế toán (✅✅✅)
+        // SP_GetTaiKhoanNH — Vai trò: TP/NVTC/Kế toán
         public DataTable GetTaiKhoanNH(string trangThai = null, string nganHang = null, bool? coSoDu = null)
         {
             try
@@ -26,7 +26,7 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Không lấy được danh sách tài khoản NH.", ex); }
         }
 
-        // SP_ThemTaiKhoanNH — Vai trò: Trưởng phòng (✅)
+        // SP_ThemTaiKhoanNH — Vai trò: Trưởng phòng
         public int ThemTaiKhoanNH(string tenTk, string soTk, string nganHang, decimal soDu = 0)
         {
             if (string.IsNullOrWhiteSpace(tenTk)) throw new BusinessException("Tên tài khoản bắt buộc.");
@@ -38,7 +38,7 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Thêm tài khoản NH thất bại.", ex); }
         }
 
-        // SP_SuaTaiKhoanNH — Vai trò: Trưởng phòng (✅)
+        // SP_SuaTaiKhoanNH — Vai trò: Trưởng phòng
         public int SuaTaiKhoanNH(int maTknh, string tenTk, string soTk, string nganHang, string trangThai = "active")
         {
             if (maTknh <= 0) throw new BusinessException("Mã tài khoản không hợp lệ.");
@@ -49,7 +49,7 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Sửa tài khoản NH thất bại.", ex); }
         }
 
-        // SP_UpdateTaiKhoanNH — Vai trò: Trưởng phòng (✅)
+        // SP_UpdateTaiKhoanNH — Vai trò: Trưởng phòng
         public int VoHieuHoaTaiKhoanNH(int maTknh)
         {
             if (maTknh <= 0) throw new BusinessException("Mã tài khoản không hợp lệ.");

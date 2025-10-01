@@ -12,7 +12,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class QLDuAn
     {
-        // SP: SP_GetDuAn — Vai trò: TP/NVTC/Kế toán (✅✅✅ xem)
+        // SP: SP_GetDuAn — Vai trò: TP/NVTC/Kế toán (xem)
         public DataTable GetDuAn(string trangThai = null, DateTime? tuNgayBd = null, DateTime? denNgayBd = null, bool? coNganSach = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_GetDuAn");
@@ -23,7 +23,7 @@ namespace JCFM.DataAccess.Repositories
             return DbHelper.ExecuteDataTable(cmd);
         }
 
-        // SP: SP_ThemDuAn — Vai trò: Trưởng phòng (✅)
+        // SP: SP_ThemDuAn — Vai trò: Trưởng phòng
         public int ThemDuAn(string tenDuAn, DateTime ngayBd, DateTime? ngayKt, decimal nganSach = 0)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_ThemDuAn");
@@ -36,7 +36,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_SuaDuAn — Vai trò: Trưởng phòng (✅)
+        // SP: SP_SuaDuAn — Vai trò: Trưởng phòng
         public int SuaDuAn(int maDuAn, string tenDuAn, DateTime ngayBd, DateTime? ngayKt, decimal nganSach, string trangThai = "active")
         {
             var cmd = DbHelper.StoredProc("dbo.SP_SuaDuAn");
@@ -51,7 +51,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_UpdateDuAn (vô hiệu hóa) — Vai trò: Trưởng phòng (✅)
+        // SP: SP_UpdateDuAn (vô hiệu hóa) — Vai trò: Trưởng phòng
         public int VohieuHoaDuAn(int maDuAn)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_UpdateDuAn");

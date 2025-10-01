@@ -20,7 +20,7 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms
         private readonly IGiaoDichService _gdSvc = new GiaoDichService();
         private readonly IDuAnService _daSvc = new DuAnService();
         private readonly ITaiKhoanNHService _tknhSvc = new TaiKhoanNHService();
-        private readonly INhanVienService _nvSvc  = new NhanVienService(); // nếu bạn chưa có thì tạm bỏ filter Người tạo
+        private readonly INhanVienService _nvSvc  = new NhanVienService();
 
         public LichSuGiaoDich_Form(AppSession session)
         {
@@ -76,7 +76,7 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms
             var tknh = _tknhSvc.GetTaiKhoanNH(null, null, null); // ma_tknh, ten_tk...
             BindCombo(cboTKNH, tknh, "ten_tk", "ma_tknh", addAll: true);
 
-            // ✅ dùng SP_TimNhanVien
+            // dùng SP_TimNhanVien
             var nv = _nvSvc.TimNhanVien(keyword: null, vaiTro: "NHAN_VIEN_TC", trangThai: null);
             BindCombo(cboNguoiTao, nv, "ho_ten", "ma_nv", addAll: true);
 
@@ -136,7 +136,6 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms
                     dgvLichSu.Columns[name].HeaderText = header;
             }
 
-            // === CHỈ RA CHỖ CẦN SỬA HEADER TIẾNG VIỆT ===
             H("ma_gd", "Mã GD");
             H("loai_gd", "Loại");
             H("so_tien", "Số tiền");
@@ -158,7 +157,6 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms
                 col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
 
-            // Căn giữa một số cột ngắn
             if (dgvLichSu.Columns.Contains("loai_gd"))
                 dgvLichSu.Columns["loai_gd"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             if (dgvLichSu.Columns.Contains("trang_thai"))

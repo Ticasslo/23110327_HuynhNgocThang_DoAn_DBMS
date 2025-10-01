@@ -114,5 +114,20 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.Login
                 Application.Exit();
             }
         }
+
+        private void Login_Form_Load(object sender, EventArgs e)
+        {
+            txtPass.UseSystemPasswordChar = true;
+            btnAnHien.Text = "👁 Hiện mật khẩu";
+        }
+
+        private void btnAnHien_Click(object sender, EventArgs e)
+        {
+            txtPass.UseSystemPasswordChar = !txtPass.UseSystemPasswordChar;
+            btnAnHien.Text = txtPass.UseSystemPasswordChar ? "👁 Hiện mật khẩu" : "   🔐 Ẩn mật khẩu";
+
+            txtPass.Focus();
+            txtPass.SelectionStart = txtPass.TextLength;
+        }
     }
 }

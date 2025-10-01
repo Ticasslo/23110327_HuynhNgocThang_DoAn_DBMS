@@ -15,7 +15,7 @@ namespace JCFM.Business.Services.Implementations
     {
         private readonly QLGiaoDich _repo = new QLGiaoDich();
 
-        // SP_ThemGiaoDich — Vai trò: Nhân viên TC (✅)
+        // SP_ThemGiaoDich — Vai trò: Nhân viên TC
         public int ThemGiaoDich(string loaiGd, decimal soTien, string moTa, string maLoai, int maTknh, int maNvTaoNvtc, int? maDuAn)
         {
             if (loaiGd != "THU" && loaiGd != "CHI") throw new BusinessException("Loại giao dịch phải là THU hoặc CHI.");
@@ -28,7 +28,7 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Thêm giao dịch thất bại.", ex); }
         }
 
-        // SP_SuaGiaoDich — Vai trò: Nhân viên TC (✅)
+        // SP_SuaGiaoDich — Vai trò: Nhân viên TC
         public int SuaGiaoDich(int maGd, decimal soTien, string moTa, string maLoai, int maTknh, int? maDuAn, int maNvSua)
         {
             if (maGd <= 0) throw new BusinessException("Mã giao dịch không hợp lệ.");
@@ -41,7 +41,7 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Sửa giao dịch thất bại.", ex); }
         }
 
-        // SP_DuyetGiaoDich — Vai trò: Trưởng phòng (✅)
+        // SP_DuyetGiaoDich — Vai trò: Trưởng phòng
         public bool DuyetGiaoDich(int maGd, int maNvDuyetTp, string trangThai)
         {
             if (maGd <= 0) throw new BusinessException("Mã giao dịch không hợp lệ.");
@@ -52,14 +52,14 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Duyệt giao dịch thất bại.", ex); }
         }
 
-        // SP_GetGiaoDichChoDuyet — Vai trò: Trưởng phòng (✅)
+        // SP_GetGiaoDichChoDuyet — Vai trò: Trưởng phòng
         public DataTable GetGiaoDichChoDuyet(int? maNvTao = null, string loaiGd = null, int? maDuAn = null)
         {
             try { return _repo.GetGiaoDichChoDuyet(maNvTao, loaiGd, maDuAn); }
             catch (DataAccessException ex) { throw new BusinessException("Không lấy được danh sách chờ duyệt.", ex); }
         }
 
-        // SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán (✅/✅)
+        // SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán
         public DataTable GetLichSuGiaoDich(DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null, int? maNvTao = null)
         {
             if (tuNgay.HasValue && denNgay.HasValue && tuNgay > denNgay)
@@ -68,7 +68,7 @@ namespace JCFM.Business.Services.Implementations
             catch (DataAccessException ex) { throw new BusinessException("Không lấy được lịch sử giao dịch.", ex); }
         }
 
-        // SP_GetLichSuGiaoDich_ForNhanVienTC — Vai trò: Nhân viên TC (✅)
+        // SP_GetLichSuGiaoDich_ForNhanVienTC — Vai trò: Nhân viên TC
         public DataTable GetLichSuGiaoDich_CuaToi(int maNvTao, DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null)
         {
             if (maNvTao <= 0) throw new BusinessException("Mã nhân viên không hợp lệ.");

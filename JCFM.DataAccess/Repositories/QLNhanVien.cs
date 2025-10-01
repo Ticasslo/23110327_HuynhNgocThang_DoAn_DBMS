@@ -10,7 +10,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class QLNhanVien
     {
-        // SP: SP_TimNhanVien — TP/NVTC/Kế toán (✅ xem)
+        // SP: SP_TimNhanVien — TP/NVTC/Kế toán (xem)
         public DataTable TimNhanVien(string keyword = null, string vaiTro = null, string trangThai = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_TimNhanVien");
@@ -20,7 +20,7 @@ namespace JCFM.DataAccess.Repositories
             return DbHelper.ExecuteDataTable(cmd);
         }
 
-        // SP: SP_ThemNhanVien — Trưởng phòng (✅)
+        // SP: SP_ThemNhanVien — Trưởng phòng
         // Trả về: ma_nv_moi
         public int ThemNhanVien(
             string hoTen,
@@ -44,7 +44,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_XoaNhanVien — Trưởng phòng (✅)
+        // SP: SP_XoaNhanVien — Trưởng phòng
         // HardDelete = 0: chỉ inactive tài khoản + drop SQL
         // Trả về: success (1) từ SP
         public int XoaNhanVien(int maNv, bool hardDelete = false, bool dropSql = true)
@@ -58,7 +58,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_KichHoatNhanVien — Trưởng phòng (✅)
+        // SP: SP_KichHoatNhanVien — Trưởng phòng
         // Trả về: success (1)
         public int KichHoatNhanVien(int maNv, bool provision = true)
         {

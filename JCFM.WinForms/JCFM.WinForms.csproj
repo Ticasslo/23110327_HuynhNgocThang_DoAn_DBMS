@@ -174,6 +174,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -188,7 +189,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\TrangChuKT01.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JCFM.Business\JCFM.Business.csproj">
       <Project>{e946555e-26db-48a8-aa5c-cb90fc613ce1}</Project>
@@ -198,6 +201,51 @@
       <Project>{cc72a89a-a31d-4e46-b3d7-a9f4e92d370d}</Project>
       <Name>JCFM.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuKT02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuKT03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuKT04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuNVTC01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuNVTC02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuNVTC03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuNVTC04.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuTP01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuTP02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChuTP03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BaoCaoChiTiet01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoaiGiaoDich01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DuAn01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TKNH01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

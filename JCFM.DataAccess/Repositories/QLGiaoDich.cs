@@ -12,7 +12,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class QLGiaoDich
     {
-        // SP: SP_ThemGiaoDich — Vai trò: Nhân viên TC (✅)
+        // SP: SP_ThemGiaoDich — Vai trò: Nhân viên TC
         public int ThemGiaoDich(string loaiGd, decimal soTien, string moTa, string maLoai, int maTknh, int maNvTaoNvtc, int? maDuAn)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_ThemGiaoDich");
@@ -28,7 +28,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_SuaGiaoDich — Vai trò: Nhân viên TC (✅) (chỉ sửa của mình & khi CHO_DUYET)
+        // SP: SP_SuaGiaoDich — Vai trò: Nhân viên TC (chỉ sửa của mình & khi CHO_DUYET)
         public int SuaGiaoDich(int maGd, decimal soTien, string moTa, string maLoai, int maTknh, int? maDuAn, int maNvSua)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_SuaGiaoDich");
@@ -44,7 +44,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_DuyetGiaoDich — Vai trò: Trưởng phòng (✅)
+        // SP: SP_DuyetGiaoDich — Vai trò: Trưởng phòng
         public bool DuyetGiaoDich(int maGd, int maNvDuyetTp, string trangThai) // 'DA_DUYET' hoặc 'TU_CHOI'
         {
             var cmd = DbHelper.StoredProc("dbo.SP_DuyetGiaoDich");
@@ -57,7 +57,7 @@ namespace JCFM.DataAccess.Repositories
             return true;
         }
 
-        // SP: SP_GetGiaoDichChoDuyet — Vai trò: Trưởng phòng (✅) (xem tất cả chờ duyệt)
+        // SP: SP_GetGiaoDichChoDuyet — Vai trò: Trưởng phòng (xem tất cả chờ duyệt)
         public DataTable GetGiaoDichChoDuyet(int? maNvTao = null, string loaiGd = null, int? maDuAn = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_GetGiaoDichChoDuyet");
@@ -68,7 +68,7 @@ namespace JCFM.DataAccess.Repositories
         }
 
 
-        // SP: SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán (✅/✅)
+        // SP: SP_GetLichSuGiaoDich — Vai trò: Trưởng phòng/Kế toán
         public DataTable GetLichSuGiaoDich(DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null, int? maNvTao = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_GetLichSuGiaoDich");
@@ -82,7 +82,7 @@ namespace JCFM.DataAccess.Repositories
             return DbHelper.ExecuteDataTable(cmd);
         }
 
-        // SP: SP_GetLichSuGiaoDich_ForNhanVienTC — Vai trò: Nhân viên TC (✅) (chỉ của tôi)
+        // SP: SP_GetLichSuGiaoDich_ForNhanVienTC — Vai trò: Nhân viên TC (chỉ của tôi)
         public DataTable GetLichSuGiaoDich_CuaToi(int maNvTao, DateTime? tuNgay = null, DateTime? denNgay = null, string trangThai = null, string loaiGd = null, int? maDuAn = null, int? maTknh = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_GetLichSuGiaoDich_ForNhanVienTC");

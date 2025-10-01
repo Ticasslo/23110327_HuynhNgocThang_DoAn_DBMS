@@ -12,7 +12,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class TinhToanTaiChinh
     {
-        // FN: FN_TinhLaiLo — Vai trò: Trưởng phòng/Kế toán (EXECUTE ✅/✅)
+        // FN: FN_TinhLaiLo — Vai trò: Trưởng phòng/Kế toán (EXECUTE)
         public decimal TinhLaiLo(DateTime ngayBd, DateTime ngayKt, int? maDuAn = null)
         {
             using (var cmd = new SqlCommand(
@@ -27,7 +27,7 @@ namespace JCFM.DataAccess.Repositories
             }
         }
 
-        // FN: FN_KiemTraSoDu — Vai trò: TP/NVTC/Kế toán (EXECUTE ✅✅✅)
+        // FN: FN_KiemTraSoDu — Vai trò: TP/NVTC/Kế toán (EXECUTE)
         public decimal KiemTraSoDu(int maTknh)
         {
             using (var cmd = new SqlCommand(
@@ -40,7 +40,7 @@ namespace JCFM.DataAccess.Repositories
             }
         }
 
-        // FN: FN_TinhTongThuChi — Vai trò: Trưởng phòng/Kế toán (SELECT ✅/✅)
+        // FN: FN_TinhTongThuChi — Vai trò: Trưởng phòng/Kế toán (SELECT)
         public DataTable TinhTongThuChi(DateTime ngayBd, DateTime ngayKt, int? maDuAn = null)
         {
             using (var cmd = new SqlCommand(

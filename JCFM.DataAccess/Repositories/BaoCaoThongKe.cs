@@ -12,7 +12,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class BaoCaoThongKe
     {
-        // SP: SP_GetThongKeThang — Vai trò: Trưởng phòng/Kế toán (✅/✅)
+        // SP: SP_GetThongKeThang — Vai trò: Trưởng phòng/Kế toán
         public DataTable GetThongKeThang(int? nam = null, int? thang = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_GetThongKeThang");
@@ -21,7 +21,7 @@ namespace JCFM.DataAccess.Repositories
             return DbHelper.ExecuteDataTable(cmd);
         }
 
-        // SP: SP_XuatBaoCaoChiTiet — Vai trò: Trưởng phòng/Kế toán (✅/✅)
+        // SP: SP_XuatBaoCaoChiTiet — Vai trò: Trưởng phòng/Kế toán
         public DataTable XuatBaoCaoChiTiet(DateTime ngayBd, DateTime ngayKt, int? maDuAn = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_XuatBaoCaoChiTiet");

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBack = new System.Windows.Forms.Button();
@@ -37,6 +38,13 @@
             this.cboLoai = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlDetail = new System.Windows.Forms.Panel();
+            this.txtNgayTao = new System.Windows.Forms.TextBox();
+            this.txtNguoiTao = new System.Windows.Forms.TextBox();
+            this.txtDuAn = new System.Windows.Forms.TextBox();
+            this.txtTenLoai = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtLoai = new System.Windows.Forms.TextBox();
             this.txtSoTien = new System.Windows.Forms.TextBox();
             this.txtMoTa = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -47,13 +55,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtLoai = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtTenLoai = new System.Windows.Forms.TextBox();
-            this.txtDuAn = new System.Windows.Forms.TextBox();
-            this.txtNguoiTao = new System.Windows.Forms.TextBox();
-            this.txtNgayTao = new System.Windows.Forms.TextBox();
             this.btnTim = new System.Windows.Forms.Button();
             this.btnTai = new System.Windows.Forms.Button();
             this.dgvChoDuyet = new System.Windows.Forms.DataGridView();
@@ -82,9 +83,9 @@
             this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label4.Location = new System.Drawing.Point(12, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(363, 41);
+            this.label4.Size = new System.Drawing.Size(413, 41);
             this.label4.TabIndex = 98;
-            this.label4.Text = "GIAO DỊCH CHỜ DUYỆT";
+            this.label4.Text = "GIAO DỊCH CHỜ DUYỆT 🕓";
             // 
             // label11
             // 
@@ -151,6 +152,68 @@
             this.pnlDetail.Name = "pnlDetail";
             this.pnlDetail.Size = new System.Drawing.Size(1158, 267);
             this.pnlDetail.TabIndex = 116;
+            // 
+            // txtNgayTao
+            // 
+            this.txtNgayTao.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNgayTao.Location = new System.Drawing.Point(124, 163);
+            this.txtNgayTao.Name = "txtNgayTao";
+            this.txtNgayTao.Size = new System.Drawing.Size(318, 31);
+            this.txtNgayTao.TabIndex = 114;
+            // 
+            // txtNguoiTao
+            // 
+            this.txtNguoiTao.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNguoiTao.Location = new System.Drawing.Point(674, 163);
+            this.txtNguoiTao.Name = "txtNguoiTao";
+            this.txtNguoiTao.Size = new System.Drawing.Size(328, 31);
+            this.txtNguoiTao.TabIndex = 113;
+            // 
+            // txtDuAn
+            // 
+            this.txtDuAn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDuAn.Location = new System.Drawing.Point(674, 103);
+            this.txtDuAn.Name = "txtDuAn";
+            this.txtDuAn.Size = new System.Drawing.Size(328, 31);
+            this.txtDuAn.TabIndex = 112;
+            // 
+            // txtTenLoai
+            // 
+            this.txtTenLoai.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenLoai.Location = new System.Drawing.Point(674, 44);
+            this.txtTenLoai.Name = "txtTenLoai";
+            this.txtTenLoai.Size = new System.Drawing.Size(328, 31);
+            this.txtTenLoai.TabIndex = 111;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label12.Location = new System.Drawing.Point(519, 166);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(108, 28);
+            this.label12.TabIndex = 110;
+            this.label12.Text = "Người tạo:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label10.Location = new System.Drawing.Point(6, 162);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(99, 28);
+            this.label10.TabIndex = 109;
+            this.label10.Text = "Ngày tạo:";
+            // 
+            // txtLoai
+            // 
+            this.txtLoai.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoai.Location = new System.Drawing.Point(124, 47);
+            this.txtLoai.Name = "txtLoai";
+            this.txtLoai.Size = new System.Drawing.Size(162, 31);
+            this.txtLoai.TabIndex = 107;
             // 
             // txtSoTien
             // 
@@ -256,68 +319,6 @@
             this.label3.TabIndex = 82;
             this.label3.Text = "Chi tiết";
             // 
-            // txtLoai
-            // 
-            this.txtLoai.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLoai.Location = new System.Drawing.Point(124, 47);
-            this.txtLoai.Name = "txtLoai";
-            this.txtLoai.Size = new System.Drawing.Size(162, 31);
-            this.txtLoai.TabIndex = 107;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label10.Location = new System.Drawing.Point(6, 162);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(99, 28);
-            this.label10.TabIndex = 109;
-            this.label10.Text = "Ngày tạo:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label12.Location = new System.Drawing.Point(519, 166);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(108, 28);
-            this.label12.TabIndex = 110;
-            this.label12.Text = "Người tạo:";
-            // 
-            // txtTenLoai
-            // 
-            this.txtTenLoai.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenLoai.Location = new System.Drawing.Point(674, 44);
-            this.txtTenLoai.Name = "txtTenLoai";
-            this.txtTenLoai.Size = new System.Drawing.Size(328, 31);
-            this.txtTenLoai.TabIndex = 111;
-            // 
-            // txtDuAn
-            // 
-            this.txtDuAn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDuAn.Location = new System.Drawing.Point(674, 103);
-            this.txtDuAn.Name = "txtDuAn";
-            this.txtDuAn.Size = new System.Drawing.Size(328, 31);
-            this.txtDuAn.TabIndex = 112;
-            // 
-            // txtNguoiTao
-            // 
-            this.txtNguoiTao.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNguoiTao.Location = new System.Drawing.Point(674, 163);
-            this.txtNguoiTao.Name = "txtNguoiTao";
-            this.txtNguoiTao.Size = new System.Drawing.Size(328, 31);
-            this.txtNguoiTao.TabIndex = 113;
-            // 
-            // txtNgayTao
-            // 
-            this.txtNgayTao.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNgayTao.Location = new System.Drawing.Point(124, 163);
-            this.txtNgayTao.Name = "txtNgayTao";
-            this.txtNgayTao.Size = new System.Drawing.Size(318, 31);
-            this.txtNgayTao.TabIndex = 114;
-            // 
             // btnTim
             // 
             this.btnTim.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -344,8 +345,11 @@
             // 
             this.dgvChoDuyet.AllowUserToAddRows = false;
             this.dgvChoDuyet.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.dgvChoDuyet.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvChoDuyet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChoDuyet.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvChoDuyet.BackgroundColor = System.Drawing.Color.Gainsboro;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -374,6 +378,7 @@
             this.dgvChoDuyet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvChoDuyet.Size = new System.Drawing.Size(1158, 380);
             this.dgvChoDuyet.TabIndex = 119;
+            this.dgvChoDuyet.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvChoDuyet_DataBindingComplete);
             this.dgvChoDuyet.SelectionChanged += new System.EventHandler(this.dgvChoDuyet_SelectionChanged);
             // 
             // GiaoDichChoDuyet_Form

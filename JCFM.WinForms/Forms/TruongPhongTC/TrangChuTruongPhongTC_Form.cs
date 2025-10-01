@@ -101,6 +101,5 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
 
         private void btnQLTaiKhoanNV_Click(object sender, EventArgs e)
             => OpenChild(new QLTaiKhoanNV_Form(_session));
-
     }
 }

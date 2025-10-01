@@ -264,6 +264,24 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             var ngayBd = dtpNgayBd.Value.Date;
             DateTime? ngayKt = dtpNgayKt.Checked ? dtpNgayKt.Value.Date : (DateTime?)null;
 
+            var tt = cboTrangThaiCT.SelectedItem?.ToString() ?? "active";
+
+            // 1) Nếu hoàn thành thì phải có ngày kết thúc
+            if (string.Equals(tt, "hoan_thanh", StringComparison.OrdinalIgnoreCase) && !ngayKt.HasValue)
+            {
+                MessageBox.Show("Dự án ở trạng thái 'hoan_thanh' bắt buộc phải có Ngày kết thúc.");
+                dtpNgayKt.Focus();
+                return;
+            }
+
+            // 2) Nếu có ngày kết thúc thì phải >= ngày bắt đầu
+            if (ngayKt.HasValue && ngayKt.Value < ngayBd)
+            {
+                MessageBox.Show("Ngày kết thúc không được nhỏ hơn Ngày bắt đầu.");
+                dtpNgayKt.Focus();
+                return;
+            }
+
             try
             {
                 if (_mode == EditMode.Create)
@@ -274,7 +292,6 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
                 else if (_mode == EditMode.Update)
                 {
                     // trạng thái lấy từ combo chi tiết
-                    var tt = cboTrangThaiCT.SelectedItem?.ToString() ?? "active";
                     _daSvc.SuaDuAn(_maDuAnDangSua, ten, ngayBd, ngayKt, nganSach, tt); // SP_SuaDuAn
                     MessageBox.Show("Cập nhật dự án thành công.");
                 }

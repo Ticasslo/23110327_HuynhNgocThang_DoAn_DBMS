@@ -15,7 +15,7 @@ namespace JCFM.Business.Services.Implementations
     {
         private readonly XemLoaiGiaoDich _repo = new XemLoaiGiaoDich();
 
-        // SP_GetLoaiGiaoDich — Vai trò: TP/NVTC/Kế toán (✅✅✅)
+        // SP_GetLoaiGiaoDich — Vai trò: TP/NVTC/Kế toán
         public DataTable GetLoaiGiaoDich(string loaiThuChi = null)
         {
             try { return _repo.GetLoaiGiaoDich(loaiThuChi); }

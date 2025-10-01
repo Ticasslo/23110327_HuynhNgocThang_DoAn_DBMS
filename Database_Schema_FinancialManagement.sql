@@ -221,6 +221,10 @@ CHECK (so_du >= 0);
 ALTER TABLE DuAn ADD CONSTRAINT CK_DuAn_Ngay 
 CHECK (ngay_kt IS NULL OR ngay_kt >= ngay_bd);
 
+-- Đảm bảo dự án hoàn thành phải có ngày kết thúc
+ALTER TABLE DuAn ADD CONSTRAINT CK_DuAn_HoanThanhCoNgayKt
+CHECK (trang_thai <> 'hoan_thanh' OR ngay_kt IS NOT NULL);
+
 
 
 
@@ -1711,7 +1715,7 @@ GRANT EXECUTE ON SP_GetTaiKhoanNH TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_GetLoaiGiaoDich TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_ThemGiaoDich TO rl_nhanvien_tc;
 GRANT EXECUTE ON SP_SuaGiaoDich TO rl_nhanvien_tc;
-
+GRANT EXECUTE ON dbo.SP_TimNhanVien TO rl_nhanvien_tc;
 
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_nhanvien_tc;  -- Chỉ cần kiểm tra số dư
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_nhanvien_tc;
@@ -1735,7 +1739,7 @@ GRANT EXECUTE ON FN_TinhLaiLo TO rl_ketoan;
 GRANT EXECUTE ON FN_KiemTraSoDu TO rl_ketoan;
 GRANT SELECT ON FN_TinhTongThuChi TO rl_ketoan;
 GRANT SELECT ON dbo.FN_Login_GetRole TO rl_ketoan;
-GRANT EXECUTE ON dbo.SP_TimNhanVien     TO rl_ketoan, rl_nhanvien_tc;
+GRANT EXECUTE ON dbo.SP_TimNhanVien TO rl_ketoan;
 
 
 -- DENY

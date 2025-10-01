@@ -131,7 +131,6 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
                 col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
 
-            // Căn giữa vài cột ngắn
             if (dgvChoDuyet.Columns.Contains("loai_gd"))
                 dgvChoDuyet.Columns["loai_gd"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
@@ -211,6 +210,12 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             if (row == null) { MessageBox.Show("Chọn một giao dịch để duyệt."); return; }
 
             var maGd = Convert.ToInt32(row["ma_gd"]);
+            var soTien = row.Table.Columns.Contains("so_tien") ? row["so_tien"]?.ToString() : null;
+
+            if (!AskConfirm("Xác nhận duyệt",
+                $"Bạn có chắc chắn DUYỆT giao dịch #{maGd}{(string.IsNullOrWhiteSpace(soTien) ? "" : $" (Số tiền: {soTien})")}?"))
+                return;
+
             try
             {
                 _gdSvc.DuyetGiaoDich(maGd, _session.MaNhanVien, "DA_DUYET"); // SP_DuyetGiaoDich
@@ -228,6 +233,12 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             if (row == null) { MessageBox.Show("Chọn một giao dịch để từ chối."); return; }
 
             var maGd = Convert.ToInt32(row["ma_gd"]);
+            var soTien = row.Table.Columns.Contains("so_tien") ? row["so_tien"]?.ToString() : null;
+
+            if (!AskConfirm("Xác nhận duyệt",
+                $"Bạn có chắc chắn DUYỆT giao dịch #{maGd}{(string.IsNullOrWhiteSpace(soTien) ? "" : $" (Số tiền: {soTien})")}?"))
+                return;
+
             try
             {
                 _gdSvc.DuyetGiaoDich(maGd, _session.MaNhanVien, "TU_CHOI"); // SP_DuyetGiaoDich
@@ -251,5 +262,38 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             btnTuChoi.Enabled = enabled;
         }
         #endregion
+
+        private void dgvChoDuyet_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            this.BeginInvoke((Action)(() => SelectFirstRowIfAny()));
+        }
+
+        private void SelectFirstRowIfAny()
+        {
+            if (dgvChoDuyet.Rows.Count == 0) return;
+            dgvChoDuyet.ClearSelection();
+
+            // chọn ô thuộc cột hiển thị đầu tiên
+            int firstVisibleCol = dgvChoDuyet.Columns
+                .Cast<DataGridViewColumn>()
+                .First(c => c.Visible).Index;
+
+            dgvChoDuyet.CurrentCell = dgvChoDuyet.Rows[0].Cells[firstVisibleCol];
+            dgvChoDuyet.Rows[0].Selected = true;
+            dgvChoDuyet.FirstDisplayedScrollingRowIndex = 0;
+        }
+
+        private bool AskConfirm(string title, string message)
+        {
+            var result = MessageBox.Show(
+                message,
+                title,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            return result == DialogResult.Yes;
+        }
+
     }
 }

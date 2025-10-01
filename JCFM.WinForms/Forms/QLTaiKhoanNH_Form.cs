@@ -47,7 +47,7 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             btnLuu.Visible = isTP;
             btnHuy.Visible = isTP;
 
-            pnlChiTiet.Enabled = false; // SetEditMode sẽ bật khi edit
+            pnlChiTiet.Enabled = false;
         }
 
         #region Init
@@ -302,7 +302,7 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.TruongP
             txtSoTk.Clear();
             txtNganHangCT.Clear();
             txtSoDu.Clear();
-            cboTrangThaiCT.SelectedIndex = 0; // active (hiển thị khi Update, nhưng set trước cũng không sao)
+            cboTrangThaiCT.SelectedIndex = 0; // active (hiển thị khi Update)
         }
         #endregion
 

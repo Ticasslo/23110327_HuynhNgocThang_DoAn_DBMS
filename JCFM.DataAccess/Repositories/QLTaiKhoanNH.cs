@@ -12,7 +12,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class QLTaiKhoanNH
     {
-        // SP: SP_GetTaiKhoanNH — Vai trò: TP/NVTC/Kế toán (✅✅✅ xem)
+        // SP: SP_GetTaiKhoanNH — Vai trò: TP/NVTC/Kế toán (xem)
         public DataTable GetTaiKhoanNH(string trangThai = null, string nganHang = null, bool? coSoDu = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_GetTaiKhoanNH");
@@ -22,7 +22,7 @@ namespace JCFM.DataAccess.Repositories
             return DbHelper.ExecuteDataTable(cmd);
         }
 
-        // SP: SP_ThemTaiKhoanNH — Vai trò: Trưởng phòng (✅)
+        // SP: SP_ThemTaiKhoanNH — Vai trò: Trưởng phòng
         public int ThemTaiKhoanNH(string tenTk, string soTk, string nganHang, decimal soDu = 0)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_ThemTaiKhoanNH");
@@ -35,7 +35,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_SuaTaiKhoanNH — Vai trò: Trưởng phòng (✅)
+        // SP: SP_SuaTaiKhoanNH — Vai trò: Trưởng phòng
         public int SuaTaiKhoanNH(int maTknh, string tenTk, string soTk, string nganHang, string trangThai = "active")
         {
             var cmd = DbHelper.StoredProc("dbo.SP_SuaTaiKhoanNH");
@@ -49,7 +49,7 @@ namespace JCFM.DataAccess.Repositories
             return Convert.ToInt32(scalar);
         }
 
-        // SP: SP_UpdateTaiKhoanNH (vô hiệu hóa) — Vai trò: Trưởng phòng (✅)
+        // SP: SP_UpdateTaiKhoanNH (vô hiệu hóa) — Vai trò: Trưởng phòng
         public int VohieuHoaTaiKhoanNH(int maTknh)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_UpdateTaiKhoanNH");

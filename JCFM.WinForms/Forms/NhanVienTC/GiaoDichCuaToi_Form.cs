@@ -66,11 +66,12 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.NhanVie
             cboTrangThai.Items.Add("TU_CHOI");
             cboTrangThai.SelectedIndex = 0;
 
-            // Dự án & TK NH từ service riêng
-            var da = _daSvc.GetDuAn(null, null, null, null); // trả DataTable: ma_du_an, ten_du_an, ...
+            // Dự án (chỉ active)
+            var da = _daSvc.GetDuAn("active", null, null, null);
             BindCombo(cboDuAn, da, "ten_du_an", "ma_du_an", addAll: true);
 
-            var tknh = _tknhSvc.GetTaiKhoanNH(null, null, null); // ma_tknh, ten_tk, ...
+            // Tài khoản NH (chỉ active)
+            var tknh = _tknhSvc.GetTaiKhoanNH("active", null, null);
             BindCombo(cboTKNH, tknh, "ten_tk", "ma_tknh", addAll: true);
 
             // DateTimePicker dùng ShowCheckBox=true trong Designer
@@ -90,11 +91,12 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.NhanVie
             ReloadMaLoaiTheoLoaiChiTiet();
 
             // TK & Dự án
-            var tknh = _tknhSvc.GetTaiKhoanNH(null, null, null);
+            var tknh = _tknhSvc.GetTaiKhoanNH("active", null, null);
             BindCombo(cboTKNH2, tknh, "ten_tk", "ma_tknh", addAll: false);
 
-            var da = _daSvc.GetDuAn(null, null, null, null);
+            var da = _daSvc.GetDuAn("active", null, null, null);
             BindCombo(cboDuAn2, da, "ten_du_an", "ma_du_an", addAll: false);
+
             InsertNoneOption(cboDuAn2, "(Không có)");
             cboDuAn2.SelectedIndex = 0;
         }
@@ -200,6 +202,9 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.NhanVie
 
             btnThem.Enabled = !editing;
             btnSua.Enabled = !editing;
+
+            btnTim.Enabled = !editing;
+            btnTai.Enabled = !editing;
         }
 
         private void ClearDetail()
@@ -237,11 +242,13 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.NhanVie
 
         private void btnTim_Click(object sender, EventArgs e)
         {
+            if (_mode != EditMode.None) { MessageBox.Show("Đang thêm/sửa. Vui lòng Lưu hoặc Hủy trước."); return; }
             LoadGrid();
         }
 
         private void btnTai_Click(object sender, EventArgs e)
         {
+            if (_mode != EditMode.None) { MessageBox.Show("Đang thêm/sửa. Vui lòng Lưu hoặc Hủy trước."); return; }
             ResetFilters();
             LoadGrid();
         }
@@ -374,7 +381,7 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms.NhanVie
             // Hiển thị để xem (readonly) khi không ở chế độ Edit
             if (_mode == EditMode.None)
             {
-                MapRowToDetail(row); // điền giá trị vào các control
+                MapRowToDetail(row);
             }
         }
 

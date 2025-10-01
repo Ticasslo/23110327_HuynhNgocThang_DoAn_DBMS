@@ -102,7 +102,6 @@ namespace _23110327_HuynhNgocThang_Nhom16_CodeQuanLyThuChiTaiChinh.Forms
                 txtMoTa.Text = row["mo_ta"]?.ToString();
         }
 
-        // Buttons
         private void btnTim_Click(object sender, EventArgs e) => LoadGrid();
 
         private void btnTai_Click(object sender, EventArgs e)
