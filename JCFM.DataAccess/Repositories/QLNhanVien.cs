@@ -10,7 +10,7 @@ namespace JCFM.DataAccess.Repositories
 {
     public class QLNhanVien
     {
-        // SP: SP_TimNhanVien — TP/NVTC/Kế toán (xem)
+        // SP: SP_TimNhanVien — TP (xem)
         public DataTable TimNhanVien(string keyword = null, string vaiTro = null, string trangThai = null)
         {
             var cmd = DbHelper.StoredProc("dbo.SP_TimNhanVien");

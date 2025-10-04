@@ -214,13 +214,14 @@
             // 
             // btnTim
             // 
+            this.btnTim.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnTim.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTim.Location = new System.Drawing.Point(12, 693);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(162, 48);
             this.btnTim.TabIndex = 135;
             this.btnTim.Text = "Tìm kiếm";
-            this.btnTim.UseVisualStyleBackColor = true;
+            this.btnTim.UseVisualStyleBackColor = false;
             this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
             // label2
@@ -246,13 +247,14 @@
             // 
             // btnTai
             // 
+            this.btnTai.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnTai.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTai.Location = new System.Drawing.Point(180, 693);
             this.btnTai.Name = "btnTai";
             this.btnTai.Size = new System.Drawing.Size(171, 48);
             this.btnTai.TabIndex = 131;
             this.btnTai.Text = "Tải lại";
-            this.btnTai.UseVisualStyleBackColor = true;
+            this.btnTai.UseVisualStyleBackColor = false;
             this.btnTai.Click += new System.EventHandler(this.btnTai_Click);
             // 
             // label10
@@ -496,6 +498,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1500, 753);
             this.Controls.Add(this.pnlChiTiet);
             this.Controls.Add(this.dgvLichSu);

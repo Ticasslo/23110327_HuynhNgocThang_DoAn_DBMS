@@ -90,24 +90,26 @@
             // 
             // btnTim
             // 
+            this.btnTim.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnTim.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTim.Location = new System.Drawing.Point(13, 688);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(162, 48);
             this.btnTim.TabIndex = 135;
             this.btnTim.Text = "Tìm kiếm";
-            this.btnTim.UseVisualStyleBackColor = true;
+            this.btnTim.UseVisualStyleBackColor = false;
             this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
             // btnTai
             // 
+            this.btnTai.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnTai.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTai.Location = new System.Drawing.Point(181, 688);
             this.btnTai.Name = "btnTai";
             this.btnTai.Size = new System.Drawing.Size(171, 48);
             this.btnTai.TabIndex = 134;
             this.btnTai.Text = "Tải lại";
-            this.btnTai.UseVisualStyleBackColor = true;
+            this.btnTai.UseVisualStyleBackColor = false;
             this.btnTai.Click += new System.EventHandler(this.btnTai_Click);
             // 
             // dgvTKNH
@@ -237,13 +239,14 @@
             // 
             // btnLuu
             // 
+            this.btnLuu.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnLuu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuu.Location = new System.Drawing.Point(996, 113);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(135, 48);
             this.btnLuu.TabIndex = 92;
             this.btnLuu.Text = "💾 Lưu";
-            this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.UseVisualStyleBackColor = false;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // label1
@@ -259,13 +262,14 @@
             // 
             // btnHuy
             // 
+            this.btnHuy.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHuy.Location = new System.Drawing.Point(996, 167);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(135, 48);
             this.btnHuy.TabIndex = 93;
             this.btnHuy.Text = "❌ Hủy";
-            this.btnHuy.UseVisualStyleBackColor = true;
+            this.btnHuy.UseVisualStyleBackColor = false;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // cboTrangThaiCT
@@ -334,35 +338,38 @@
             // 
             // btnVoHieuHoa
             // 
+            this.btnVoHieuHoa.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnVoHieuHoa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVoHieuHoa.Location = new System.Drawing.Point(16, 160);
             this.btnVoHieuHoa.Name = "btnVoHieuHoa";
             this.btnVoHieuHoa.Size = new System.Drawing.Size(159, 48);
             this.btnVoHieuHoa.TabIndex = 140;
             this.btnVoHieuHoa.Text = "Vô hiệu hóa";
-            this.btnVoHieuHoa.UseVisualStyleBackColor = true;
+            this.btnVoHieuHoa.UseVisualStyleBackColor = false;
             this.btnVoHieuHoa.Click += new System.EventHandler(this.btnVoHieuHoa_Click);
             // 
             // btnSua
             // 
+            this.btnSua.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.Location = new System.Drawing.Point(16, 106);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(159, 48);
             this.btnSua.TabIndex = 139;
             this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.UseVisualStyleBackColor = false;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
+            this.btnThem.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnThem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Location = new System.Drawing.Point(16, 52);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(159, 48);
             this.btnThem.TabIndex = 138;
             this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // txtNganHang
@@ -387,6 +394,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1500, 753);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtNganHang);

@@ -3,7 +3,27 @@
   "WorkspaceRootPath": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\truongphongtc\\trangchutruongphongtc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\truongphongtc\\trangchutruongphongtc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\nhanvientc\\trangchunhanvientc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\nhanvientc\\trangchunhanvientc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\ketoan\\trangchuketoan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\ketoan\\trangchuketoan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\qlduan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\qlduan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\tp_kt\\baocaochitiet_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\tp_kt\\baocaochitiet_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.winforms\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
@@ -100,10 +120,6 @@
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\qlduan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\qlduan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\qlduan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\loaigiaodich_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\loaigiaodich_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -114,10 +130,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\truongphongtc\\trangchutruongphongtc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\truongphongtc\\trangchutruongphongtc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\truongphongtc\\trangchutruongphongtc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\truongphongtc\\trangchutruongphongtc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\truongphongtc\\qltaikhoannv_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -156,16 +168,8 @@
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\tp_kt\\baocaochitiet_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\tp_kt\\baocaochitiet_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\tp_kt\\baocaochitiet_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\nhanvientc\\trangchunhanvientc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\nhanvientc\\trangchunhanvientc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.winforms\\forms\\nhanvientc\\trangchunhanvientc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\nhanvientc\\trangchunhanvientc_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\nhanvientc\\giaodichcuatoi_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -188,11 +192,7 @@
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\ketoan\\trangchuketoan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\ketoan\\trangchuketoan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\ketoan\\trangchuketoan_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|d:\\ute_dbms\\23110327_huynhngocthang_nhom16_quanlythuchitaichinh\\jcfm.winforms\\forms\\truongphongtc\\trangchutruongphongtc_form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\forms\\truongphongtc\\trangchutruongphongtc_form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68C6EDCC-2318-4F07-A4F1-6AA0DE0B05B6}|JCFM.WinForms.csproj|solutionrelative:forms\\truongphongtc\\trangchutruongphongtc_form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -257,7 +257,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -269,72 +269,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GiaoDichService.cs",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
-              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
-              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "TrangChuTruongPhongTC_Form.cs [Design]",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs",
+              "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs [Design]",
+              "RelativeToolTip": "Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:42:53.351Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DuAnService.cs",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
-              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
-              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:41:42.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BaoCaoThongKeService.cs",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
-              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
-              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBEAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:44:19.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
-              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
-              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T05:08:41.295Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T04:49:35.055Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BusinessException.cs",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Exceptions\\BusinessException.cs",
-              "RelativeDocumentMoniker": "..\\JCFM.Business\\Exceptions\\BusinessException.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Exceptions\\BusinessException.cs",
-              "RelativeToolTip": "..\\JCFM.Business\\Exceptions\\BusinessException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Title": "TrangChuNhanVienTC_Form.cs [Design]",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs",
+              "RelativeDocumentMoniker": "Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs [Design]",
+              "RelativeToolTip": "Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T09:42:27.693Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T04:49:20.102Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "TrangChuKeToan_Form.cs [Design]",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\KeToan\\TrangChuKeToan_Form.cs",
+              "RelativeDocumentMoniker": "Forms\\KeToan\\TrangChuKeToan_Form.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\KeToan\\TrangChuKeToan_Form.cs [Design]",
+              "RelativeToolTip": "Forms\\KeToan\\TrangChuKeToan_Form.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T04:48:58.037Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "QLDuAn_Form.cs [Design]",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLDuAn_Form.cs",
+              "RelativeDocumentMoniker": "Forms\\QLDuAn_Form.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLDuAn_Form.cs [Design]",
+              "RelativeToolTip": "Forms\\QLDuAn_Form.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T11:20:58.546Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BaoCaoChiTiet_Form.cs [Design]",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\BaoCaoChiTiet_Form.cs",
+              "RelativeDocumentMoniker": "Forms\\TP_KT\\BaoCaoChiTiet_Form.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\BaoCaoChiTiet_Form.cs [Design]",
+              "RelativeToolTip": "Forms\\TP_KT\\BaoCaoChiTiet_Form.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T11:37:07.668Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "App.config",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\App.config",
               "RelativeDocumentMoniker": "App.config",
@@ -348,6 +343,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "BusinessException.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "RelativeToolTip": "..\\JCFM.Business\\Exceptions\\BusinessException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T09:42:27.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
+              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\Login\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T05:08:41.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BaoCaoThongKeService.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
+              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\BaoCaoThongKeService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBEAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T10:44:19.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DuAnService.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
+              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\DuAnService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T10:41:42.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GiaoDichService.cs",
+              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
+              "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
+              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
+              "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\GiaoDichService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T10:42:53.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "LoaiGiaoDichService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\LoaiGiaoDichService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\LoaiGiaoDichService.cs",
@@ -355,12 +410,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\LoaiGiaoDichService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T16:00:11.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T16:00:11.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "NhanVienService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\NhanVienService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\NhanVienService.cs",
@@ -368,12 +422,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\NhanVienService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwCoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T10:30:16.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T10:30:16.098Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "TaiKhoanNHService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\TaiKhoanNHService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\TaiKhoanNHService.cs",
@@ -381,12 +434,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\TaiKhoanNHService.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:40:44.542Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:40:44.542Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "TinhToanTaiChinhService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Implementations\\TinhToanTaiChinhService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Implementations\\TinhToanTaiChinhService.cs",
@@ -394,12 +446,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Implementations\\TinhToanTaiChinhService.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBEAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:45:35.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:45:35.947Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\Login\\IAuthService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\Login\\IAuthService.cs",
@@ -407,12 +458,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\Login\\IAuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T05:06:36.774Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T05:06:36.774Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "IBaoCaoThongKeService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\IBaoCaoThongKeService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\IBaoCaoThongKeService.cs",
@@ -420,12 +470,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\IBaoCaoThongKeService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:44:34.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:44:34.752Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "IDuAnService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\IDuAnService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\IDuAnService.cs",
@@ -433,12 +482,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\IDuAnService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:41:52.762Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:41:52.762Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "IGiaoDichService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\IGiaoDichService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\IGiaoDichService.cs",
@@ -446,12 +494,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\IGiaoDichService.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAmwAsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:43:07.557Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:43:07.557Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "ILoaiGiaoDichService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\ILoaiGiaoDichService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\ILoaiGiaoDichService.cs",
@@ -459,12 +506,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\ILoaiGiaoDichService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T15:59:42.724Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T15:59:42.724Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "INhanVienService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\INhanVienService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\INhanVienService.cs",
@@ -472,12 +518,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\INhanVienService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T10:29:24.71Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T10:29:24.71Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "ITaiKhoanNHService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\ITaiKhoanNHService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\ITaiKhoanNHService.cs",
@@ -485,12 +530,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\ITaiKhoanNHService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:40:56.639Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:40:56.639Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "ITinhToanTaiChinhService.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.Business\\Services\\Interfaces\\ITinhToanTaiChinhService.cs",
               "RelativeDocumentMoniker": "..\\JCFM.Business\\Services\\Interfaces\\ITinhToanTaiChinhService.cs",
@@ -498,12 +542,11 @@
               "RelativeToolTip": "..\\JCFM.Business\\Services\\Interfaces\\ITinhToanTaiChinhService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:45:48.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:45:48.948Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "XemLoaiGiaoDich.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\XemLoaiGiaoDich.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\XemLoaiGiaoDich.cs",
@@ -511,12 +554,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\XemLoaiGiaoDich.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T15:27:58.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T15:27:58.037Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "TinhToanTaiChinh.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\TinhToanTaiChinh.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\TinhToanTaiChinh.cs",
@@ -524,12 +566,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\TinhToanTaiChinh.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAgwA4AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:31:52.478Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:31:52.478Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "QLTaiKhoanNH.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\QLTaiKhoanNH.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\QLTaiKhoanNH.cs",
@@ -537,12 +578,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\QLTaiKhoanNH.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAgwA4AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:28:38.89Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:28:38.89Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "QLNhanVien.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\QLNhanVien.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\QLNhanVien.cs",
@@ -550,12 +590,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\QLNhanVien.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAgwA0AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T10:30:53.01Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T10:30:53.01Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "QLGiaoDich.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\QLGiaoDich.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\QLGiaoDich.cs",
@@ -563,12 +602,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\QLGiaoDich.cs",
               "ViewState": "AgIAAEsAAAAAAAAAAAAowE8AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:30:26.697Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:30:26.697Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "QLDuAn.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\QLDuAn.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\QLDuAn.cs",
@@ -576,12 +614,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\QLDuAn.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAgwDUAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:29:47.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:29:47.335Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "BaoCaoThongKe.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\BaoCaoThongKe.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\BaoCaoThongKe.cs",
@@ -589,12 +626,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\BaoCaoThongKe.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwBcAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T10:31:05.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T10:31:05.39Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "DbHelper.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\DBConnection\\DbHelper.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\DBConnection\\DbHelper.cs",
@@ -602,12 +638,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\DBConnection\\DbHelper.cs",
               "ViewState": "AgIAAD8AAAAAAAAAAAAowE0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T14:32:17.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T14:32:17.79Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 31,
               "Title": "DatabaseConnection.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\DBConnection\\DatabaseConnection.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\DBConnection\\DatabaseConnection.cs",
@@ -615,12 +650,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\DBConnection\\DatabaseConnection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T09:43:05.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-28T09:43:05.196Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "AuthRepository.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.DataAccess\\Repositories\\Login\\AuthRepository.cs",
               "RelativeDocumentMoniker": "..\\JCFM.DataAccess\\Repositories\\Login\\AuthRepository.cs",
@@ -628,12 +662,11 @@
               "RelativeToolTip": "..\\JCFM.DataAccess\\Repositories\\Login\\AuthRepository.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAQwCAAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T05:07:42.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T05:07:42.863Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "QLTaiKhoanNH_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLTaiKhoanNH_Form.cs",
               "RelativeDocumentMoniker": "Forms\\QLTaiKhoanNH_Form.cs",
@@ -641,24 +674,22 @@
               "RelativeToolTip": "Forms\\QLTaiKhoanNH_Form.cs",
               "ViewState": "AgIAAFsBAAAAAAAAAAAAADYBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T17:00:21.857Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T17:00:21.857Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 34,
               "Title": "QLTaiKhoanNH_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLTaiKhoanNH_Form.cs",
               "RelativeDocumentMoniker": "Forms\\QLTaiKhoanNH_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLTaiKhoanNH_Form.cs [Design]",
               "RelativeToolTip": "Forms\\QLTaiKhoanNH_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:20:02.806Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-29T11:20:02.806Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 35,
               "Title": "QLDuAn_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLDuAn_Form.cs",
               "RelativeDocumentMoniker": "Forms\\QLDuAn_Form.cs",
@@ -671,19 +702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "QLDuAn_Form.cs [Design]",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLDuAn_Form.cs",
-              "RelativeDocumentMoniker": "Forms\\QLDuAn_Form.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\QLDuAn_Form.cs [Design]",
-              "RelativeToolTip": "Forms\\QLDuAn_Form.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:20:58.546Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 36,
               "Title": "LoaiGiaoDich_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\LoaiGiaoDich_Form.cs",
               "RelativeDocumentMoniker": "Forms\\LoaiGiaoDich_Form.cs",
@@ -691,24 +710,22 @@
               "RelativeToolTip": "Forms\\LoaiGiaoDich_Form.cs",
               "ViewState": "AgIAAGEAAAAAAAAAAADwv2gAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T16:59:02.035Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T16:59:02.035Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 37,
               "Title": "LoaiGiaoDich_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\LoaiGiaoDich_Form.cs",
               "RelativeDocumentMoniker": "Forms\\LoaiGiaoDich_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\LoaiGiaoDich_Form.cs [Design]",
               "RelativeToolTip": "Forms\\LoaiGiaoDich_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:37:53.847Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-29T11:37:53.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 38,
               "Title": "TrangChuTruongPhongTC_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs",
@@ -721,19 +738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "TrangChuTruongPhongTC_Form.cs [Design]",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs",
-              "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs [Design]",
-              "RelativeToolTip": "Forms\\TruongPhongTC\\TrangChuTruongPhongTC_Form.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T04:49:35.055Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 39,
               "Title": "QLTaiKhoanNV_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs",
@@ -741,24 +746,22 @@
               "RelativeToolTip": "Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs",
               "ViewState": "AgIAAGUBAAAAAAAAAAAowLMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T18:01:21.875Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T18:01:21.875Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "QLTaiKhoanNV_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs [Design]",
               "RelativeToolTip": "Forms\\TruongPhongTC\\QLTaiKhoanNV_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T17:58:27.004Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-30T17:58:27.004Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "GiaoDichChoDuyet_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs",
@@ -766,24 +769,22 @@
               "RelativeToolTip": "Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs",
               "ViewState": "AgIAAAkBAAAAAAAAAIA6wIUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T16:09:23.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T16:09:23.843Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 42,
               "Title": "GiaoDichChoDuyet_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs [Design]",
               "RelativeToolTip": "Forms\\TruongPhongTC\\GiaoDichChoDuyet_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:39:15.167Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-29T11:39:15.167Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 43,
               "Title": "ThongKeThang_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\ThongKeThang_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TP_KT\\ThongKeThang_Form.cs",
@@ -791,24 +792,22 @@
               "RelativeToolTip": "Forms\\TP_KT\\ThongKeThang_Form.cs",
               "ViewState": "AgIAAJ8AAAAAAAAAAAAAANgAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T17:00:28.785Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T17:00:28.785Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 44,
               "Title": "ThongKeThang_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\ThongKeThang_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TP_KT\\ThongKeThang_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\ThongKeThang_Form.cs [Design]",
               "RelativeToolTip": "Forms\\TP_KT\\ThongKeThang_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:36:16.149Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-29T11:36:16.149Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 45,
               "Title": "LichSuGiaoDich_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\LichSuGiaoDich_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TP_KT\\LichSuGiaoDich_Form.cs",
@@ -816,24 +815,22 @@
               "RelativeToolTip": "Forms\\TP_KT\\LichSuGiaoDich_Form.cs",
               "ViewState": "AgIAAPcAAAAAAAAAAAAqwJ8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T10:43:43.896Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T10:43:43.896Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 46,
               "Title": "LichSuGiaoDich_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\LichSuGiaoDich_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TP_KT\\LichSuGiaoDich_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\LichSuGiaoDich_Form.cs [Design]",
               "RelativeToolTip": "Forms\\TP_KT\\LichSuGiaoDich_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T10:43:41.469Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-30T10:43:41.469Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 47,
               "Title": "BaoCaoChiTiet_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\BaoCaoChiTiet_Form.cs",
               "RelativeDocumentMoniker": "Forms\\TP_KT\\BaoCaoChiTiet_Form.cs",
@@ -846,19 +843,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "BaoCaoChiTiet_Form.cs [Design]",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\BaoCaoChiTiet_Form.cs",
-              "RelativeDocumentMoniker": "Forms\\TP_KT\\BaoCaoChiTiet_Form.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\TP_KT\\BaoCaoChiTiet_Form.cs [Design]",
-              "RelativeToolTip": "Forms\\TP_KT\\BaoCaoChiTiet_Form.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:37:07.668Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 48,
               "Title": "TrangChuNhanVienTC_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs",
               "RelativeDocumentMoniker": "Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs",
@@ -871,19 +856,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "TrangChuNhanVienTC_Form.cs [Design]",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs",
-              "RelativeDocumentMoniker": "Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs [Design]",
-              "RelativeToolTip": "Forms\\NhanVienTC\\TrangChuNhanVienTC_Form.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T04:49:20.102Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 49,
               "Title": "GiaoDichCuaToi_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs",
               "RelativeDocumentMoniker": "Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs",
@@ -891,24 +864,22 @@
               "RelativeToolTip": "Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs",
               "ViewState": "AgIAAKUBAAAAAAAAAADwv4ABAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:42:17.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T11:42:17.795Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 50,
               "Title": "GiaoDichCuaToi_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs",
               "RelativeDocumentMoniker": "Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs [Design]",
               "RelativeToolTip": "Forms\\NhanVienTC\\GiaoDichCuaToi_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T11:38:42.5Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-29T11:38:42.5Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 51,
               "Title": "Login_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\Login\\Login_Form.cs",
               "RelativeDocumentMoniker": "Forms\\Login\\Login_Form.cs",
@@ -916,24 +887,22 @@
               "RelativeToolTip": "Forms\\Login\\Login_Form.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T05:16:48.695Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T05:16:48.695Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 52,
               "Title": "Login_Form.cs [Design]",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\Login\\Login_Form.cs",
               "RelativeDocumentMoniker": "Forms\\Login\\Login_Form.cs",
               "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\Login\\Login_Form.cs [Design]",
               "RelativeToolTip": "Forms\\Login\\Login_Form.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T04:48:31.776Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-09-29T04:48:31.776Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 53,
               "Title": "TrangChuKeToan_Form.cs",
               "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\KeToan\\TrangChuKeToan_Form.cs",
               "RelativeDocumentMoniker": "Forms\\KeToan\\TrangChuKeToan_Form.cs",
@@ -943,18 +912,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-29T09:34:51.937Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "TrangChuKeToan_Form.cs [Design]",
-              "DocumentMoniker": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\KeToan\\TrangChuKeToan_Form.cs",
-              "RelativeDocumentMoniker": "Forms\\KeToan\\TrangChuKeToan_Form.cs",
-              "ToolTip": "D:\\UTE_DBMS\\23110327_HuynhNgocThang_Nhom16_QuanLyThuChiTaiChinh\\JCFM.WinForms\\Forms\\KeToan\\TrangChuKeToan_Form.cs [Design]",
-              "RelativeToolTip": "Forms\\KeToan\\TrangChuKeToan_Form.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T04:48:58.037Z",
-              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -992,8 +949,7 @@
               "RelativeToolTip": "Forms\\TP_KT\\ThongKeThang_Form.Designer.cs",
               "ViewState": "AgIAAB8BAAAAAAAAAAAUwDABAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T15:29:41.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T15:29:41.207Z"
             },
             {
               "$type": "Document",
@@ -1005,8 +961,7 @@
               "RelativeToolTip": "Forms\\LoaiGiaoDich_Form.Designer.cs",
               "ViewState": "AgIAAAYBAAAAAAAAAAAUwBYBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T14:46:27.546Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T14:46:27.546Z"
             },
             {
               "$type": "Document",
@@ -1018,8 +973,7 @@
               "RelativeToolTip": "Forms\\QLTaiKhoanNH_Form.Designer.cs",
               "ViewState": "AgIAAKgAAAAAAAAAAAAUwLcAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T03:23:06.742Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T03:23:06.742Z"
             },
             {
               "$type": "Document",
@@ -1031,8 +985,7 @@
               "RelativeToolTip": "Forms\\NhanVienTC\\GiaoDichCuaToi_Form.Designer.cs",
               "ViewState": "AgIAAIgAAAAAAAAAAAArwJcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T16:09:01.637Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T16:09:01.637Z"
             },
             {
               "$type": "Document",

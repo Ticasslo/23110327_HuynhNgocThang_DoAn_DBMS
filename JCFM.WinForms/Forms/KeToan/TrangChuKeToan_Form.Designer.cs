@@ -92,68 +92,74 @@
             // 
             // btnLichSuGiaoDich
             // 
+            this.btnLichSuGiaoDich.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnLichSuGiaoDich.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLichSuGiaoDich.Location = new System.Drawing.Point(32, 78);
             this.btnLichSuGiaoDich.Name = "btnLichSuGiaoDich";
             this.btnLichSuGiaoDich.Size = new System.Drawing.Size(290, 77);
             this.btnLichSuGiaoDich.TabIndex = 95;
             this.btnLichSuGiaoDich.Text = "Lịch sử giao dịch";
-            this.btnLichSuGiaoDich.UseVisualStyleBackColor = true;
+            this.btnLichSuGiaoDich.UseVisualStyleBackColor = false;
             this.btnLichSuGiaoDich.Click += new System.EventHandler(this.btnLichSuGiaoDich_Click);
             // 
             // btnThongKeThang
             // 
+            this.btnThongKeThang.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnThongKeThang.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThongKeThang.Location = new System.Drawing.Point(32, 206);
             this.btnThongKeThang.Name = "btnThongKeThang";
             this.btnThongKeThang.Size = new System.Drawing.Size(290, 77);
             this.btnThongKeThang.TabIndex = 96;
             this.btnThongKeThang.Text = "Thống kê tháng";
-            this.btnThongKeThang.UseVisualStyleBackColor = true;
+            this.btnThongKeThang.UseVisualStyleBackColor = false;
             this.btnThongKeThang.Click += new System.EventHandler(this.btnThongKeThang_Click);
             // 
             // btnBaoCaoChiTiet
             // 
+            this.btnBaoCaoChiTiet.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnBaoCaoChiTiet.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBaoCaoChiTiet.Location = new System.Drawing.Point(32, 289);
             this.btnBaoCaoChiTiet.Name = "btnBaoCaoChiTiet";
             this.btnBaoCaoChiTiet.Size = new System.Drawing.Size(290, 77);
             this.btnBaoCaoChiTiet.TabIndex = 97;
             this.btnBaoCaoChiTiet.Text = "Báo cáo chi tiết dự án";
-            this.btnBaoCaoChiTiet.UseVisualStyleBackColor = true;
+            this.btnBaoCaoChiTiet.UseVisualStyleBackColor = false;
             this.btnBaoCaoChiTiet.Click += new System.EventHandler(this.btnBaoCaoChiTiet_Click);
             // 
             // btnXemTaiKhoanNH
             // 
+            this.btnXemTaiKhoanNH.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnXemTaiKhoanNH.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXemTaiKhoanNH.Location = new System.Drawing.Point(32, 418);
             this.btnXemTaiKhoanNH.Name = "btnXemTaiKhoanNH";
             this.btnXemTaiKhoanNH.Size = new System.Drawing.Size(290, 77);
             this.btnXemTaiKhoanNH.TabIndex = 98;
             this.btnXemTaiKhoanNH.Text = "Xem tài khoản ngân hàng";
-            this.btnXemTaiKhoanNH.UseVisualStyleBackColor = true;
+            this.btnXemTaiKhoanNH.UseVisualStyleBackColor = false;
             this.btnXemTaiKhoanNH.Click += new System.EventHandler(this.btnXemTaiKhoanNH_Click);
             // 
             // btnXemDuAn
             // 
+            this.btnXemDuAn.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnXemDuAn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXemDuAn.Location = new System.Drawing.Point(32, 501);
             this.btnXemDuAn.Name = "btnXemDuAn";
             this.btnXemDuAn.Size = new System.Drawing.Size(290, 77);
             this.btnXemDuAn.TabIndex = 99;
             this.btnXemDuAn.Text = "Xem dự án";
-            this.btnXemDuAn.UseVisualStyleBackColor = true;
+            this.btnXemDuAn.UseVisualStyleBackColor = false;
             this.btnXemDuAn.Click += new System.EventHandler(this.btnXemDuAn_Click);
             // 
             // btnLoaiGiaoDich
             // 
+            this.btnLoaiGiaoDich.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnLoaiGiaoDich.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoaiGiaoDich.Location = new System.Drawing.Point(32, 584);
             this.btnLoaiGiaoDich.Name = "btnLoaiGiaoDich";
             this.btnLoaiGiaoDich.Size = new System.Drawing.Size(290, 77);
             this.btnLoaiGiaoDich.TabIndex = 100;
             this.btnLoaiGiaoDich.Text = "Các loại giao dịch";
-            this.btnLoaiGiaoDich.UseVisualStyleBackColor = true;
+            this.btnLoaiGiaoDich.UseVisualStyleBackColor = false;
             this.btnLoaiGiaoDich.Click += new System.EventHandler(this.btnLoaiGiaoDich_Click);
             // 
             // label4
@@ -262,6 +268,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1182, 753);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);

@@ -27,7 +27,7 @@ namespace JCFM.DataAccess.Repositories
             }
         }
 
-        // FN: FN_KiemTraSoDu — Vai trò: TP/NVTC/Kế toán (EXECUTE)
+        // FN: FN_KiemTraSoDu — Vai trò: NVTC/K (EXECUTE)
         public decimal KiemTraSoDu(int maTknh)
         {
             using (var cmd = new SqlCommand(
